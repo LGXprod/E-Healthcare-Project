@@ -20,7 +20,7 @@ connection.connect(function(err) {
 })
 
 const ehealthApp = express();
-// ehealthApp.use(bodyParser.urlencoded({extended: true}));
+ehealthApp.use(bodyParser.urlencoded({extended: true}));
 ehealthApp.use(express.static(__dirname + "/public"));
 
 ehealthApp.listen(3000, () => {
@@ -33,3 +33,4 @@ loginController.showLoginPage(ehealthApp, views_dir);
 loginController.checkLoginDetails(ehealthApp, connection);
 
 registrationController.showRegisterPage(ehealthApp, views_dir);
+registrationController.registerUser(ehealthApp, connection);
