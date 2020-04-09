@@ -29,4 +29,4 @@ ehealthApp.listen(3000, () => {
 ehealthApp.use(express.static(__dirname + "/public"));
 
 loginController.showLoginPage(ehealthApp);
-loginController.checkLoginDetails(ehealthApp);
+loginController.checkLoginDetails(ehealthApp, connection);

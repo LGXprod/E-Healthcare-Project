@@ -4,12 +4,24 @@ const showLoginPage = (app) => {
     });
 }
 
-const checkLoginDetails = (app) => {
+const checkLoginDetails = (app, connection) => {
     app.post("/", (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
         
-        res.send("<script>alert('Successfully logged in')</script>");
+        var queryString = "select username from Patient where username='" + username + "' and userPassword='" + password + "';";
+
+        connection.query(queryString, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                if (result.length == 0) {
+                    console.log("incorrect");
+                } else {
+                    console.log("correct");
+                }
+            }
+        });
     });
 }
 
