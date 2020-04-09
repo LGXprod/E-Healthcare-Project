@@ -1,6 +1,6 @@
-const showLoginPage = (app) => {
+const showLoginPage = (app, dir) => {
     app.get("/", (req, res) => {
-        res.sendFile("/index.html");
+        res.sendFile(dir + "/index.html");
     });
 }
 
