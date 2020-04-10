@@ -11,7 +11,7 @@ const registerUser = (app, connection) => {
         const username = body.username;
         const password = body.password;
 
-        const queryString = "select username from Patient where username='" + username + "';"
+        const queryString = "select username from Patient where username='" + username + "';";
         // need to find a way to prevent sql injections
 
         connection.query(queryString, (err, result) => {

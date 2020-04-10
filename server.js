@@ -3,6 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mySQL = require("mysql");
 
+// importing testing and sample data modules
+const insertRandomData = require("./testing/insertRandomData");
+
+// importing controllers
 const loginController = require("./controllers/loginController");
 const registrationController = require("./controllers/registrationController")
 
@@ -17,7 +21,14 @@ connection.connect(function(err) {
     if (err) throw err;
 
     console.log("Successfully connected to DB");
-})
+});
+
+// generates 10 rows in the Patient table using simulated data from the faker package
+
+// for (var i=1; i<=10; i++) {
+//     insertRandomData.addPatData(connection);
+//     console.log("");
+// }
 
 const ehealthApp = express();
 ehealthApp.use(bodyParser.urlencoded({extended: true}));
