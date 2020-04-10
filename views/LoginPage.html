@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>eHealthcare</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+  <!--- Font from google fonts --->
+	<link href="https://fonts.googleapis.com/css?family=Assistant:600&display=swap" rel="stylesheet">
+  <!--- Font Awesome is used for the email and password icons --->
+  <script src="https://kit.fontawesome.com/d65ff00190.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+	<img class="background" src="img/doctors.svg">
+
+		<div class="login-content">
+			<form action="index.html">
+
+				<img src="img/title2.png"> <!--- Logo --->
+
+           		<div class="input-div ID">
+           		   <div class="i"> <!--- Icon Class --->
+           		   		<i class="fas fa-id-card-alt"></i> <!--- Font Awesome Icon --->
+           		   </div>
+
+           		   <div class="div">
+           		   		<input name="username" type="text" class="input" placeholder="Patient or Doctor Number">
+           		   </div>
+           		</div>
+
+           		<div class="input-div pass">
+           		   <div class="i"> <!--- Icon Class --->
+           		    	<i class="fas fa-lock"></i> <!--- Font Awesome Icon --->
+           		   </div>
+           		   <div class="div">
+           		    	<input name="password" type="password" class="input" placeholder="Password">
+            	   </div>
+            	</div>
+
+            	<a href="#">Forgot Password?</a> <!---href="this will be another
+                                                           url for the forgot Password
+                                                           page" --->
+            	<input type="submit" class="btn" value="LOGIN">
+
+              <p> Don't have an account?
+                <h1 class="popup"> Sign up here </h1>
+              </p>
+            </form>
+      </div>
+
+			<div class="signup">
+					<div class="signup-content">
+						<h2> Sign Up </h2>
+						<h3> Please fill in this form to create an account! </h3>
+						<img src="img/close.png" alt="Close" class="close">
+						<input type="text" class="signup-input" placeholder="First Name">
+						<input type="text" class="signup-input" placeholder="Last Name"></input>
+						<input type="email" class="signup-input" placeholder="Email">
+						<input type="password" class="signup-input" placeholder="Password">
+						<input type="submit" class="signup-btn" value="SIGN UP">
+					</div>
+			</div>
+
+    <script type="text/javascript" src="../controllers/loginController.js"></script>
+</body>
+
+</html>
