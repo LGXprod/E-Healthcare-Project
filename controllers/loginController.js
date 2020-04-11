@@ -1,4 +1,5 @@
 const patient = require("../models/patient");
+const doctor = require("../models/doctor");
 
 const showLoginPage = (app, dir) => {
     app.get("/", (req, res) => {
@@ -6,19 +7,33 @@ const showLoginPage = (app, dir) => {
     });
 }
 
-const checkLoginDetails = (app, connection) => {
+const checkLoginDetails = (app, connection, dir) => {
     app.post("/", (req, res) => {
         patient.checkLoginCredentials(connection, req.body.username, req.body.password).then((correctLogin) => {
-            console.log(correctLogin);
 
             if (correctLogin) {
-                res.sendFile("/PatientDashboard.html");
+                res.sendFile(dir + "/PatientDashboard.html");
             } else {
-                
+
+                doctor.checkLoginCredentials(connection, req.body.username, req.body.password).then((correctLogin) => {
+
+                    if (correctLogin) {
+                        res.sendFile(dir + "/DoctorDashboard.html");
+                    } else {
+                        res.send("<script>alert('Wrong login details')</script>");
+                    }
+
+                }).catch((err) => {
+                    console.log("Error");
+                    throw err;
+                });
+
             }
         }).catch((err) => {
+            console.log("Error");
             throw err;
         });
+
     });
 }
 

@@ -30,6 +30,12 @@ connection.connect(function(err) {
 //     console.log("");
 // }
 
+// generates 10 rows in the Doctor table using simulated data from the faker package
+
+// for (var i=1; i<=5; i++) {
+//     insertRandomData.addDocData(connection);
+// }
+
 const ehealthApp = express();
 ehealthApp.use(bodyParser.urlencoded({extended: true}));
 ehealthApp.use(express.static(__dirname + "/public"));
@@ -41,7 +47,7 @@ ehealthApp.listen(3000, () => {
 const views_dir = __dirname + "/views";
 
 loginController.showLoginPage(ehealthApp, views_dir);
-loginController.checkLoginDetails(ehealthApp, connection);
+loginController.checkLoginDetails(ehealthApp, connection, views_dir);
 
 registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);

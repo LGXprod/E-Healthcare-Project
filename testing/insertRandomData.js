@@ -30,6 +30,18 @@ const addPatData = (connection) => {
     });
 }
 
+const addDocData = (connection) => {
+    const queryString = "insert into Doctor (username, userPassword, fName, sName) values ('"
+                        + faker.internet.email() + "', '" + faker.internet.password() + "', '"
+                        + faker.name.firstName() + "', '" + faker.name.lastName() + "');";
+    console.log(queryString);
+
+    connection.query(queryString, (err) => {
+        if (err) throw err;
+    });
+}
+
 module.exports = {
-    addPatData: addPatData
+    addPatData: addPatData,
+    addDocData: addDocData
 }
