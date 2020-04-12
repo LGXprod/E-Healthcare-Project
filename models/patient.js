@@ -54,5 +54,5 @@ const checkLoginCredentials = (connection, username, password) => {
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     isUsernameAvailable: async (connection, username) => { return await isUsernameAvailable(connection, username) },
-    insertPatientIntoDB: async (connection, body, username, password) => { return await insertNewPatDB(connection, body, username, password) }
+    insertNewPatDB: async (connection, body, username, password) => { return await insertNewPatDB(connection, body, username, password) }
 }
