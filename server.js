@@ -37,8 +37,11 @@ connection.connect(function(err) {
 // }
 
 const ehealthApp = express();
+
 ehealthApp.use(bodyParser.urlencoded({extended: true}));
 ehealthApp.use(express.static(__dirname + "/public"));
+
+ehealthApp.set("view engine", "ejs");
 
 ehealthApp.listen(3000, () => {
     console.log("Node server started on port 3000");
@@ -47,7 +50,7 @@ ehealthApp.listen(3000, () => {
 const views_dir = __dirname + "/views";
 
 loginController.showLoginPage(ehealthApp, views_dir);
-loginController.checkLoginDetails(ehealthApp, connection, views_dir);
+loginController.loginUser(ehealthApp, connection, views_dir);
 
 registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);

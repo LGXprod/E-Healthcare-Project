@@ -33,6 +33,23 @@ async function insertNewPatDB(connection, body, username, password) {
     });
 }
 
+const getPatByUsername = (connection, username) => {
+    return new Promise((resolve, reject) => {
+        connection.query("select * from Patient where username = '" + username + "';", (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                if (result.length === 1) {
+                    console.log(result[0]);
+                    resolve(result[0]);
+                } else {
+                    resolve(null);
+                }
+            }
+        });
+    })
+}
+
 const checkLoginCredentials = (connection, username, password) => {
     return new Promise((resolve, reject) => {
         var queryString = "select username from Patient where username='" + username + "' and userPassword='" + password + "';";
@@ -54,5 +71,6 @@ const checkLoginCredentials = (connection, username, password) => {
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     isUsernameAvailable: async (connection, username) => { return await isUsernameAvailable(connection, username) },
-    insertNewPatDB: async (connection, body, username, password) => { return await insertNewPatDB(connection, body, username, password) }
+    insertNewPatDB: async (connection, body, username, password) => { return await insertNewPatDB(connection, body, username, password) },
+    getPatByUsername: getPatByUsername
 }

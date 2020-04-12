@@ -32,6 +32,7 @@ const registerUser = (app, connection) => {
             } else {
                 res.send("<script>alert('That username is not available')</script>");
             }
+            
         }).catch((err) => {
             console.log(err);
         });
