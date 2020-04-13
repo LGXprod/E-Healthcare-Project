@@ -1,17 +1,20 @@
 const patient = require("../models/patient");
 
+// sends registration.html to /registration
 const showRegisterPage = (app, dir) => {
     app.get("/registration", (req, res) => {
         res.sendFile(dir + "/registration.html");
     });
 }
 
+// gets data from a form that's action="/registration"
 const registerUser = (app, connection) => {
     app.post("/registration", (req, res) => {
         const body = req.body;
-        const username = body.username;
+        const username = body.username; // accesses variables form object (req.body) and gets a specific property from it (username) (this is the name of the input in the form)
         const password = body.password;
 
+        // calls async function to check if username is available
         patient.isUsernameAvailable(connection, username).then((isAvailable) => {
             console.log(isAvailable);
 
