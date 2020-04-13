@@ -16,7 +16,7 @@ const loginUser = (app, connection, dir) => {
         // this function returns a promise as the act of acessing data in a db takes time
         // and hence cannot be done synchronously (hence async function)
         // using a promises allows the program to wait for the query to the DB to be done
-        // and then get it results 
+        // and then get it results
         // to access the data in a promise we use .then() and .catch() to get errors
         patient.checkLoginCredentials(connection, req.body.username, req.body.password).then((correctLogin) => {
 
@@ -35,7 +35,7 @@ const loginUser = (app, connection, dir) => {
                     if (correctLogin) {
                         showUserDashboard(res, false, body.username, connection, dir);
                     } else {
-                        res.send("<script>alert('Wrong login details')</script>");
+                        res.send("<script>alert('Wrong login details');history.go(-1);</script>");
                     }
 
                 }).catch((err) => {
