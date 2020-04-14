@@ -1,4 +1,5 @@
 const patient = require("../models/patient");
+const userDashboardController = require("./userDashboardController");
 
 // sends registration.html to /registration
 const showRegisterPage = (app, dir) => {
@@ -8,7 +9,7 @@ const showRegisterPage = (app, dir) => {
 }
 
 // gets data from a form that's action="/registration"
-const registerUser = (app, connection) => {
+const registerUser = (app, connection, dir) => {
     app.post("/registration", (req, res) => {
         const body = req.body;
         const username = body.username; // accesses variables form object (req.body) and gets a specific property from it (username) (this is the name of the input in the form)
@@ -23,9 +24,9 @@ const registerUser = (app, connection) => {
                 patient.insertNewPatDB(connection, body, username, password).then((successfulInsert) => {
 
                     if (successfulInsert) {
-                        console.log("New patient added");
+                        userDashboardController.showUserDashboard(res, true, username, connection);
                     } else {
-                        console.log("Did not add new patient (FIX)");
+                        res.send("<script>alert('An error occurred. Please refresh page and try again')</script>")
                     }
 
                 }).catch((err) => {

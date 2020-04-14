@@ -1,6 +1,7 @@
 // imports necessary models
 const patient = require("../models/patient");
 const doctor = require("../models/doctor");
+const userDashboardController = require("./userDashboardController");
 
 // function called that shows login page when someone access (some url (in this case localhost:3000))/
 const showLoginPage = (app, dir) => {
@@ -10,7 +11,7 @@ const showLoginPage = (app, dir) => {
 }
 
 // function called when a user submits their login details and gets the form data
-const loginUser = (app, connection, dir) => {
+const loginUser = (app, connection) => {
     app.post("/", (req, res) => {
         // calls a function that checks login details given by user
         // this function returns a promise as the act of acessing data in a db takes time
@@ -21,7 +22,7 @@ const loginUser = (app, connection, dir) => {
         patient.checkLoginCredentials(connection, req.body.username, req.body.password).then((correctLogin) => {
 
             if (correctLogin) {
-                showUserDashboard(res, true, req.body.username, connection, dir);
+                userDashboardController.showUserDashboard(res, true, req.body.username, connection);
             } else {
 
                 // does essentially the same thing as the patient.checkLoginCredentials() but for doctors
@@ -33,7 +34,7 @@ const loginUser = (app, connection, dir) => {
                 doctor.checkLoginCredentials(connection, req.body.username, req.body.password).then((correctLogin) => {
 
                     if (correctLogin) {
-                        showUserDashboard(res, false, body.username, connection, dir);
+                        userDashboardController.showUserDashboard(res, false, body.username, connection);
                     } else {
                         res.send("<script>alert('Wrong login details');history.go(-1);</script>");
                     }
@@ -50,37 +51,6 @@ const loginUser = (app, connection, dir) => {
         });
 
     });
-}
-
-// displays a user's dashboard using ejs (HTML templating)
-function showUserDashboard(res, isPatient, username, connection, dir) {
-    if (isPatient) {
-
-        patient.getPatByUsername(connection, username).then((patient) => {
-            if (patient == null) {
-                res.send("<script>alert('Could not find unique user. Please contact admin.')</script>");
-            } else {
-                // sends an ejs file and loads variables stored in the object below, where designated (check PatientDashboard.ejs)
-                res.render("PatientDashboard", {
-                    username: patient.username,
-                    fName: patient.fName,
-                    sName: patient.sName,
-                    medicareNo: patient.medicareNo,
-                    medicareIRN: patient.medicareIRN,
-                    medicareExpiry: patient.medicareExpiry
-                });
-            }
-        }).catch((err) => {
-            console.log(err);
-        });
-
-    } else {
-        res.render("DoctorDashboard", {
-            username: "fwef",
-            fName: "fwefwe",
-            sName: "gefbe"
-        });
-    }
 }
 
 // allows other files to access variables in its object (in js you can pass functions as variables)

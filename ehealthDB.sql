@@ -1,3 +1,5 @@
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
 drop DATABASE ehealthDB;
 create DATABASE ehealthDB;
 use ehealthDB;
