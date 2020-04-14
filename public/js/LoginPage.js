@@ -30,4 +30,9 @@ for( var i=0,il = links.length; i< il; i ++ ){
 // Close the signup window
 document.querySelector(".close").addEventListener("click", function(){
     document.querySelector(".signup").style.display = "none";
+    //Clears inputs if the signup window is closed
+    var inputs = document.getElementsByClassName("signup-input");
+      for (var i=0 ; i < inputs.length ; i++){
+            inputs[i].value = "";
+          }
 });
