@@ -1,0 +1,157 @@
+*{
+box-sizing: border-box;
+}
+
+body{
+  font-family: 'Assistant';
+  background: #fbfbfb;
+}
+
+#sideMenu{
+  background: #4c516d;
+  width: 280px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+ul {
+  top: 150px;
+  position: absolute;
+}
+
+#sideMenu > img{
+   display:block;
+   width: 100%;
+   position: relative;
+   top: -50px;
+}
+
+ul > a{
+  display: block;
+  position: relative;
+  left: -40px;
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+#sideMenu a:hover {
+  background: #397298;
+  border-left: 5px solid #aa74da;
+  padding: 15px;
+  width: 280px;
+}
+
+#sideMenu a.clicked {
+  background: #397298;
+  border-left: 5px solid #aa74da;
+  padding: 15px 15px 15px 25px;
+  width: 280px;
+}
+
+i {
+  color: white;
+  font-size: 1.2rem;
+  margin-right: 0.8rem;
+  display: inline-block;
+  width: 20px;
+  position: relative;
+  top: 2px;
+}
+
+#sideMenu a.clicked > i{
+color: #aa74da; /* Icon colour on click */
+}
+
+#sideMenu a:hover > i{
+color: #aa74da; /* Icon colour on hover */
+}
+
+#dashboardArea {
+  margin-left: 280px;
+  padding: 10px;
+}
+
+.heading > h1 {
+  color: #792da8;
+  font-size: 25px;
+  font-weight: 400;
+  margin: 10px;
+}
+
+.heading > p {
+  color: #535353;
+  font-size: 14px;
+  margin: 10px;
+  display: inline-block;
+}
+
+.slides > .slide {
+  background: #fff;
+  border-radius: 5px;
+  padding: 0 15px;
+  width: 100%;
+  margin: 10px;
+  float: left;
+  padding: 10px;
+}
+
+.slides > .slide-below {
+  background: #fff;
+  border-radius: 5px;
+  padding: 0 15px;
+  margin: 10px;
+  float: left;
+  padding: 20px;
+}
+
+.slides > .slide > img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+}
+
+.slides > .slide > .user-name {
+  font-size: 1.2rem;
+  color: #792da8;
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.slides > .slide > .user-email {
+  font-size: 0.8rem;
+  color: #535353;
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.slides > .slide > .below {
+  width: (100/4) + %;
+  padding: 0 15px;
+  display: inline-block;
+}
+
+.heading > .btn {
+  float: right;
+  display: block;
+  height: 25px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-image: linear-gradient(to left, #792da8, #8a3fcc, #aa74da);
+  background-size: 200%;
+  font-size: 12px;
+  color: white;
+  font-family: 'Assistant';
+  cursor: pointer; /*change the cursor to the hand thing*/
+  transition: 0.8s;
+}
+
+.heading > .btn:hover{
+background-position: right;
+}
