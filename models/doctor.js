@@ -26,7 +26,9 @@ const checkLoginCredentials = (connection, username, password) => {
 }
 
 const getAvailableAppointments = (connection, username) => {
-
+    return new Promise((resolve, reject) => {
+        connection.query("select ")
+    })
 }
 
 module.exports = {

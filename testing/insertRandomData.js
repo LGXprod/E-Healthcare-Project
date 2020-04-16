@@ -1,4 +1,5 @@
 const faker = require("faker");
+const doctor = require("../models/doctor");
 
 const addPatData = (connection) => {
     var day = Math.floor(1 + Math.random()*30);
@@ -41,7 +42,48 @@ const addDocData = (connection) => {
     });
 }
 
+// this function is from: https://gist.github.com/miguelmota/7905510
+var getDates = function(startDate, endDate) {
+    var dates = [],
+        currentDate = startDate,
+        addDays = function(days) {
+          var date = new Date(this.valueOf());
+          date.setDate(date.getDate() + days);
+          return date;
+        };
+    while (currentDate <= endDate) {
+      dates.push(currentDate);
+      currentDate = addDays.call(currentDate, 1);
+    }
+    return dates;
+};
+
+const addAvailabilityData = (connection) => {
+    var current = new Date();
+    var dates = getDates(new Date(current.getFullYear(), current.getMonth(), current.getDate()),
+                new Date(current.getFullYear()+1, current.getMonth(), current.getDate()));  
+
+    doctor.getAllDoctors(connection).then((doctors) => {
+        for (var i = 0; i < doctors.length; i++) {
+            for (let date of dates) {
+                const theDate = date.getFullYear() + "-" + (date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()) + "-"
+                                 + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
+
+                var queryString = "insert into Doctor_Availability (doc_username, startTime, endTime) values ('"
+                                   + doctors[i].username + "', '" + theDate + " 10:00:00', '" + theDate + " 17:00:00');";
+
+                connection.query(queryString, (err) => {
+                    
+                });
+            }
+        }   
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
 module.exports = {
     addPatData: addPatData,
-    addDocData: addDocData
+    addDocData: addDocData,
+    addAvailabilityData: addAvailabilityData
 }

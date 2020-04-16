@@ -41,6 +41,10 @@ connection.connect(function(err) {
 //     insertRandomData.addDocData(connection);
 // }
 
+// adds a year's worth of dates and times to a doctors availability
+
+// insertRandomData.addAvailabilityData(connection);
+
 const ehealthApp = express(); // creates express app so we can use its http middleware functions
 
 ehealthApp.use(bodyParser.urlencoded({extended: true})); // encodes data passed from forms
