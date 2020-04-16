@@ -1,3 +1,12 @@
+const getAllDoctors = (connection) => {
+    return new Promise((resolve, reject) => {
+        connection.query("select username from Doctor;", (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+        });
+    });
+}
+
 const checkLoginCredentials = (connection, username, password) => {
     return new Promise((resolve, reject) => {
         var queryString = "select username from Doctor where username='" + username + "' and userPassword='" + password + "';";
@@ -16,6 +25,11 @@ const checkLoginCredentials = (connection, username, password) => {
     });
 }
 
+const getAvailableAppointments = (connection, username) => {
+
+}
+
 module.exports = {
-    checkLoginCredentials: checkLoginCredentials
+    checkLoginCredentials: checkLoginCredentials,
+    getAllDoctors: getAllDoctors
 }

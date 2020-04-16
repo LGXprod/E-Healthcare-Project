@@ -11,6 +11,7 @@ const insertRandomData = require("./testing/insertRandomData");
 // importing controllers
 const loginController = require("./controllers/loginController");
 const registrationController = require("./controllers/registrationController");
+const schedulingController = require("./controllers/schedulingController");
 
 // uses mysql package to create connection to mysql server
 const connection = mySQL.createConnection({
@@ -60,3 +61,5 @@ loginController.loginUser(ehealthApp, connection);
 
 registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
+
+schedulingController.getAvailableAppointments(ehealthApp, connection);
