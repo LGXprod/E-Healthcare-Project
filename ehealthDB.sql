@@ -55,3 +55,12 @@ create table Communication (
     theMessage longtext,
     timeSent DATETIME
 );
+
+drop table Person_Availability;
+
+create table Doctor_Availability (
+    doc_username varchar(50),
+    startTime datetime,
+    endTime datetime,
+    CONSTRAINT Doctor_Availability_FK FOREIGN KEY (doc_username) REFERENCES Doctor(username)
+);
