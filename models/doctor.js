@@ -25,6 +25,12 @@ const checkLoginCredentials = (connection, username, password) => {
     });
 }
 
+const getQualifications = (connection, username) => {
+    return new Promise((resolve, reject) => {
+        
+    });
+}
+
 const getAvailableAppointments = (connection, username) => {
     return new Promise((resolve, reject) => {
         connection.query("select ")

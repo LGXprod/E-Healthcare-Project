@@ -56,6 +56,8 @@ create table Communication (
     timeSent DATETIME
 );
 
+-- copy and run in workbench:
+
 drop table Person_Availability;
 
 create table Doctor_Availability (
