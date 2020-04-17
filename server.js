@@ -67,3 +67,5 @@ registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
 
 schedulingController.getAvailableAppointments(ehealthApp, connection);
+
+// demonstration of commit
