@@ -40,7 +40,7 @@
 		<div class="heading">
 			<h1>Patient Dashboard</h1>
 			 <p>Welcome to eHealthCare etc ...</p>
-				 <input type="submit" class="btn" value="Edit Profile">
+				 <input type="submit" class="editBtn" value="Edit Profile">
 		</div>
 
 		<div class="slides">
@@ -68,6 +68,62 @@
 					<h1> Something else?</h1>
 			</div>
 
+		</div>
+
+		<div class="edit-profile">
+				<section class="edit-content">
+					<h2> Edit Profile </h2>
+					<img src="img/close.png" alt="Close" class="close">
+					<hr>
+
+					<img src="img/avatar.svg" class="avatar">
+				<!---	<form action="/registration" method="post"> --->
+
+				  <h3 class="imgFile"> Change Profile Picture </h3>
+
+						<div class="editfName">
+							<label for="first-name">First Name</label>
+							<input id="first-name" name="fName" type="text"
+										 class="edit-input" value="<%= fName%>">
+						</div>
+
+						<div class="editlName">
+							<label for="last-name">Last Name</label>
+							<input id="last-name" name="sName" type="text"
+										 class="edit-input" value="<%= sName%>">
+						</div>
+
+						<div class="editEmail">
+							<label for="user">Email</label>
+							<input id="user" name="username" type="email"
+								     class="edit-input" value="<%= username%>">
+						</div>
+
+						<div class="editMedNo">
+							<label for="med-no">Medicare Number</label>
+							<input id="med-no" name="medicareNo" type="text"
+										 class="edit-input" value="<%= medicareNo%>">
+						</div>
+
+						<div class="editMedIRN">
+							<label for="med-irn">Medicare IRN</label>
+							<input id="med-irn" name="medicareIRN" type="text"
+										 class="edit-input" value="<%= medicareIRN%>">
+						</div>
+
+						<div class="editMedDate">
+							<label for="med-date">Medicare IRN</label>
+							<input id="med-date" name="medicareExpiry" type="date"
+										 class="edit-input" value="<%= medicareExpiry%>">
+						</div>
+
+						<a href="#" class="changePass"> Change Password</a>
+
+						<input type="submit" class="save-btn" value="Save Changes">
+
+
+				<!---	</form> --->
+			</section>
 		</div>
 
 	<script type="text/javascript" src="js/patientDashboard.js"></script>
