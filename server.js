@@ -69,3 +69,4 @@ registrationController.registerUser(ehealthApp, connection);
 schedulingController.getAvailableAppointments(ehealthApp, connection);
 
 // demonstration of commit
+// learning to commit
