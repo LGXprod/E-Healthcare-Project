@@ -25,13 +25,31 @@ const checkLoginCredentials = (connection, username, password) => {
     });
 }
 
-const getAvailableAppointments = (connection, username) => {
+const getAvailableAppointments = (connection, username, date) => {
     return new Promise((resolve, reject) => {
-        connection.query("select ")
-    })
+        const queryString = "select date_format(startTime, '%H:%i') as theStartTime, date_format(endTime, '%H:%i') as theEndTime from Doctor_Availability where startTime like '" 
+                            + date + "%' and doc_username='" + username + "';";
+        console.log(queryString)
+
+        connection.query(queryString, (err, availabiltity) => {
+            if (err) reject(err);
+
+            console.log(availabiltity);
+
+            // const queryString = "select appointmentTime from Schedule where appointmentTime like '" + date + "%' and doc_username='" + 
+            //                     username + "';";
+
+            // is there appointment 8:15 no, {true, 8:15}, is there an appointment 8:30 yes {false, 8:30}
+
+            // connection.query(queryString, (err, appointments) => {
+                
+            // });
+        });
+    });
 }
 
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
-    getAllDoctors: getAllDoctors
+    getAllDoctors: getAllDoctors, 
+    getAvailableAppointments: getAvailableAppointments
 }
