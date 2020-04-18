@@ -31,6 +31,13 @@ function showUserDashboard(res, isPatient, username, connection) {
     }
 }
 
+// show the webpage with the doctor's about me and qualifications
+const showAboutMe = (app) => {
+    app.get("/aboutMe", (req, res) => {
+        res.render("AboutMe");
+    });
+}
+
 module.exports = {
     showUserDashboard: showUserDashboard
 }

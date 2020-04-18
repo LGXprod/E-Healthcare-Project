@@ -64,3 +64,5 @@ create table Doctor_Availability (
     endTime datetime,
     CONSTRAINT Doctor_Availability_FK FOREIGN KEY (doc_username) REFERENCES Doctor(username)
 );
+
+-- copy and run in workbench:
