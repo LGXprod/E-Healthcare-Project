@@ -73,10 +73,12 @@ const addAvailabilityData = (connection) => {
                                    + doctors[i].username + "', '" + theDate + " 10:00:00', '" + theDate + " 17:00:00');";
 
                 connection.query(queryString, (err) => {
-                    
+
                 });
             }
         }   
+
+        console.log("Added availability data");
     }).catch((err) => {
         console.log(err);
     });

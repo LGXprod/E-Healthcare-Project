@@ -1,16 +1,16 @@
 const patient = require("../models/patient");
 const doctor = require("../models/doctor");
 
-const showBookingPage = (app) => {
-    app.get("/booking", (req, res) => {
-        res.render("BookingMenu");
-    });
-}
-
-const getAvailableAppointments = (app, connection) => {
+const getAppointments = (app, connection) => {
     app.get("/appointmentsAvailable", (req, res) => {
         doctor.getAllDoctors(connection).then((doctors) => {
             
+            doctor.getAvailableAppointments(connection, doctors[0].username, "2020-04-18").then((schedule) => {
+                
+            }).catch((err) => {
+                console.log(err);
+            });
+
         }).catch((err) => {
             console.log(err);
         })
@@ -19,6 +19,13 @@ const getAvailableAppointments = (app, connection) => {
     });
 }
 
+const showBookingPage = (app, connection) => {
+    app.get("/booking", (req, res) => {
+        getAppointments(app, connection);
+        res.render("BookingMenu");
+    });
+}
+
 module.exports = {
-    getAvailableAppointments: getAvailableAppointments
+    getAppointments: getAppointments
 }
