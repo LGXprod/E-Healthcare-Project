@@ -25,7 +25,6 @@ const checkLoginCredentials = (connection, username, password) => {
     });
 }
 
-<<<<<<< HEAD
 const getQualifications = (connection, username) => {
     return new Promise((resolve, reject) => {
         
@@ -33,9 +32,6 @@ const getQualifications = (connection, username) => {
 }
 
 const getAvailableAppointments = (connection, username) => {
-=======
-const getAvailableAppointments = (connection, username, date) => {
->>>>>>> 31964c6f6b43f7599c199e50d168ca7234c5719a
     return new Promise((resolve, reject) => {
         const queryString = "select date_format(startTime, '%H:%i') as theStartTime, date_format(endTime, '%H:%i') as theEndTime from Doctor_Availability where startTime like '" 
                             + date + "%' and doc_username='" + username + "';";
