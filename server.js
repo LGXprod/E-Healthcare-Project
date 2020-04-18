@@ -36,6 +36,7 @@ connection.connect(function(err) {
 // }
 
 // generates 10 rows in the Doctor table using simulated data from the faker package
+// must run this before running insertRandomData so there is data for use in doctor table
 
 // for (var i=1; i<=5; i++) {
 //     insertRandomData.addDocData(connection);
@@ -67,6 +68,3 @@ registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
 
 schedulingController.getAvailableAppointments(ehealthApp, connection);
-
-// demonstration of commit
-// learning to commit
