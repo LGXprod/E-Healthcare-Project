@@ -31,6 +31,24 @@ const showBookingPage = (app, connection) => {
     });
 }
 
+const bookAppointment = (app, connection) => {
+    app.post("/newAppointment", (req, res) => {
+        var date = req.body.date; // date in mysql includes time
+        var username = req.body.username;
+
+        // call a function to query the database to save that appointment in schedule
+    });
+}
+
+const removeAppointment = (app, connection) => {
+    app.post("/removeAppointment", (req, res) => {
+        var username = req.body.username;
+        var date = req.body.date;
+
+        
+    });
+}
+
 module.exports = {
     getAppointmentsByDate: getAppointmentsByDate
 }
