@@ -66,11 +66,4 @@ loginController.loginUser(ehealthApp, connection);
 registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
 
-<<<<<<< HEAD
-schedulingController.getAvailableAppointments(ehealthApp, connection);
-
-// demonstration of commit 
-// sijofkijdsvndfknvj
-=======
-schedulingController.getAppointments(ehealthApp, connection);
->>>>>>> 31964c6f6b43f7599c199e50d168ca7234c5719a
+schedulingController.getAppointmentsByDate(ehealthApp, connection);
