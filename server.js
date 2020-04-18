@@ -68,10 +68,5 @@ registrationController.registerUser(ehealthApp, connection);
 
 schedulingController.getAvailableAppointments(ehealthApp, connection);
 
-<<<<<<< HEAD
 // demonstration of commit 
 // sijofkijdsvndfknvj
-=======
-// demonstration of commit
-// learning to commit
->>>>>>> 1f62b73bb32c18931380c92369b78f0bede94514

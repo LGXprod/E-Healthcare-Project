@@ -56,8 +56,6 @@ create table Communication (
     timeSent DATETIME
 );
 
--- copy and run in workbench:
-
 drop table Person_Availability;
 
 create table Doctor_Availability (
@@ -66,3 +64,5 @@ create table Doctor_Availability (
     endTime datetime,
     CONSTRAINT Doctor_Availability_FK FOREIGN KEY (doc_username) REFERENCES Doctor(username)
 );
+
+-- copy and run in workbench:
