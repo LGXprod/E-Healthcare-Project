@@ -1,6 +1,6 @@
-const getAllDoctors = (connection) => {
+const getAllDoctors = (connection, attributes) => {
     return new Promise((resolve, reject) => {
-        connection.query("select username from Doctor;", (err, result) => {
+        connection.query("select " + attributes + " from Doctor;", (err, result) => {
             if (err) reject(err);
             resolve(result);
         });
