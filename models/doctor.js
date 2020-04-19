@@ -71,7 +71,10 @@ const getAvailableAppointments = (connection, username, date) => {
                     availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)].isAvailable = false;
                 }
 
-                resolve(availableAppointments);
+                resolve({
+                    startTime: availabiltity[0].startTime,
+                    appointments: availableAppointments
+                });
             });
         });
     });
