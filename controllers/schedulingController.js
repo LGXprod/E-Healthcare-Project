@@ -34,21 +34,26 @@ const showBookingPage = (app, connection) => {
 const bookAppointment = (app, connection) => {
     app.post("/newAppointment", (req, res) => {
         var date = req.body.date; // date in mysql includes time
-        var username = req.body.username;
+        var pat_username = req.body.pat_username; //name for input in HTML form
+        var doc_username = req.body.doc_username; //name for input in HTML form
 
+        patient.insertNewAppointmentToSchedule(connection, pat_username, doc_username, date);
         // call a function to query the database to save that appointment in schedule
     });
 }
 
 const removeAppointment = (app, connection) => {
     app.post("/removeAppointment", (req, res) => {
-        var username = req.body.username;
-        var date = req.body.date;
+        var date = req.body.date; // date in mysql includes time
+        var pat_username = req.body.pat_username; //name for input in HTML form
+        var doc_username = req.body.doc_username; //name for input in HTML form
 
-        
+        patient.deleteAppointmentFromSchedule(connection, pat_username, doc_username, date);
     });
 }
 
 module.exports = {
-    getAppointmentsByDate: getAppointmentsByDate
+    getAppointmentsByDate: getAppointmentsByDate,
+    bookAppointment: bookAppointment,
+    removeAppointment: removeAppointment
 }
