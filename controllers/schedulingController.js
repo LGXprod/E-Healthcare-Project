@@ -1,33 +1,47 @@
 const patient = require("../models/patient");
 const doctor = require("../models/doctor");
 
+async function getDoctorSchedule(connection, theDoctor, date) {
+    return new Promise((resolve, reject) => {
+        doctor.getAvailableAppointments(connection, theDoctor.username, date).then((schedule) => { // getting the promise from getAvailableAppointments()
+            resolve(schedule);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
+
 // this function will be called by the client side js to get the appointments via ajax (so it can be updated regularly)
 const getAppointmentsByDate = (app, connection) => {
     app.get("/appointmentsAvailable", (req, res) => {
+        console.log(req.query);
 
-        doctor.getAllDoctors(connection).then((doctors) => { // getting the promise from getAllDoctors()
-            
+        doctor.getAllDoctors(connection, "username, fName, sName").then(async (doctors) => { // getting the promise from getAllDoctors()
+            var doctorTimes = [];
+
             for (var theDoctor of doctors) {
-                doctor.getAvailableAppointments(connection, theDoctor.username, "2020-03-18").then((schedule) => { // getting the promise from getAvailableAppointments()
-                    console.log(schedule);
-                }).catch((err) => {
-                    console.log(err);
-                });
+                const schedule = await getDoctorSchedule(connection, theDoctor, req.query.date);
+                doctorTimes.push({fName: theDoctor.fName, sName: theDoctor.sName, schedule: schedule});
             }
+
+            res.json(doctorTimes);
 
         }).catch((err) => {
             console.log(err);
         })
-
-        res.json({});
     });
 
 }
 
 const showBookingPage = (app, connection) => {
     app.get("/booking", (req, res) => {
-        getAppointments(app, connection);
-        res.render("BookingMenu");
+        doctor.getAllDoctors(connection, "fName, sName").then((doctors) => {
+            res.render("Booking", {
+                doctors: doctors
+            });
+        }).catch((err) => {
+            console.log(err);
+        });
     });
 }
 
@@ -50,5 +64,6 @@ const removeAppointment = (app, connection) => {
 }
 
 module.exports = {
-    getAppointmentsByDate: getAppointmentsByDate
+    getAppointmentsByDate: getAppointmentsByDate,
+    showBookingPage: showBookingPage
 }

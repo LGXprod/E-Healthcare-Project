@@ -68,3 +68,4 @@ registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
 
 schedulingController.getAppointmentsByDate(ehealthApp, connection);
+schedulingController.showBookingPage(ehealthApp, connection);
