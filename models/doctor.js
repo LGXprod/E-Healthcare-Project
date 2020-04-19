@@ -48,7 +48,6 @@ const getAvailableAppointments = (connection, username, date) => {
             // and that doctors can have to finish at a time that is divisible by 15 
 
             const time = timeRangeToMinutes(availabiltity[0].startTime, availabiltity[0].endTime);
-            console.log(time);
             var availableAppointments = [];
 
             for (var i = 0; i <= time; i = i + 15) {
