@@ -68,9 +68,45 @@ const checkLoginCredentials = (connection, username, password) => {
     });
 }
 
+const insertNewAppointmentToSchedule = (connection, pat_username, doc_username, date) => {
+    return new Promise((resolve, reject) => {
+        var queryString = "insert into Schedule (pat_username, doc_username, appointmentTime) values " + "('" + pat_username + "', '" + doc_username + "', '" + date + "');";
+
+        console.log(queryString);
+
+        connection.query(queryString, (err) => {
+            if (err) { // if there is an error with the insert query
+                reject(err);
+            } else {
+                resolve(true);
+            }
+            // if it doesn't meet the above condition it is assumed the insert query for the new patient is successful
+        });
+    })
+}
+
+const deleteAppointmentFromSchedule = (connection, pat_username, doc_username, date) => {
+    return new Promise((resolve, reject) => {
+        var queryString = "delete from Schedule where pat_username = "+ pat_username + "and doc_username = "+ doc_username + " and appointmentTime = " + date + ";";
+
+        console.log(queryString);
+
+        connection.query(queryString, (err) => {
+            if (err) { // if there is an error with the insert query
+                reject(err);
+            } else {
+                resolve(true);
+            }
+            // if it doesn't meet the above condition it is assumed the insert query for the new patient is successful
+        });
+    })
+}
+
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     isUsernameAvailable: async (connection, username) => { return await isUsernameAvailable(connection, username) },
     insertNewPatDB: async (connection, body, username, password) => { return await insertNewPatDB(connection, body, username, password) },
-    getPatByUsername: getPatByUsername
+    getPatByUsername: getPatByUsername,
+    insertNewAppointmentToSchedule: insertNewAppointmentToSchedule,
+    deleteAppointmentFromSchedule: deleteAppointmentFromSchedule
 }
