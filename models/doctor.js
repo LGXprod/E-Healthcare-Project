@@ -41,7 +41,10 @@ const checkLoginCredentials = (connection, username, password) => {
 
 const getQualifications = (connection, username) => {
     return new Promise((resolve, reject) => {
-        
+        connection.query("select certifications from Doctor where username = '" + username + "';", (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+        });
     });
 }
 

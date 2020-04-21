@@ -40,7 +40,7 @@ connection.connect(function(err) {
 
 // for (var i=1; i<=5; i++) {
 //     insertRandomData.addDocData(connection);
-// }
+//  }
 
 // adds a year's worth of dates and times to a doctors availability
 
