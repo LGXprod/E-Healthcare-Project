@@ -43,7 +43,7 @@ const getQualifications = (connection, username) => {
     return new Promise((resolve, reject) => {
         connection.query("select certifications from Doctor where username = '" + username + "';", (err, result) => {
             if (err) reject(err);
-            resolve(result);
+            resolve(result); 
         });
     });
 }
@@ -63,7 +63,6 @@ const getAvailableAppointments = (connection, username, date) => {
 
             // it is key that a patient can only book in 15 increments of time (e.g. 12:00, 12:15, 12:30 ...)
             // and that doctors can have to finish at a time that is divisible by 15 
-
             const time = timeRangeToMinutes(availabiltity[0].startTime, availabiltity[0].endTime);
             var availableAppointments = [];
 

@@ -63,7 +63,7 @@ const addAvailabilityData = (connection) => {
     var dates = getDates(new Date(current.getFullYear(), current.getMonth(), current.getDate()),
                 new Date(current.getFullYear()+1, current.getMonth(), current.getDate()));  
 
-    doctor.getAllDoctors(connection).then((doctors) => {
+    doctor.getAllDoctors(connection, "username").then((doctors) => {
         for (var i = 0; i < doctors.length; i++) {
             for (let date of dates) {
                 const theDate = date.getFullYear() + "-" + (date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()) + "-"
