@@ -32,9 +32,9 @@ const addPatData = (connection) => {
 }
 
 const addDocData = (connection) => {
-    const queryString = "insert into Doctor (username, userPassword, fName, sName) values ('"
+    const queryString = "insert into Doctor (username, userPassword, fName, sName, certifications) values ('"
                         + faker.internet.email() + "', '" + faker.internet.password() + "', '"
-                        + faker.name.firstName() + "', '" + faker.name.lastName() + "');";
+                        + faker.name.firstName() + "', '" + faker.name.lastName() + "', '" + faker.lorem.paragraphs() + "');";
     console.log(queryString);
 
     connection.query(queryString, (err) => {
