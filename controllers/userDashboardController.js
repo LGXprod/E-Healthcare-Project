@@ -1,4 +1,5 @@
 const patient = require("../models/patient");
+const doctor = require("../models/doctor");
 
 // displays a user's dashboard using ejs (HTML templating)
 function showUserDashboard(res, isPatient, username, connection) {
@@ -23,11 +24,17 @@ function showUserDashboard(res, isPatient, username, connection) {
         });
 
     } else {
-        res.render("DoctorDashboard", {
-            username: "fwef",
-            fName: "fwefwe",
-            sName: "gefbe"
+
+        doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
+            res.render("DoctorDashboard", {
+                username: username,
+                fName: theDoctor[0].fName,
+                sName: theDoctor[0].sName
+            });
+        }).catch((err) => {
+            console.log(err);
         });
+ 
     }
 }
 

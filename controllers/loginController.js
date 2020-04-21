@@ -34,7 +34,7 @@ const loginUser = (app, connection) => {
                 doctor.checkLoginCredentials(connection, req.body.username, req.body.password).then((correctLogin) => {
 
                     if (correctLogin) {
-                        userDashboardController.showUserDashboard(res, false, body.username, connection);
+                        userDashboardController.showUserDashboard(res, false, req.body.username, connection);
                     } else {
                         res.send("<script>alert('Wrong login details');history.go(-1);</script>");
                     }
