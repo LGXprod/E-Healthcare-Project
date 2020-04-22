@@ -39,11 +39,11 @@ function showUserDashboard(res, isPatient, username, connection) {
 }
 
 // show the webpage with the doctor's about me and qualifications
-const showAboutMe = (app, connection) => {
+const showAboutMe = (app, connection, username) => {
     app.get("/aboutMe", (req, res) => {
-        doctor.getQualifications(connection, "fName, sName").then((doctors) => {
+        doctor.getQualifications(connection, username).then((doctors) => {
             res.render("AboutMe", {
-                doctors: doctors
+                doctors: doctors[0].certifications
             });
         }).catch((err) => {
             console.log(err);
