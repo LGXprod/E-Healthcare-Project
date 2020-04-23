@@ -12,6 +12,7 @@ const insertRandomData = require("./testing/insertRandomData");
 const loginController = require("./controllers/loginController");
 const registrationController = require("./controllers/registrationController");
 const schedulingController = require("./controllers/schedulingController");
+const userDashboardController = require("./controllers/userDashboardController");
 
 // uses mysql package to create connection to mysql server
 const connection = mySQL.createConnection({
@@ -69,3 +70,5 @@ registrationController.registerUser(ehealthApp, connection);
 
 schedulingController.getAppointmentsByDate(ehealthApp, connection);
 schedulingController.showBookingPage(ehealthApp, connection);
+
+userDashboardController.ourDoctors(ehealthApp, connection);

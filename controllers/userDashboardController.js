@@ -39,18 +39,27 @@ function showUserDashboard(res, isPatient, username, connection) {
 }
 
 // show the webpage with the doctor's about me and qualifications
-const showAboutMe = (app, connection, username) => {
-    app.get("/aboutMe", (req, res) => {
-        doctor.getQualifications(connection, username).then((doctors) => {
-            res.render("AboutMe", {
-                doctors: doctors[0].certifications
-            });
-        }).catch((err) => {
-            console.log(err);
-        });
+const ourDoctors = (app, connection) => {
+    app.get("/OurDoctors", (req, res) => {
+        doctor.getAllDoctors(connection, "fName, sName, certifications").then((doctors) => {
+            var doctorDetails = [];
+
+            for (var doctor of doctors) {
+                doctorDetails.push({
+                    fName: doctor.fName,
+                    sName: doctor.sName,
+                    details: doctor.certifications
+                });
+            }
+
+            console.log(doctorDetails);
+
+            res.render("OurDoctors", doctorDetails);
+        }); 
     });
 }
 
 module.exports = {
-    showUserDashboard: showUserDashboard
+    showUserDashboard: showUserDashboard,
+    ourDoctors: ourDoctors
 }
