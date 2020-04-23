@@ -54,7 +54,9 @@ const ourDoctors = (app, connection) => {
 
             console.log(doctorDetails);
 
-            res.render("OurDoctors", doctorDetails);
+            res.render("OurDoctors", {
+                doctorDetails: doctorDetails
+            });
         }); 
     });
 }
