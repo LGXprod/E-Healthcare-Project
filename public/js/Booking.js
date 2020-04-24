@@ -31,55 +31,81 @@ $("#booking-btn").click(() => {
     //delete first row for doctor table as it was white space
     document.querySelector(".table table").deleteRow(0);
 
-    //Clicking on doctor name in the table will open a table specific to the clicked on doctor
-    $(function(){
-        $('#doctorTable').on('click', 'td', function(){
+        //Clicking on doctor name in the table will open a table specific to the clicked on doctor
+        $(function(){
+            $('#doctorTable').on('click', 'td', function(){
 
-          document.querySelector(".table table").style.display = "none";
-          document.querySelector(".av-table table").style.display = "table";
-          document.querySelector(".av-table #back-btn").style.display = "block";
+              document.querySelector(".table table").style.display = "none";
+              document.querySelector(".av-table table").style.display = "table";
+              document.querySelector(".av-table #back-btn").style.display = "block";
 
-          var doctorName = $(this).closest("tr").text()
+              var doctorName = $(this).closest("tr").text()
 
-          document.querySelector(".booking-input p").innerHTML = doctorName + " Appointments";
+              document.querySelector(".booking-input p").innerHTML = doctorName + " Appointments";
 
-          //row index of doctor clicked (correlates to results array)
-          var i = $(this).closest("tr").index();
+              //row index of doctor clicked (correlates to results array)
+              var i = $(this).closest("tr").index();
 
-          $(document).ready(function() {
-              // Fetch the initial table
-              refreshTable();
-                // Fetch every 5 seconds
-              setInterval(refreshTable, 5000);
-          });
+              $(document).ready(function() {
+                  // Fetch the initial table
+                 refreshTable();
 
-          //needs to refresh table that is clicked on (this jsut refreshes the first initial clicked on table)
-          function refreshTable(){
+              });
+
+              //needs to refresh table that is clicked on (this jsut refreshes the first initial clicked on table)
+              function refreshTable(){
                   $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
-                    var doctorData = '';
+                        var doctorData = '';
 
-              for(var a = 0; a < 29; a++) {
-                  $.each(result[i], function(index, val){
-                    doctorData += "<tr><td>" + result[i].schedule.appointments[a].minutesAfterStart + "</td>";
+                  for(var a = 0; a < Object.keys(result[i].schedule.appointments).length; a++) {
 
-                    if(result[i].schedule.appointments[a].isAvailable) {
-                      doctorData += "<td>"+ "Available" +"</td>";
-                    }
-                    else {
-                      doctorData += "<td>"+ "Unavailable" +"</td>";
-                    }
+                      $.each(result[i], function(index, val){
 
-                    });
-              }
-                          $('#doctorAv table tbody').html(doctorData);
+                          var startTime = result[i].schedule.startTime;
+                          var minsAfter = result[i].schedule.appointments[a].minutesAfterStart;
+
+                          //change start time of 10:00 to "10"
+                          var splitHM = startTime.split(":");
+                          var hour = parseInt(splitHM[0]);
+
+                          var timeAfterStart = new Date();
+
+                          timeAfterStart.setHours(hour);
+                          timeAfterStart.setMinutes(minsAfter);
+
+                          var appointmentTime = (timeAfterStart.getHours() + ":" + timeAfterStart.getMinutes());
+
+                          function formatTwelveHour(date) {
+                              var hours = timeAfterStart.getHours();
+                              var minutes = timeAfterStart.getMinutes();
+                              var ampm = hours >= 12 ? 'PM' : 'AM'; // assigns pm if over 12 and am if under 12
+                              hours = hours % 12;
+                              hours = hours ? hours : 12; // sets hour 0 to 12
+                              minutes = minutes < 10 ? '0'+ minutes : minutes;
+                              var strTime = hours + ':' + minutes + ' ' + ampm;
+                              return strTime;
+                          }
+
+                          doctorData += "<tr><td>" + formatTwelveHour(appointmentTime) + "</td>";
+
+                          if(result[i].schedule.appointments[a].isAvailable) {
+                            doctorData += "<td>" + "Available" + "</td>";
+                          }
+                          else {
+                            doctorData += "<td>" + "Unavailable" + "</td>";
+                          }
+                            return false;
+                          });
+                  }
+                  $('#doctorAv table tbody').html(doctorData);
+
                   }});
-              }
+                }
 
-          });
+              });
 
-          });
+            });
 });
-
 
 //Book An Appointment highlighted when the PatientDashbaord page is loaded
 $(document).ready(function() {

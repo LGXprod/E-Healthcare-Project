@@ -125,8 +125,8 @@ color: #aa74da; /* Icon colour on hover */
   border-spacing: 1;
   display: none;
   float: left;
+  border: 1px solid grey;
   background: white;
-  border-radius: 10px;
   overflow: scroll;
   margin: 10px;
   margin-left: 300px;
@@ -183,14 +183,13 @@ color: #aa74da; /* Icon colour on hover */
 
 .av-table > table {
   border-spacing: 1;
-  border: 1;
   display: none;
+  border: 1px solid grey;
+  border-collapse: collapse;
   background: white;
   float: left;
   right: 500px;
-  border-radius: 10px;
   overflow: scroll;
-  border-radius: 10px;
   margin: 10px;
   margin-left: 300px;
 }
@@ -217,6 +216,12 @@ color: #aa74da; /* Icon colour on hover */
 
 .av-table > table tbody td {
   padding: 10px;
+  width: 100px;
+}
+
+.av-table > table tbody tr:hover {
+  color: #792da8;
+  cursor: pointer;
 }
 
 #table-area > #doctorAv > #back-btn {
