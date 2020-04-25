@@ -2,8 +2,10 @@
 require("dotenv").config();
 // accessing packages downloaded from npm
 const express = require("express");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const mySQL = require("mysql");
+const mySQLStore = require("express-mysql-session")(session);
 
 // importing testing and sample data modules
 const insertRandomData = require("./testing/insertRandomData");
@@ -21,6 +23,21 @@ const connection = mySQL.createConnection({
     password: process.env.DB_PASSWORD, // accesses the local env file and gets the password which is store in the DB_PASSWORD
     database: "eHealthDB"
 });
+
+const sessionStore = new mySQLStore({
+    createDatabaseTable: true,
+    expiration: 3600000,
+    checkExpirationInterval: 10000,
+    endConnectionOnClose: true,
+    schema: {
+		tableName: 'sessions',
+		columnNames: {
+			session_id: 'session_id',
+			expires: 'expires',
+			data: 'data'
+		}
+    }
+}, connection);
 
 // uses connection to connect to the mysql ehealth db
 connection.connect(function(err) {
@@ -49,6 +66,13 @@ connection.connect(function(err) {
 
 const ehealthApp = express(); // creates express app so we can use its http middleware functions
 
+ehealthApp.use(session({
+    secret: 'ssshhhhh',
+    store: sessionStore,
+    resave: false,
+	saveUninitialized: false
+}));
+
 ehealthApp.use(bodyParser.urlencoded({extended: true})); // encodes data passed from forms
 ehealthApp.use(express.static(__dirname + "/public")); // allows html/ejs files to only reference the relative file path 
 
@@ -64,6 +88,7 @@ const views_dir = __dirname + "/views";
 // calls functions in controller modules
 loginController.showLoginPage(ehealthApp, views_dir);
 loginController.loginUser(ehealthApp, connection);
+loginController.logoutUser(ehealthApp, sessionStore);
 
 registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
@@ -71,4 +96,5 @@ registrationController.registerUser(ehealthApp, connection);
 schedulingController.getAppointmentsByDate(ehealthApp, connection);
 schedulingController.showBookingPage(ehealthApp, connection);
 
+userDashboardController.showUserDashboard(ehealthApp, connection);
 userDashboardController.ourDoctors(ehealthApp, connection);

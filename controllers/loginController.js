@@ -22,7 +22,9 @@ const loginUser = (app, connection) => {
         patient.checkLoginCredentials(connection, req.body.username, req.body.password).then((correctLogin) => {
 
             if (correctLogin) {
-                userDashboardController.showUserDashboard(res, true, req.body.username, connection);
+                // userDashboardController.showUserDashboard(res, true, req.body.username, connection, req);
+                req.session.username = req.body.username;
+                res.redirect("/PatientDashboard");
             } else {
 
                 // does essentially the same thing as the patient.checkLoginCredentials() but for doctors
@@ -34,7 +36,9 @@ const loginUser = (app, connection) => {
                 doctor.checkLoginCredentials(connection, req.body.username, req.body.password).then((correctLogin) => {
 
                     if (correctLogin) {
-                        userDashboardController.showUserDashboard(res, false, req.body.username, connection);
+                        // userDashboardController.showUserDashboard(res, false, req.body.username, connection);
+                        req.session.username = req.body.username;
+                        res.redirect("/DoctorDashboard");
                     } else {
                         res.send("<script>alert('Wrong login details');history.go(-1);</script>");
                     }
@@ -53,8 +57,20 @@ const loginUser = (app, connection) => {
     });
 }
 
+const logout = (app, connection) => {
+    app.get("/logout", (req, res) => {
+
+        req.session.destroy(() => {
+            res.clearCookie('connect.sid');
+            res.redirect("/");
+        });
+        
+    });
+}
+
 // allows other files to access variables in its object (in js you can pass functions as variables)
 module.exports = {
     showLoginPage: showLoginPage,
-    loginUser: loginUser
+    loginUser: loginUser,
+    logoutUser: logout
 }
