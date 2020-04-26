@@ -1,8 +1,22 @@
-const getAllDoctors = (connection) => {
+const getAllDoctors = (connection, attributes) => {
     return new Promise((resolve, reject) => {
-        connection.query("select username from Doctor;", (err, result) => {
+        connection.query("select " + attributes + " from Doctor;", (err, result) => {
             if (err) reject(err);
             resolve(result);
+        });
+    });
+}
+
+const getDoctorByUsername = (connection, username) => {
+    return new Promise((resolve, reject) => {
+        const queryString = "select * from doctor where username ='" + username + "';";
+        
+        connection.query(queryString, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
         });
     });
 }
@@ -27,7 +41,22 @@ const checkLoginCredentials = (connection, username, password) => {
 
 const getQualifications = (connection, username) => {
     return new Promise((resolve, reject) => {
-        
+        connection.query("select certifications from Doctor where username = '" + username + "';", (err, result) => {
+            if (err) reject(err);
+            resolve(result); 
+        });
+    });
+}
+
+const insertNewCertifications = (connection, username) => {
+    return new Promise((resolve, reject) => {
+        connection.query("some insert query to the db", (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(true);
+            }
+        });
     });
 }
 
@@ -46,9 +75,7 @@ const getAvailableAppointments = (connection, username, date) => {
 
             // it is key that a patient can only book in 15 increments of time (e.g. 12:00, 12:15, 12:30 ...)
             // and that doctors can have to finish at a time that is divisible by 15 
-
             const time = timeRangeToMinutes(availabiltity[0].startTime, availabiltity[0].endTime);
-            console.log(time);
             var availableAppointments = [];
 
             for (var i = 0; i <= time; i = i + 15) {
@@ -72,7 +99,10 @@ const getAvailableAppointments = (connection, username, date) => {
                     availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)].isAvailable = false;
                 }
 
-                resolve(availableAppointments);
+                resolve({
+                    startTime: availabiltity[0].startTime,
+                    appointments: availableAppointments
+                });
             });
         });
     });
@@ -81,5 +111,7 @@ const getAvailableAppointments = (connection, username, date) => {
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     getAllDoctors: getAllDoctors, 
-    getAvailableAppointments: getAvailableAppointments
+    getAvailableAppointments: getAvailableAppointments,
+    getDoctorByUsername: getDoctorByUsername,
+    insertNewCertifications: insertNewCertifications
 }

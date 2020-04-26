@@ -6,10 +6,11 @@ $(function(){
 });
 
 //Home highlighted when the PatientDashbaord page is loaded
-//$(document).ready(function() {
-//    $("#sideMenu a").slice(0,1,2,3,4,5,6).css({"background": "#397298", "border-left": "5px solid #1cb100",
-//    "padding": "15px 15px 15px 25px", "width": "280px", "transition": "0s"});
-//});
+$(document).ready(function() {
+    $("#sideMenu a").slice(0,1,2,3,4,5,6).css({"background": "#397298", "border-left": "5px solid #aa74da",
+    "padding": "15px 15px 15px 25px", "width": "280px", "transition": "0s"});
+    $("#sideMenu a i").slice(0,1,2,3,4,5,6).css({"color": "#aa74da"});
+});
 
 // Opens edit profile pop up when edit profile button here is clicked
 $(document).ready(function() {

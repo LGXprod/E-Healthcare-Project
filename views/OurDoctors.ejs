@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Booking</title>
+        <link rel="stylesheet" type="text/css" href="css/booking.css">
+        <!--- Font from google fonts --->
+        <link href="https://fonts.googleapis.com/css?family=Assistant:600&display=swap" rel="stylesheet">
+        <!--- Font Awesome is used for the email and password icons --->
+        <script src="https://kit.fontawesome.com/d65ff00190.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+
+
+
+    <body>
+
+      <div id="sideMenu" >
+        <img src="img/dashboardTitle.png">
+        <ul>
+          <a href="#" class="link"><i class="fa fa-home"
+          ></i> Home</a>
+          <a href="/booking" class="link"><i class="fa fa-calendar-check"
+          ></i> Book An Appointment</a>
+          <a href="#" class="link"><i class="fa fa-clock"
+          ></i> Schedule</a>
+          <a href="#" class="link"><i class="fa fa-user-nurse"
+          ></i> Doctors</a>
+          <a href="#" class="link"><i class="fa fa-first-aid"
+          ></i> Urgent Cases</a>
+          <a href="#" class="link"><i class="fa fa-question-circle"
+          ></i> FAQ</a>
+          <a style="position: fixed; bottom: 0; left: 0.52rem" href="#" class="link"><i class="fa fa-sign-out-alt"
+          ></i> Logout</a>
+        </ul>
+      </div>
+
+
+
+      <style>
+
+<body>
+
+        {
+            font-family: Arial;
+            font-size: 17px;
+        }
+
+        .container {
+            position: relative;
+             max-width: 800px;
+            margin: 0 auto;
+            margin-left: 290px;
+           }
+
+
+        .container .content {
+            position: absolute;
+            bottom: 0;
+            background: rgb(0, 0, 0); /* Fallback color */
+            background: rgba(0, 0, 0, 0.3); /* Black background with 0.5 opacity */
+            color: #f1f1f1;
+            width: 148%;
+            padding: 10px;
+            margin-left: 0px;
+            }
+    </style>
+
+<body>
+
+            <div class="container">
+            <img src="img/ourDoc.png" width="1180" height="250">
+            <div class="content">
+            <h1>Our Doctors</h1>
+             </div>
+    </div>
+
+</body>
+
+
+
+          <style>
+        .main {
+                margin-left: 290px;
+              }
+        </style>
+
+      <div class="main">
+         <% for (var doctor of doctorDetails) { %>
+                <div style="background-color:lavender">
+                      <h1><%= doctor.fName%></h1>
+                      <h3><%= doctor.sName%></h3>
+                      <p><%= doctor.details%></p>
+                 </div>
+                      <% } %>     
+        </div>
+
+
+
+    </body>
+
+    <script type="text/javascript" src="js/OurDoctors.js"></script>
+</html>
