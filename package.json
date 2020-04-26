@@ -18,11 +18,16 @@
   "homepage": "https://github.com/LGXprod/E-Healthcare-Project#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "connect-redis": "^4.0.4",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.4",
+<<<<<<< HEAD
+=======
+    "express-session": "^1.17.1",
+>>>>>>> 7ac5972690a03e76cbf89e1e6a5ed26cad39719b
     "faker": "^4.1.0",
     "mysql": "^2.18.1"
   }

@@ -2,8 +2,10 @@
 require("dotenv").config();
 // accessing packages downloaded from npm
 const express = require("express");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const mySQL = require("mysql");
+const mySQLStore = require("express-mysql-session")(session);
 
 // importing testing and sample data modules
 const insertRandomData = require("./testing/insertRandomData");
@@ -22,6 +24,24 @@ const connection = mySQL.createConnection({
     database: "eHealthDB"
 });
 
+
+ //uses connection to connect to the mysql ehealth db
+
+const sessionStore = new mySQLStore({
+    createDatabaseTable: true,
+    expiration: 3600000,
+    checkExpirationInterval: 10000,
+    endConnectionOnClose: true,
+    schema: {
+		tableName: 'sessions',
+		columnNames: {
+			session_id: 'session_id',
+			expires: 'expires',
+			data: 'data'
+		}
+    }
+}, connection);
+
 // uses connection to connect to the mysql ehealth db
 connection.connect(function(err) {
     if (err) throw err;
@@ -30,24 +50,30 @@ connection.connect(function(err) {
 });
 
 // generates 10 rows in the Patient table using simulated data from the faker package
+ //for (var i=1; i<=10; i++) {
+  //   insertRandomData.addPatData(connection);
+   //  console.log("");
+ //}
 
- for (var i=1; i<=10; i++) {
-     insertRandomData.addPatData(connection);
-     console.log("");
- }
-
-// generates 10 rows in the Doctor table using simulated data from the faker package
-// must run this before running insertRandomData so there is data for use in doctor table
-
- for (var i=1; i<=5; i++) {
-     insertRandomData.addDocData(connection);
-  }
 
 // adds a year's worth of dates and times to a doctors availability
+// for (var i=1; i<=5; i++) {
+//     insertRandomData.addDocData(connection);
+//  }
 
- insertRandomData.addAvailabilityData(connection);
+
+// adds a year's worth of dates and times to a doctors availability
+ //insertRandomData.addAvailabilityData(connection);
+
 
 const ehealthApp = express(); // creates express app so we can use its http middleware functions
+
+ehealthApp.use(session({
+    secret: 'ssshhhhh',
+    store: sessionStore,
+    resave: false,
+	saveUninitialized: false
+}));
 
 ehealthApp.use(bodyParser.urlencoded({extended: true})); // encodes data passed from forms
 ehealthApp.use(express.static(__dirname + "/public")); // allows html/ejs files to only reference the relative file path 
@@ -64,6 +90,7 @@ const views_dir = __dirname + "/views";
 // calls functions in controller modules
 loginController.showLoginPage(ehealthApp, views_dir);
 loginController.loginUser(ehealthApp, connection);
+loginController.logoutUser(ehealthApp, sessionStore);
 
 registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
@@ -71,4 +98,5 @@ registrationController.registerUser(ehealthApp, connection);
 schedulingController.getAppointmentsByDate(ehealthApp, connection);
 schedulingController.showBookingPage(ehealthApp, connection);
 
+userDashboardController.showUserDashboard(ehealthApp, connection);
 userDashboardController.ourDoctors(ehealthApp, connection);

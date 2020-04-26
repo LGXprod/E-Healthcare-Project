@@ -48,6 +48,18 @@ const getQualifications = (connection, username) => {
     });
 }
 
+const insertNewCertifications = (connection, username) => {
+    return new Promise((resolve, reject) => {
+        connection.query("some insert query to the db", (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(true);
+            }
+        });
+    });
+}
+
 function timeRangeToMinutes(startTime, endTime) {
     return parseInt(endTime.split(":")[0])*60 + parseInt(endTime.split(":")[1])
     - parseInt(startTime.split(":")[0])*60 + parseInt(startTime.split(":")[1]);
@@ -100,5 +112,6 @@ module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     getAllDoctors: getAllDoctors, 
     getAvailableAppointments: getAvailableAppointments,
-    getDoctorByUsername: getDoctorByUsername
+    getDoctorByUsername: getDoctorByUsername,
+    insertNewCertifications: insertNewCertifications
 }
