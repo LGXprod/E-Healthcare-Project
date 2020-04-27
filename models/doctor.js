@@ -50,7 +50,7 @@ const getQualifications = (connection, username) => {
 
 const insertNewCertifications = (connection, username) => {
     return new Promise((resolve, reject) => {
-        connection.query("some insert query to the db", (err) => {
+        connection.query("insert into Doctor (certifications) values '" + username +"' ;", (err) => {
             if (err) {
                 reject(err);
             } else {
