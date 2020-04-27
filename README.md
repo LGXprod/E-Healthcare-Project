@@ -1,6 +1,6 @@
 # E-Healthcare-Project
 
-## Recently NPM packages
+## Recently added NPM packages
 
 - express-session
 - express-mysql-session
