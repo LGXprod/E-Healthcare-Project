@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+<<<<<<< HEAD
+    "\\controllers",
+    "\\views"
+  ],
+  "SelectedNode": "\\views\\viewAppointments.ejs",
+=======
     "\\public",
     "\\public\\css",
 <<<<<<< HEAD
@@ -13,5 +19,6 @@
   ],
   "SelectedNode": "\\views\\Booking.ejs",
 >>>>>>> 7046797677a15a85a07edc7d96b61eab61dcf5ae
+>>>>>>> 7ac5972690a03e76cbf89e1e6a5ed26cad39719b
   "PreviewInSolutionExplorer": false
 }
