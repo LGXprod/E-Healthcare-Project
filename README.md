@@ -30,6 +30,7 @@ The result parameter (an array of objects, each object has these attributes):
 Therefore, to get doctor x's (their first name: A, and last name: B) appointments you need to loop through the result until you find a doctor that has fName=A and sName=B. Then you need to get that element and access the startTime and minutes after variables using the above structure. One method of doing this is as follows:
 
 $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
+
      for (var doctor of result) { // loop throw each element in result and save each element in the doctor variable
           if (doctor.fName=="A" && doctor.sName=="B") { // how to determine if it's doctor x
                 console.log("Doctor x starts at: " + startTime);
