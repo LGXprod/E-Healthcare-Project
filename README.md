@@ -1,5 +1,10 @@
 # E-Healthcare-Project
 
+## Recently NPM packages
+
+- express-session
+- express-mysql-session
+
 ## Appointments
 
 ### Bookings
