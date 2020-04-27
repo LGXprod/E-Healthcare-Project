@@ -90,7 +90,7 @@ const views_dir = __dirname + "/views";
 // calls functions in controller modules
 loginController.showLoginPage(ehealthApp, views_dir);
 loginController.loginUser(ehealthApp, connection);
-loginController.logoutUser(ehealthApp, sessionStore);
+loginController.logoutUser(ehealthApp);
 
 registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
