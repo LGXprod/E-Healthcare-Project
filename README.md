@@ -54,6 +54,7 @@ You'll have to use some simple time maths to convert a startTime and minutesAfte
 ## Data the front end GETS using EJS
 
 The majority of pages that use the .ejs extension get their data through a JS object (variable_name.attribute) inside the ejs file itself. Check https://www.npmjs.com/package/ejs to see how to use EJS on the front end or google EJS something. The two basics are:
+     
      -Assigning a HTML tag/attribute a value: <%= variable_name %>
      -Control flow (e.g. loops and functions). For example: 
      
