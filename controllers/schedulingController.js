@@ -14,7 +14,6 @@ async function getDoctorSchedule(connection, theDoctor, date) {
 // this function will be called by the client side js to get the appointments via ajax (so it can be updated regularly)
 const getAppointmentsByDate = (app, connection) => {
     app.get("/appointmentsAvailable", (req, res) => {
-        console.log(req.query);
 
         doctor.getAllDoctors(connection, "username, fName, sName").then(async (doctors) => { // getting the promise from getAllDoctors()
             var doctorTimes = [];
@@ -28,20 +27,29 @@ const getAppointmentsByDate = (app, connection) => {
 
         }).catch((err) => {
             console.log(err);
-        })
+        });
+
     });
 
 }
 
 const showBookingPage = (app, connection) => {
     app.get("/booking", (req, res) => {
-        doctor.getAllDoctors(connection, "fName, sName").then((doctors) => {
-            res.render("Booking", {
-                doctors: doctors
+
+        res.setHeader('Cache-Control', 'no-cache, no-store');
+
+        if (req.session.username != null) {
+            doctor.getAllDoctors(connection, "fName, sName").then((doctors) => {
+                res.render("Booking", {
+                    doctors: doctors
+                });
+            }).catch((err) => {
+                console.log(err);
             });
-        }).catch((err) => {
-            console.log(err);
-        });
+        } else {
+            res.redirect("/");
+        }
+        
     });
 }
 
