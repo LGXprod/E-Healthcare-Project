@@ -14,25 +14,53 @@ $("#booking-btn").click(() => {
     // MUST RAN THE ADD RANDOM DOCTOR AND ADD RANDOM DOCTOR_AVALIABILITY FOR LOOP IN SERVER.JS
     // otherwise the json will be empty
 
-    var refreshIntervalId = setInterval(appointmentInterval, 5000)
+        var selectedDate = date;
+        var now = new Date();
+        var nowString = now.getFullYear()  + "-" + (now.getMonth() < 10 ? "0" + now.getMonth() : now.getMonth()) + "-" + now.getDate();
+        if (selectedDate < nowString) {
+          alert("You entered a date that has already passed. \nPlease enter a valid date.")
+          document.querySelector(".table table").style.display = "none";
+          document.querySelector(".booking-input p").style.display = "none";
+        } else {
+          var refreshIntervalId = setInterval(appointmentInterval, 5000)
 
-    function appointmentInterval(){
-        $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
-            console.log(result);;
-        }});
-    }
+          function appointmentInterval(){
+              $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
+                  console.log(result);;
+              }});
+          }
 
-    $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
-      $.each(result, function(i, val) {
-        $("#doctorTable table tbody").append("<tr><td>"+ val.fName + " " + val.sName +"</tr></td>");
-      });
-    }});
+          $("#doctorTable table tbody").each(function() {
+              if($(this).find('td').length == 0) {
+                //delete row if no data
+                $("tr").each(function() {
+                    if (!$(this).text().trim()) {
+                      this.remove();
+                    }
+                  });
 
-    //delete first row for doctor table as it was white space
-    document.querySelector(".table table").deleteRow(0);
+                $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
+                  $.each(result, function(i, val) {
+                    $("#doctorTable table tbody").append("<tr><td>"+ val.fName + " " + val.sName +"</tr></td>");
+                  });
+                }});
+              }
+              else {
+                $("#doctorTable table tbody").empty();
+
+                $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
+                  $.each(result, function(i, val) {
+                    $("#doctorTable table tbody").append("<tr><td>"+ val.fName + " " + val.sName +"</tr></td>");
+                  });
+                }});
+
+              }
+          });
+        }
 
         //Clicking on doctor name in the table will open a table specific to the clicked on doctor
         $(function(){
+
             $('#doctorTable').on('click', 'td', function(){
 
               document.querySelector(".table table").style.display = "none";
@@ -52,7 +80,7 @@ $("#booking-btn").click(() => {
 
               });
 
-              //needs to refresh table that is clicked on (this jsut refreshes the first initial clicked on table)
+              //needs to refresh table that is clicked on (this just refreshes the first initial clicked on table)
               function refreshTable(){
                   $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
                         var doctorData = '';
@@ -98,6 +126,10 @@ $("#booking-btn").click(() => {
                           });
                   }
                   $('#doctorAv table tbody').html(doctorData);
+
+                  $('#doctorAv').on('click', 'tr', function(){
+
+                  });
 
                   }});
                 }
