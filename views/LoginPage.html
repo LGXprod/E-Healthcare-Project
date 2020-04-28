@@ -51,22 +51,47 @@
       </div>
 
 			<div class="signup">
-					<div class="signup-content">
-						<h2> Sign Up </h2>
-						<h3> Please fill in this form to create an account! </h3>
-						<img src="img/times.svg" alt="Close" class="close">
-						<form action="/registration" method="post">
-							<input name="username" type="email" class="signup-input" placeholder="Email">
-							<input name="password" type="password" class="signup-input" placeholder="Password">
-							<input name="fName" type="text" class="signup-input" placeholder="First Name">
-							<input name="sName" type="text" class="signup-input" placeholder="Last Name">
-							<input name="medicareNo" type="text" class="signup-input" placeholder="Medicare Number">
-							<input name="medicareIRN" type="text" class="signup-input" placeholder="Medicare IRN">
-							<input name="medicareExpiry" type="date" class="signup-input" placeholder="Medicare Expiry">
-							<input type="submit" class="signup-btn" value="Sign Up">
-						</form>
+					<div class="userSelect">
+						<img src="img/times.svg" alt="Close" class="closeSelect">
+						<h4> Please select the type of account </h4>
+						<input type="button" id="patientBtn" value="Patient">
+            <input type="button" id="doctorBtn"  value="Doctor">
 					</div>
+     </div>
+
+		 <div class="signup-form-p">
+			 <div class="signup-content">
+				 <h2> Sign Up </h2>
+				 <h3> Please fill in this form to create a patient account! </h3>
+				 <img src="img/times.svg" alt="Close" class="close">
+				 <form action="/registration" method="post">
+					 <input name="username" type="email" class="pat-signup-input" placeholder="Email">
+					 <input name="password" type="password" class="pat-signup-input" placeholder="Password">
+					 <input name="fName" type="text" class="pat-signup-input" placeholder="First Name">
+					 <input name="sName" type="text" class="pat-signup-input" placeholder="Last Name">
+					 <input name="medicareNo" type="text" class="pat-signup-input" placeholder="Medicare Number">
+					 <input name="medicareIRN" type="text" class="pat-signup-input" placeholder="Medicare IRN">
+					 <input name="medicareExpiry" type="date" class="pat-signup-input" placeholder="Medicare Expiry">
+					 <input type="submit" class="pat-signup-btn" value="Sign Up">
+				 </form>
+			 </div>
+	  </div>
+
+		<div class="signup-form-d">
+			<div class="signup-content">
+				<h2> Sign Up </h2>
+				<h3> Please fill in this form to create a doctor account! </h3>
+				<img src="img/times.svg" alt="Close" class="closedoc">
+				<form action="/registration" method="post">
+					<input name="username" type="email" class="doc-signup-input" placeholder="Email">
+					<input name="password" type="password" class="doc-signup-input" placeholder="Password">
+					<input name="fName" type="text" class="doc-signup-input" placeholder="First Name">
+					<input name="sName" type="text" class="doc-signup-input" placeholder="Last Name">
+					<input type="submit" class="doc-signup-btn" value="Sign Up">
+				</form>
 			</div>
+	 </div>
+
 
     <script type="text/javascript" src="js/LoginPage.js"></script>
 </body>
