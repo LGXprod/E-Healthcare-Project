@@ -59,7 +59,7 @@ $("#booking-btn").click(() => {
         }
 
         //Clicking on doctor name in the table will open a table specific to the clicked on doctor
-        $(function(){
+        $(function book(){
 
             $('#doctorTable').on('click', 'td', function(){
 
@@ -127,14 +127,22 @@ $("#booking-btn").click(() => {
                   }
                   $('#doctorAv table tbody').html(doctorData);
 
-                  $('#doctorAv').on('click', 'tr', function(){
 
+                  $('#doctorAv').on('click', 'tr', function timeOnClick(){
+                      var appTime = $(this).closest("tr").text();
+                      appTime = appTime.replace('Available','');
+                      document.querySelector("#confirmApp").style.display = "inline-block";
+                      document.querySelector("#confirmHeading").innerHTML = "Please confirm appointment with Doctor " + doctorName +
+                                                                            " at " + appTime + " " + date;
                   });
 
                   }});
                 }
 
+
               });
+
+
 
             });
 });
@@ -153,4 +161,5 @@ $(".av-table #back-btn").click(function(){
   document.querySelector(".av-table table").style.display = "none";
   document.querySelector(".av-table #back-btn").style.display = "none";
   document.querySelector(".booking-input p").innerHTML = "Please select a Doctor to see availability";
+  document.querySelector("#confirmApp").style.display = "none";
 });
