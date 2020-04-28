@@ -139,7 +139,7 @@ $("#booking-btn").click(() => {
             });
 });
 
-//Book An Appointment highlighted when the PatientDashbaord page is loaded
+//Book An Appointment highlighted when the Booking page is loaded
 $(document).ready(function() {
     $("#sideMenu a").slice(1,2,3,4,5,6).css({"background": "#397298", "border-left": "5px solid #aa74da",
     "padding": "15px 15px 15px 25px", "width": "280px", "transition": "0s"});
