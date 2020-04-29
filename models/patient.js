@@ -70,7 +70,7 @@ const checkLoginCredentials = (connection, username, password) => {
 
 const insertNewAppointmentToSchedule = (connection, pat_username, doc_username, date) => {
     return new Promise((resolve, reject) => {
-        var queryString = "insert into Schedule (pat_username, doc_username, appointmentTime) values " + "('" + pat_username + "', '" + "Desmond_Borer@hotmail.com" + "', '" + date + "');";
+        var queryString = "insert into Schedule (pat_username, doc_username, appointmentTime) values " + "('" + pat_username + "', '" + doc_username + "', '" + date + "');";
 
         console.log(queryString);
 
