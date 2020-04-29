@@ -32,7 +32,7 @@ justify-content: flex-start;
 align-items: center;
 text-align: center;
 position: absolute;
-right: 80px;
+right: 50px;
 top: 50px;
 
 }
@@ -180,6 +180,72 @@ background-position: right;
   align-items: center;
 }
 
+.signup-form-p{
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form-d{
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.userSelect{
+  height: auto;
+  width: 20%;
+  background: rgba(255, 255, 255, 1);
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  text-align:center;
+}
+
+#patientBtn {
+  background-color: #397298;
+  display: inline-block;
+  width: 30%;
+  height: 40px;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+#doctorBtn {
+  background-color: #397298;
+  display: inline-block;
+  width: 30%;
+  height: 40px;
+  outline: none;
+  border: none;
+  color: white;
+  margin-left: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+h4{
+  font-family: 'Assistant';
+  font-size: 14px;
+  color: #535353;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .signup-content{
   height: auto;
   width: auto;
@@ -195,7 +261,7 @@ h2{
   text-align: center;
 }
 
-.signup-input{
+.pat-signup-input, .doc-signup-input{
   margin: 20px auto;
   display: block;
   width: 50%;
@@ -209,7 +275,7 @@ h2{
   font-family: 'Assistant';
 }
 
-.signup-btn{
+.pat-signup-btn, .doc-signup-btn{
    background-color: #397298;
    display: block;
    width: 30%;
@@ -225,7 +291,7 @@ h2{
    cursor: pointer;
 }
 
-.close{
+.close, .closedoc{
     position: absolute;
     top: 15px;
     right: 15px;
@@ -233,6 +299,18 @@ h2{
     background: transparent;
     height: 23px;
     width: 23px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.closeSelect{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    opacity: 0.7;
+    background: transparent;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     cursor: pointer;
 }

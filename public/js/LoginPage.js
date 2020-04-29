@@ -27,9 +27,38 @@ for( var i=0,il = links.length; i< il; i ++ ){
  }
 }
 
-// Close the signup window
-document.querySelector(".close").addEventListener("click", function(){
+// Close the userSelect window
+document.querySelector(".closeSelect").addEventListener("click", function(){
     document.querySelector(".signup").style.display = "none";
+});
+
+// open patient sign up window
+document.querySelector("#patientBtn").addEventListener("click", function(){
+    document.querySelector(".signup").style.display = "none";
+    document.querySelector(".signup-form-p").style.display = "flex";
+});
+
+// open doctor sign up window
+document.querySelector("#doctorBtn").addEventListener("click", function(){
+    document.querySelector(".signup").style.display = "none";
+    document.querySelector(".signup-form-d").style.display = "flex";
+});
+
+// Close the patient signup window
+document.querySelector(".close").addEventListener("click", function(){
+    document.querySelector(".signup-form-p").style.display = "none";
+    document.querySelector(".signup").style.display = "flex";
+    //Clears inputs if the signup window is closed
+    var inputs = document.getElementsByClassName("signup-input");
+      for (var i=0 ; i < inputs.length ; i++){
+            inputs[i].value = "";
+          }
+});
+
+// Close the doctor signup window
+document.querySelector(".closedoc").addEventListener("click", function(){
+    document.querySelector(".signup-form-d").style.display = "none";
+    document.querySelector(".signup").style.display = "flex";
     //Clears inputs if the signup window is closed
     var inputs = document.getElementsByClassName("signup-input");
       for (var i=0 ; i < inputs.length ; i++){

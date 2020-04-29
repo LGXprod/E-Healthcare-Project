@@ -2,16 +2,23 @@ const doctor = require("../models/doctor");
 
 const showDocInfoPage = (app, connection) => {
     const doc_username = req.session.username;
+    return new Promise((resolve, reject) => {
 
-    // get the certifications of the doctor with the above username
-    // and then render that info into ejs file
-    // below will have to be inside a promise to get the certifications
+        // get the certifications of the doctor with the above username
+        // and then render that info into ejs file
+        // below will have to be inside a promise to get the certifications
+        app.get("/DoctorInfo", (req, res) => {
+            doctor.getQualitifications(connection, doc_username).then((doctors) => {
 
-    app.get("/DoctorInfo", (req, res) => {
-        res.render("DoctorInfo", {
-            doctorInfo: // variable that contains the doctor's certifications
-        })
-    });
+                res.render("DoctorInfo", {
+                    doctorInfo: doctorInfo// variable that contains the doctor's certifications
+                });
+            });
+        });
+            if (err) reject(err);
+            resolve(result); 
+        });
+
 }
 
 const updateDocInfo = (app, connection) => {
@@ -23,6 +30,11 @@ const updateDocInfo = (app, connection) => {
         // I have declared this function it's called insertNewCertifications()
         // If the promise returns true then execute the below code
 
-        res.redirect("/DoctorInfo");
+        doctor.insertNewCertifications(connection, doc_username, newInfo).then((doctors) => {
+            res.redirect("/DoctorInfo");
+
+        });
+            
     });
+    
 }

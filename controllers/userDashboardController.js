@@ -92,23 +92,31 @@ function showUserDashboard(app, connection) {
 // show the webpage with the doctor's about me and qualifications
 const ourDoctors = (app, connection) => {
     app.get("/OurDoctors", (req, res) => {
-        doctor.getAllDoctors(connection, "fName, sName, certifications").then((doctors) => {
-            var doctorDetails = [];
 
-            for (var doctor of doctors) {
-                doctorDetails.push({
-                    fName: doctor.fName,
-                    sName: doctor.sName,
-                    details: doctor.certifications
+        res.setHeader('Cache-Control', 'no-cache, no-store');
+
+        if (req.session.username != null) {
+            doctor.getAllDoctors(connection, "fName, sName, certifications").then((doctors) => {
+                var doctorDetails = [];
+    
+                for (var doctor of doctors) {
+                    doctorDetails.push({
+                        fName: doctor.fName,
+                        sName: doctor.sName,
+                        details: doctor.certifications
+                    });
+                }
+    
+                console.log(doctorDetails);
+    
+                res.render("OurDoctors", {
+                    doctorDetails: doctorDetails
                 });
-            }
-
-            console.log(doctorDetails);
-
-            res.render("OurDoctors", {
-                doctorDetails: doctorDetails
-            });
-        }); 
+            }); 
+        } else {
+            res.redirect("/");
+        }
+        
     });
 }
 

@@ -1,0 +1,308 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Assistant';
+	background: #fbfbfb;
+}
+
+hr {
+	border: 0;
+	height: 1px;
+	background: #333;
+	background-image: linear-gradient(to right, #959595, #333, #959595);
+}
+
+#sideMenu {
+	background: #4c516d;
+	width: 280px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+}
+
+ul {
+	top: 150px;
+	position: absolute;
+}
+
+#sideMenu > img {
+	display: block;
+	width: 100%;
+	position: relative;
+	top: -50px;
+}
+
+ul > a {
+	display: block;
+	position: relative;
+	left: -40px;
+	color: white;
+	text-decoration: none;
+	padding: 15px;
+	transition: all 0.3s ease-in-out;
+}
+
+#sideMenu a:hover {
+	background: #397298;
+	border-left: 5px solid #aa74da;
+	padding: 15px;
+	width: 280px;
+}
+
+#sideMenu a.clicked {
+	background: #397298;
+	border-left: 5px solid #aa74da;
+	padding: 15px 15px 15px 25px;
+	width: 280px;
+}
+
+i {
+	color: white;
+	font-size: 1.2rem;
+	margin-right: 0.8rem;
+	display: inline-block;
+	width: 20px;
+	position: relative;
+	top: 2px;
+}
+
+#sideMenu a.clicked > i {
+	color: #aa74da; /* Icon colour on click */
+}
+
+#sideMenu a:hover > i {
+	color: #aa74da; /* Icon colour on hover */
+}
+
+#dashboardArea {
+	margin-left: 280px;
+	padding: 10px;
+}
+
+.heading > h1 {
+	color: #792da8;
+	font-size: 25px;
+	font-weight: 400;
+	margin: 10px;
+}
+
+.heading > p {
+	color: #535353;
+	font-size: 14px;
+	margin: 10px;
+	display: inline-block;
+}
+
+.slides > .slide {
+	background: #fff;
+	border-radius: 5px;
+	padding: 0 15px;
+	width: 100%;
+	margin: 10px;
+	float: left;
+	padding: 10px;
+}
+
+.slides > .slide-below {
+	background: #fff;
+	border-radius: 5px;
+	padding: 0 15px;
+	margin: 10px;
+	float: left;
+	padding: 20px;
+}
+
+.slides > .slide > img {
+	width: 130px;
+	height: 130px;
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+}
+
+.slides > .slide > .user-name {
+	font-size: 1.2rem;
+	color: #792da8;
+	display: block;
+	text-align: center;
+	margin: 10px 0;
+}
+
+.slides > .slide > .user-email {
+	font-size: 0.8rem;
+	color: #535353;
+	display: block;
+	text-align: center;
+	margin: 10px 0;
+}
+
+.slides > .slide > .below {
+	width: (100/4) + %;
+	padding: 0 15px;
+	display: inline-block;
+}
+
+.heading > .editBtn {
+	float: right;
+	display: block;
+	height: 25px;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to left, #792da8, #8a3fcc, #aa74da);
+	background-size: 200%;
+	font-size: 12px;
+	color: white;
+	font-family: 'Assistant';
+	cursor: pointer; /*change the cursor to the hand thing*/
+	transition: 0.8s;
+}
+
+	.heading > .editBtn:hover {
+		background-position: right;
+	}
+
+.edit-profile {
+	background: rgba(0, 0, 0, 0.6);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+
+.edit-content {
+	height: 380px;
+	width: auto;
+	background: rgba(255, 255, 255, 1);
+	border-radius: 5px;
+	position: relative;
+	padding: 10px;
+	padding-bottom: 25px;
+	background: white;
+}
+
+h2 {
+	font-family: 'Assistant';
+	font-size: 25px;
+	padding-left: 20px;
+	color: #792da8;
+}
+
+.edit-input {
+	width: 200px;
+	height: 35px;
+	display: inline-block;
+	padding: 8px;
+	border: 1px solid grey;
+	outline: 1px;
+	background: transparent;
+	font-size: 12px;
+	color: #535353;
+	font-family: 'Assistant';
+}
+
+.edit-profile > .edit-content > .avatar {
+	display: inline-block;
+	width: 20%;
+}
+
+.editfName {
+	margin-left: 50px;
+	display: inline-block;
+	position: absolute;
+	margin-top: 10px;
+}
+
+.editlName {
+	margin-left: 300px;
+	display: inline-block;
+	position: absolute;
+	margin-top: 10px;
+}
+
+.editEmail {
+	margin-left: 50px;
+	display: inline-block;
+	position: absolute;
+	margin-top: 80px;
+}
+
+.editMedNo {
+	margin-left: 300px;
+	display: inline-block;
+	position: absolute;
+	margin-top: 80px;
+}
+
+.editMedIRN {
+	margin-left: 50px;
+	display: inline-block;
+	position: absolute;
+	margin-top: 150px;
+}
+
+.editMedDate {
+	margin-left: 300px;
+	display: inline-block;
+	position: absolute;
+	margin-top: 150px;
+}
+
+label {
+	display: block;
+}
+
+.save-btn {
+	background-color: #397298;
+	display: block;
+	width: 110px;
+	height: 30px;
+	position: absolute;
+	bottom: 25px;
+	right: 65px;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+h3 {
+	font-size: 12px;
+	color: #397298;
+	display: inline-block;
+	position: absolute;
+	bottom: 110px;
+	left: 24px;
+	cursor: pointer;
+}
+
+.edit-profile > .edit-content > a {
+	color: #397298;
+	font-size: 12px;
+	display: inline-block;
+	position: absolute;
+	bottom: 30px;
+	left: 202px;
+}
+
+.close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	opacity: 0.7;
+	background: rgba(255, 255, 255, 0.8);
+	height: 23px;
+	width: 23px;
+	border-radius: 50%;
+	cursor: pointer;
+}
