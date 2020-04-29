@@ -20,7 +20,7 @@ const getAppointmentsByDate = (app, connection) => {
 
             for (var theDoctor of doctors) {
                 const schedule = await getDoctorSchedule(connection, theDoctor, req.query.date);
-                doctorTimes.push({fName: theDoctor.fName, sName: theDoctor.sName, schedule: schedule});
+                doctorTimes.push({username: theDoctor.username, fName: theDoctor.fName, sName: theDoctor.sName, schedule: schedule});
             }
 
             res.json(doctorTimes);
