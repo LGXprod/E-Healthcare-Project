@@ -136,8 +136,7 @@ $("#booking-btn").click(() => {
                                                                             " at " + appTime + " " + date;
 
                       document.getElementById("appDate").value = date;
-                      document.getElementById("patUser").value = "Ahmad_Huels@hotmail.com";
-                      document.getElementById("docUser").value = "Lawrence.Kshlerin@yahoo.com";
+                      document.getElementById("docUser").value = result[i].username;
 
                   });
 
