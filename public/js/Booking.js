@@ -134,6 +134,11 @@ $("#booking-btn").click(() => {
                       document.querySelector("#confirmApp").style.display = "inline-block";
                       document.querySelector("#confirmHeading").innerHTML = "Please confirm appointment with Doctor " + doctorName +
                                                                             " at " + appTime + " " + date;
+
+                      document.getElementById("appDate").value = date;
+                      document.getElementById("patUser").value = "Ahmad_Huels@hotmail.com";
+                      document.getElementById("docUser").value = "Lawrence.Kshlerin@yahoo.com";
+
                   });
 
                   }});
