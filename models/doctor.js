@@ -87,14 +87,14 @@ const getAvailableAppointments = (connection, username, date) => {
 
             const queryString = "select date_format(appointmentTime, '%H:%i') as appointmentTime from Schedule where appointmentTime like '" + date + "%' and doc_username='" + 
                                 username + "';";
-
+            // console.log(queryString);
             // is there appointment 8:15 no, {true, 8:15}, is there an appointment 8:30 yes {false, 8:30}
 
             connection.query(queryString, (err, appointments) => {
                 if (err) reject (err);
 
                 for (var appointment of appointments) {
-                    const time = timeRangeToMinutes(availabiltity[0].startTime, appointment.appointmentTime);
+                    const time = timeRangeToMinutes("00:00", appointment.appointmentTime);
 
                     availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)].isAvailable = false;
                 }

@@ -56,7 +56,7 @@ const showBookingPage = (app, connection) => {
 const bookAppointment = (app, connection) => {
     app.post("/newAppointment", (req, res) => {
         var date = req.body.date; // date in mysql includes time
-        var pat_username = req.body.pat_username; //name for input in HTML form
+        var pat_username = req.session.username;
         var doc_username = req.body.doc_username; //name for input in HTML form
 
         patient.insertNewAppointmentToSchedule(connection, pat_username, doc_username, date);
@@ -67,7 +67,7 @@ const bookAppointment = (app, connection) => {
 const removeAppointment = (app, connection) => {
     app.post("/removeAppointment", (req, res) => {
         var date = req.body.date; // date in mysql includes time
-        var pat_username = req.body.pat_username; //name for input in HTML form
+        var pat_username = req.session.username;
         var doc_username = req.body.doc_username; //name for input in HTML form
 
         patient.deleteAppointmentFromSchedule(connection, pat_username, doc_username, date);
