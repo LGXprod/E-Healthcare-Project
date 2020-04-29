@@ -66,6 +66,27 @@ function showUserDashboard(app, connection) {
         }
 
     });
+
+
+    app.get("/DoctorDashboard", (req, res) => {
+        
+        res.setHeader('Cache-Control', 'no-cache, no-store');
+
+        if (req.session.username != null) {
+            doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
+                res.render("DoctorDashboard", {
+                    username: username,
+                    fName: theDoctor[0].fName,
+                    sName: theDoctor[0].sName
+                });
+            }).catch((err) => {
+                console.log(err);
+            });
+        } else {
+            res.redirect("/");
+        }
+
+    });
 }
 
 // show the webpage with the doctor's about me and qualifications

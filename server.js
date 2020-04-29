@@ -24,9 +24,6 @@ const connection = mySQL.createConnection({
     database: "eHealthDB"
 });
 
-<<<<<<< HEAD
- //uses connection to connect to the mysql ehealth db
-=======
 const sessionStore = new mySQLStore({
     createDatabaseTable: true,
     expiration: 3600000,
@@ -43,7 +40,6 @@ const sessionStore = new mySQLStore({
 }, connection);
 
 // uses connection to connect to the mysql ehealth db
->>>>>>> 7046797677a15a85a07edc7d96b61eab61dcf5ae
 connection.connect(function(err) {
     if (err) throw err;
 
@@ -60,15 +56,9 @@ connection.connect(function(err) {
 // generates 10 rows in the Doctor table using simulated data from the faker package
 // must run this before running insertRandomData so there is data for use in doctor table
 
-<<<<<<< HEAD
- //for (var i=1; i<=5; i++) {
-   //  insertRandomData.addDocData(connection);
- //}
-=======
 // for (var i=1; i<=5; i++) {
 //     insertRandomData.addDocData(connection);
 //  }
->>>>>>> 7046797677a15a85a07edc7d96b61eab61dcf5ae
 
 // adds a year's worth of dates and times to a doctors availability
 
@@ -105,6 +95,8 @@ registrationController.registerUser(ehealthApp, connection);
 
 schedulingController.getAppointmentsByDate(ehealthApp, connection);
 schedulingController.showBookingPage(ehealthApp, connection);
+schedulingController.bookAppointment(ehealthApp, connection);
+schedulingController.removeAppointment(ehealthApp, connection);
 
 userDashboardController.showUserDashboard(ehealthApp, connection);
 userDashboardController.ourDoctors(ehealthApp, connection);

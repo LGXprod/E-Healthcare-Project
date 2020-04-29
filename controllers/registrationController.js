@@ -15,8 +15,6 @@ const registerUser = (app, connection, dir) => {
         const username = body.username; // accesses variables form object (req.body) and gets a specific property from it (username) (this is the name of the input in the form)
         const password = body.password;
 
-        const fName = req.body.
-
         // calls async function to check if username is available
         patient.isUsernameAvailable(connection, username).then((isAvailable) => {
             console.log(isAvailable);
