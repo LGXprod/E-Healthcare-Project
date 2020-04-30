@@ -157,7 +157,6 @@ const updateDocInfo = (app, connection) => {
 
         doctor.insertNewCertifications(connection, doc_username, newInfo).then((doctors) => {
             res.redirect("/DoctorInfo");
-
         });
             
     });
