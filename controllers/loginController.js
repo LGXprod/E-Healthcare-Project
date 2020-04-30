@@ -57,7 +57,7 @@ const loginUser = (app, connection) => {
     });
 }
 
-const logout = (app, connection) => {
+const logout = (app) => {
     app.get("/logout", (req, res) => {
 
         req.session.destroy(() => {

@@ -24,9 +24,13 @@
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.4",
+<<<<<<< HEAD
 
     "express-session": "^1.17.1",
 
+=======
+    "express-session": "^1.17.1",
+>>>>>>> 607f5268bc3774717f539fea31a8b0260844cfca
     "faker": "^4.1.0",
     "mysql": "^2.18.1"
   }

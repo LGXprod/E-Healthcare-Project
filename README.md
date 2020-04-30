@@ -1,8 +1,13 @@
 # E-Healthcare-Project
 
-## Appointments
+## Recently added NPM packages
 
-### Bookings
+- express-session
+- express-mysql-session
+
+## Data the front end GETS using AJAX
+
+### Appointments/Bookings
 
 The booking data of all doctors is sent as a JSON object to the /appointmentsAvailable?date=(some date in form yyyy-mm-dd) endpoint. 
 
@@ -45,3 +50,18 @@ $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
 }});
           
 You'll have to use some simple time maths to convert a startTime and minutesAfterStart variable into a timeOfAppointment variable. But above is how you would find startTime and minutesAfterStart and print it.
+
+## Data the front end GETS using EJS
+
+The majority of pages that use the .ejs extension get their data through a JS object (variable_name.attribute) inside the ejs file itself. Check https://www.npmjs.com/package/ejs to see how to use EJS on the front end or google EJS something. The two basics are:
+     
+     -Assigning a HTML tag/attribute a value: <%= variable_name %>
+     -Control flow (e.g. loops and functions). For example: 
+     
+     <% for (*for loop conditions*) { %>
+          <*logic inside the loop*>
+     <% } %>
+                                                            
+### How do you find the name of the variable you should be using in the EJS file? 
+Ask a member of the back end group and they will tell you. In the future we will have the names of these variables in this section of the document. 
+                                               

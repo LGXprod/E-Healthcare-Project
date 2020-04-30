@@ -66,3 +66,6 @@ create table Doctor_Availability (
 );
 
 -- copy and run in workbench:
+ALTER TABLE SCHEDULE DROP FOREIGN KEY SCHEDULE_FK1;
+ALTER TABLE SCHEDULE DROP FOREIGN KEY SCHEDULE_FK2;
+ALTER TABLE schedule DROP PRIMARY KEY;

@@ -49,24 +49,32 @@
       <div id="table-area">
              <div id="doctorTable" class="table">
                <table>
-
                  <tbody>
                      <tr>
                      </tr>
                  </tbody>
                </table>
              </div>
-
              <div id="doctorAv" class="av-table">
                <table>
                  <tbody>
                      <tr>
-            
+
                    </tr>
                 </tbody>
                </table>
                <button id="back-btn">Back</button>
              </div>
+
+            <form action="/newAppointment" method="post">
+              <div id="confirmApp">
+                <h2 id="confirmHeading"><h2>
+                <input type="hidden" name="date" id="appDate">
+                <input type="hidden" name="doc_username" id="docUser">
+                <input type="submit" class="app-btn" value="Confirm">
+              </div>
+          <!---  <input name="date" type="email" class="pat-signup-input" placeholder="Email">--->
+            </form>
       </div>
 
 
