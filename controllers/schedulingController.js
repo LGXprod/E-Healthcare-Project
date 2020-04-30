@@ -49,7 +49,7 @@ const showBookingPage = (app, connection) => {
         } else {
             res.redirect("/");
         }
-        
+
     });
 }
 
@@ -61,6 +61,8 @@ const bookAppointment = (app, connection) => {
 
         patient.insertNewAppointmentToSchedule(connection, pat_username, doc_username, date);
         // call a function to query the database to save that appointment in schedule
+
+        res.redirect("/Booking");
     });
 }
 
