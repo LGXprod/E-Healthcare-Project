@@ -50,20 +50,20 @@ connection.connect(function(err) {
 });
 
 // generates 10 rows in the Patient table using simulated data from the faker package
- //for (var i=1; i<=10; i++) {
-  //   insertRandomData.addPatData(connection);
-   //  console.log("");
- //}
+ // for (var i=1; i<=10; i++) {
+ //     insertRandomData.addPatData(connection);
+ //     console.log("");
+ // }
 
 
 // adds a year's worth of dates and times to a doctors availability
-// for (var i=1; i<=5; i++) {
-//     insertRandomData.addDocData(connection);
-//  }
+ // for (var i=1; i<=5; i++) {
+ //     insertRandomData.addDocData(connection);
+ //  }
 
 
 // adds a year's worth of dates and times to a doctors availability
- //insertRandomData.addAvailabilityData(connection);
+ // insertRandomData.addAvailabilityData(connection);
 
 
 const ehealthApp = express(); // creates express app so we can use its http middleware functions
