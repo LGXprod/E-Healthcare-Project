@@ -76,9 +76,28 @@ const removeAppointment = (app, connection) => {
     });
 }
 
+const doctorViewAppointments = (app, connection) => {
+    app.get("/ViewAppointments", (req, res) => {
+        res.setHeader('Cache-Control', 'no-cache, no-store');
+
+        if (req.session.username != null) {
+            doctor.getAllDoctors(connection, "fName, sName").then((doctors) => {
+                res.render("ViewAppointments", {
+                    doctors: doctors
+                });
+            }).catch((err) => {
+                console.log(err);
+            });
+        } else {
+            res.redirect("/");
+        }
+    });
+}
+
 module.exports = {
     getAppointmentsByDate: getAppointmentsByDate,
     showBookingPage: showBookingPage,
     bookAppointment: bookAppointment,
-    removeAppointment: removeAppointment
+    removeAppointment: removeAppointment,
+    doctorViewAppointments: doctorViewAppointments
 }

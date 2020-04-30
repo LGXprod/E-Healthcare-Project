@@ -97,6 +97,7 @@ registrationController.registerUser(ehealthApp, connection);
 
 schedulingController.getAppointmentsByDate(ehealthApp, connection);
 schedulingController.showBookingPage(ehealthApp, connection);
+schedulingController.doctorViewAppointments(ehealthApp, connection);
 schedulingController.bookAppointment(ehealthApp, connection);
 schedulingController.removeAppointment(ehealthApp, connection);
 
