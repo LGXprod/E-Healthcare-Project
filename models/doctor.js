@@ -115,5 +115,6 @@ module.exports = {
     getAllDoctors: getAllDoctors,
     getAvailableAppointments: getAvailableAppointments,
     getDoctorByUsername: getDoctorByUsername,
-    insertNewCertifications: insertNewCertifications
+    insertNewCertifications: insertNewCertifications,
+    getQualifications: getQualifications
 }

@@ -73,9 +73,9 @@ function showUserDashboard(app, connection) {
         res.setHeader('Cache-Control', 'no-cache, no-store');
 
         if (req.session.username != null) {
-            doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
+            doctor.getDoctorByUsername(connection, req.session.username).then((theDoctor) => {
                 res.render("DoctorDashboard", {
-                    username: username,
+                    username: req.session.username,
                     fName: theDoctor[0].fName,
                     sName: theDoctor[0].sName
                 });
@@ -120,7 +120,53 @@ const ourDoctors = (app, connection) => {
     });
 }
 
+const showDocInfoPage = (app, connection) => {
+    return new Promise((resolve, reject) => {
+
+        // get the certifications of the doctor with the above username
+        // and then render that info into ejs file
+        // below will have to be inside a promise to get the certifications
+        app.get("/DoctorInfo", (req, res) => {
+            res.setHeader('Cache-Control', 'no-cache, no-store');
+
+            doctor.getQualifications(connection, req.session.username).then((doctors) => {
+                res.render("DoctorInfo", {
+                    doctorInfo: doctors[0].certifications // variable that contains the doctor's certifications
+                });
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+            if (err) reject(err);
+            resolve(result); 
+        });
+
+}
+
+const updateDocInfo = (app, connection) => {
+    app.post("/updateDocInfo", (req, res) => {
+
+        res.setHeader('Cache-Control', 'no-cache, no-store');
+
+        const doc_username = req.session.username;
+        const newInfo = req.body.description;
+
+        // make a function inside the doctor model and have it replace the current info with the new info
+        // I have declared this function it's called insertNewCertifications()
+        // If the promise returns true then execute the below code
+
+        doctor.insertNewCertifications(connection, doc_username, newInfo).then((doctors) => {
+            res.redirect("/DoctorInfo");
+
+        });
+            
+    });
+    
+}
+
 module.exports = {
     showUserDashboard: showUserDashboard,
-    ourDoctors: ourDoctors
+    ourDoctors: ourDoctors,
+    showDocInfoPage: showDocInfoPage,
+    updateDocInfo: updateDocInfo
 }

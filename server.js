@@ -102,3 +102,5 @@ schedulingController.removeAppointment(ehealthApp, connection);
 
 userDashboardController.showUserDashboard(ehealthApp, connection);
 userDashboardController.ourDoctors(ehealthApp, connection);
+userDashboardController.showDocInfoPage(ehealthApp, connection);
+userDashboardController.updateDocInfo(ehealthApp, connection);
