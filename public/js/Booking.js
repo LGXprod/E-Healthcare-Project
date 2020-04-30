@@ -69,7 +69,7 @@ $("#booking-btn").click(() => {
 
               var doctorName = $(this).closest("tr").text()
 
-              document.querySelector(".booking-input p").innerHTML = doctorName + " Appointments";
+              document.querySelector(".booking-input p").innerHTML = doctorName + " available appointments";
 
               //row index of doctor clicked (correlates to results array)
               var i = $(this).closest("tr").index();
@@ -77,7 +77,6 @@ $("#booking-btn").click(() => {
               $(document).ready(function() {
                   // Fetch the initial table
                  refreshTable();
-
               });
 
               //needs to refresh table that is clicked on (this just refreshes the first initial clicked on table)
@@ -116,11 +115,8 @@ $("#booking-btn").click(() => {
 
                           doctorData += "<tr><td>" + formatTwelveHour(appointmentTime) + "</td>";
 
-                          if(result[i].schedule.appointments[a].isAvailable) {
-                            doctorData += "<td>" + "Available" + "</td>";
-                          }
-                          else {
-                            doctorData += "<td>" + "Unavailable" + "</td>";
+                          if(!result[i].schedule.appointments[a].isAvailable) {
+                               doctorData += "<td>" + "NA" + "</td>";
                           }
                             return false;
                           });
@@ -135,10 +131,28 @@ $("#booking-btn").click(() => {
                       document.querySelector("#confirmHeading").innerHTML = "Please confirm appointment with Doctor " + doctorName +
                                                                             " at " + appTime + " " + date;
 
-                      document.getElementById("appDate").value = date;
+
+                     if (appTime.includes("AM")){
+                       sqlTime = appTime.replace(' AM', ':00');
+                     }
+                     else {
+                       sqlTime = appTime.replace(' PM', ':00');
+                     }
+
+                      document.getElementById("appDate").value = date + " " + sqlTime;
                       document.getElementById("docUser").value = result[i].username;
 
                   });
+
+                  // delete row if unavailable
+                  $(function(){
+                      $("#doctorAv tr").each(function(){
+                        var col_val = $(this).find("td:eq(1)").text();
+                        if (col_val == "NA"){
+                          $(this).text('')
+                           }
+                      });
+                    });
 
                   }});
                 }

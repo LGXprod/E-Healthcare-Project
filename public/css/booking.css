@@ -201,8 +201,8 @@ color: #aa74da; /* Icon colour on hover */
 .av-table > table > tbody {
   display: inline-block;
   height: 400px;
-  min-width: 200px;
-  max-width: 400px;
+  min-width: 100px;
+  width: 150px;
   overflow-y: auto;
   overflow-x: hidden;
 }
