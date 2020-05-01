@@ -3,7 +3,7 @@
 
 <head>
 	<title>eHealthcare</title>
-	<link rel="stylesheet" type="text/css" href="css/viewAppointments.css">
+	<link rel="stylesheet" type="text/css" href="css/doctorDashboard.css">
   <!--- Font from google fonts --->
 	<link href="https://fonts.googleapis.com/css?family=Assistant:600&display=swap" rel="stylesheet">
   <!--- Font Awesome is used for the email and password icons --->
@@ -12,27 +12,6 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link href='fullcalendar/core/main.css' rel='stylesheet' />
-    <link href='fullcalendar/daygrid/main.css' rel='stylesheet' />
-
-    <script src='fullcalendar/core/main.js'></script>
-    <script src='fullcalendar/daygrid/main.js'></script>
-
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          plugins: [ 'dayGrid' ]
-        });
-
-        calendar.render();
-      });
-
-    </script>
-
 </head>
 
 <body>
@@ -61,6 +40,15 @@
 		</div>
 
 		 <div id='calendar'></div>
+
+
+		<form action="/action_page.php">
+		<h3>Please select a date to view scheduled appointments</h3>
+  		<label for="birthday">Select date:</label>
+  		<input type="date" id="birthday" name="birthday">
+  		<input type="submit">
+</form>
+
 
 
 
