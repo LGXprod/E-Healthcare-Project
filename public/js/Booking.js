@@ -1,6 +1,6 @@
 $("#booking-btn").click(() => {
     var [year, month, day] = $("#date").val().split("-");
-    month = parseInt(month) - 1;
+    month = parseInt(month);
     const date = year + "-" + (month < 10 ? "0" + month : month) + "-" + day;
     console.log(date)
 
