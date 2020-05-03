@@ -81,9 +81,9 @@ const doctorViewAppointments = (app, connection) => {
         res.setHeader('Cache-Control', 'no-cache, no-store');
 
         if (req.session.username != null) {
-            doctor.getAllDoctors(connection, "fName, sName").then((doctors) => {
+            doctor.getDoctorByUsername(connection, req.session.username).then((doctor) => {
                 res.render("ViewAppointments", {
-                    doctors: doctors
+                    doctor: doctor
                 });
             }).catch((err) => {
                 console.log(err);
