@@ -1,8 +1,18 @@
 {
   "ExpandedNodes": [
     "",
+<<<<<<< HEAD
+    "\\controllers",
+    "\\public",
+    "\\public\\css",
+    "\\public\\js",
+    "\\views"
+  ],
+  "SelectedNode": "\\controllers\\docInfoController.js",
+=======
     "\\views"
   ],
   "SelectedNode": "\\server.js",
+>>>>>>> 9b1c50f2b849beaf370ff2d8daec3c87af3051db
   "PreviewInSolutionExplorer": false
 }
