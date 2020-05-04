@@ -22,14 +22,10 @@
           ></i> Home</a>
           <a href="/booking" class="link"><i class="fa fa-calendar-check"
           ></i> Book An Appointment</a>
-          <a href="#" class="link"><i class="fa fa-clock"
-          ></i> Schedule</a>
-          <a href="#" class="link"><i class="fa fa-user-nurse"
-          ></i> Doctors</a>
+          <a href="/OurDoctors" class="link"><i class="fa fa-user-nurse"
+          ></i> Our Doctors</a>
           <a href="#" class="link"><i class="fa fa-first-aid"
           ></i> Urgent Cases</a>
-          <a href="#" class="link"><i class="fa fa-question-circle"
-          ></i> FAQ</a>
           <a style="position: fixed; bottom: 0; left: 0.52rem" href="#" class="link"><i class="fa fa-sign-out-alt"
           ></i> Logout</a>
         </ul>
@@ -53,24 +49,32 @@
       <div id="table-area">
              <div id="doctorTable" class="table">
                <table>
-
                  <tbody>
                      <tr>
                      </tr>
                  </tbody>
                </table>
              </div>
-
              <div id="doctorAv" class="av-table">
                <table>
                  <tbody>
                      <tr>
-            
+
                    </tr>
                 </tbody>
                </table>
                <button id="back-btn">Back</button>
              </div>
+
+            <form action="/newAppointment" method="post">
+              <div id="confirmApp">
+                <h2 id="confirmHeading"><h2>
+                <input type="hidden" name="date" id="appDate">
+                <input type="hidden" name="doc_username" id="docUser">
+                <input type="submit" class="app-btn" value="Confirm">
+              </div>
+          <!---  <input name="date" type="email" class="pat-signup-input" placeholder="Email">--->
+            </form>
       </div>
 
 

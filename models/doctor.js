@@ -10,7 +10,7 @@ const getAllDoctors = (connection, attributes) => {
 const getDoctorByUsername = (connection, username) => {
     return new Promise((resolve, reject) => {
         const queryString = "select * from doctor where username ='" + username + "';";
-        
+
         connection.query(queryString, (err, result) => {
             if (err) {
                 reject(err);
@@ -43,14 +43,14 @@ const getQualifications = (connection, username) => {
     return new Promise((resolve, reject) => {
         connection.query("select certifications from Doctor where username = '" + username + "';", (err, result) => {
             if (err) reject(err);
-            resolve(result); 
+            resolve(result);
         });
     });
 }
 
 const insertNewCertifications = (connection, username) => {
     return new Promise((resolve, reject) => {
-        connection.query("some insert query to the db", (err) => {
+        connection.query("insert into Doctor (certifications) values '" + username +"' ;", (err) => {
             if (err) {
                 reject(err);
             } else {
@@ -67,14 +67,14 @@ function timeRangeToMinutes(startTime, endTime) {
 
 const getAvailableAppointments = (connection, username, date) => {
     return new Promise((resolve, reject) => {
-        const queryString = "select date_format(startTime, '%H:%i') as startTime, date_format(endTime, '%H:%i') as endTime from Doctor_Availability where startTime like '" 
+        const queryString = "select date_format(startTime, '%H:%i') as startTime, date_format(endTime, '%H:%i') as endTime from Doctor_Availability where startTime like '"
                             + date + "%' and doc_username='" + username + "';";
 
         connection.query(queryString, async (err, availabiltity) => {
             if (err) reject(err);
 
             // it is key that a patient can only book in 15 increments of time (e.g. 12:00, 12:15, 12:30 ...)
-            // and that doctors can have to finish at a time that is divisible by 15 
+            // and that doctors can have to finish at a time that is divisible by 15
             const time = timeRangeToMinutes(availabiltity[0].startTime, availabiltity[0].endTime);
             var availableAppointments = [];
 
@@ -85,18 +85,20 @@ const getAvailableAppointments = (connection, username, date) => {
                 });
             }
 
-            const queryString = "select date_format(appointmentTime, '%H:%i') as appointmentTime from Schedule where appointmentTime like '" + date + "%' and doc_username='" + 
+            const queryString = "select date_format(appointmentTime, '%H:%i') as appointmentTime from Schedule where appointmentTime like '" + date + "%' and doc_username='" +
                                 username + "';";
-
+            // console.log(queryString);
             // is there appointment 8:15 no, {true, 8:15}, is there an appointment 8:30 yes {false, 8:30}
 
             connection.query(queryString, (err, appointments) => {
                 if (err) reject (err);
 
                 for (var appointment of appointments) {
-                    const time = timeRangeToMinutes(availabiltity[0].startTime, appointment.appointmentTime);
+                    const time = timeRangeToMinutes("00:00", appointment.appointmentTime);
 
-                    availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)].isAvailable = false;
+                    availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)] = {
+                      isAvailable: false
+                    };
                 }
 
                 resolve({
@@ -110,8 +112,9 @@ const getAvailableAppointments = (connection, username, date) => {
 
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
-    getAllDoctors: getAllDoctors, 
+    getAllDoctors: getAllDoctors,
     getAvailableAppointments: getAvailableAppointments,
     getDoctorByUsername: getDoctorByUsername,
-    insertNewCertifications: insertNewCertifications
+    insertNewCertifications: insertNewCertifications,
+    getQualifications: getQualifications
 }

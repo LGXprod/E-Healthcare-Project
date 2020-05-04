@@ -3,7 +3,7 @@
 
 <head>
 	<title>eHealthcare</title>
-	<link rel="stylesheet" type="text/css" href="css/doctorDashboard.css">
+	<link rel="stylesheet" type="text/css" href="css/appointments.css">
   <!--- Font from google fonts --->
 	<link href="https://fonts.googleapis.com/css?family=Assistant:600&display=swap" rel="stylesheet">
   <!--- Font Awesome is used for the email and password icons --->
@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
 
     <div id="sideMenu">
 		<img src="img/dashboardTitle.png">
@@ -36,28 +35,62 @@
 
 	<div id="dashboardArea">
 		<div class="heading">
-			<h1>Doctor Dashboard</h1>
-			 <p>Welcome to eHealthCare</p>
-		</div>
+			<h1>My Appointments</h1>
 
-			<div class="slide">
-					<div class="user-prof"></div>
-					<img src="img/avatar.svg">
-					<span class="user-name">Dr. <%= fName %> <%= sName%></span>
-					<span class="user-email"><%= username%></span>
-					<section class="slide-below">
-							<h2>Specialises in: </h2>
-							<h2>Experience: </h2>
-							<h2>Education: </h2>
-					</section>
-					<hr style="width:85%;margin-top:75px;">
-			</div>
+		<div class="appointment-input">
+		<input type="date" name="date" id="date">
+
+		<button id="appointment-btn">Submit</button>
+
 
 		</div>
+
+
+		<!-- <form action="/action_page.php"> --> 
+		<h3>Please select a date to view scheduled appointments</h3>
+  		<label for="birthday">Select date:</label>
+  		<input type="date" id="date"i name="date">
+  		<button id="viewAppointsBtn">Submit</button>
+    </form>
+
+<!--		<form action="/action_page.php">
+		<h3>Please select a date to view scheduled appointments</h3>
+  		<label for="birthday">Select date:</label>
+  		<input type="date" id="birthday" name="birthday">
+  		<input type="submit">
+    </form> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>
 
-<script type="text/javascript" src="js/doctorDashboard.js"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="js/ViewAppointments.js"></script>
 
 </html>
