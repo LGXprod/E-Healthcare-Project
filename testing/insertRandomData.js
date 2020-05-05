@@ -84,8 +84,29 @@ const addAvailabilityData = (connection) => {
     });
 }
 
+const addOtherDoctorInfo = (connection) => {
+
+    const specialisations = ["General Practitioner", "Cardiologist", "Pediatrician", "Dermatologist"];
+    const university = ["University of NSW", "University of Sydney", "University of Western Sydney", "University of Cambridge"];
+    
+    doctor.getAllDoctors(connection, "username").then((doctors) => {
+        for (var theDoctor of doctors) {
+            doctor.insertOtherInfo(connection, theDoctor.username, specialisations[Math.floor(Math.random()*Math.floor(4))]
+                , university[Math.floor(Math.random()*Math.floor(4))], faker.lorem.sentence()).then((success) => {
+                    
+                }).catch((err) => {
+                    console.log(err);
+                });
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+
+}
+
 module.exports = {
     addPatData: addPatData,
     addDocData: addDocData,
-    addAvailabilityData: addAvailabilityData
+    addAvailabilityData: addAvailabilityData,
+    addOtherDoctorInfo: addOtherDoctorInfo
 }

@@ -84,6 +84,9 @@ $("#booking-btn").click(() => {
                   $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
                         var doctorData = '';
 
+                        // console.log(result[2].fName);
+                        // console.log(result[2].schedule.appointments[3].isAvailable);
+
                   for(var a = 0; a < Object.keys(result[i].schedule.appointments).length; a++) {
 
                       $.each(result[i], function(index, val){
@@ -110,6 +113,8 @@ $("#booking-btn").click(() => {
                               hours = hours ? hours : 12; // sets hour 0 to 12
                               minutes = minutes < 10 ? '0'+ minutes : minutes;
                               var strTime = hours + ':' + minutes + ' ' + ampm;
+                              console.log("");
+                              console.log(strTime);
                               return strTime;
                           }
 
