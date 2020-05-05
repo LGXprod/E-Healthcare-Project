@@ -1,0 +1,168 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Assistant';
+	background: #fbfbfb;
+}
+
+hr {
+	border: 0;
+	height: 1px;
+	background: #333;
+	background-image: linear-gradient(to right, #959595, #333, #959595);
+}
+
+#sideMenu {
+	background: #4c516d;
+	width: 280px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+}
+
+ul {
+	top: 150px;
+	position: absolute;
+}
+
+#sideMenu > img {
+	display: block;
+	width: 100%;
+	position: relative;
+	top: -50px;
+}
+
+ul > a {
+	display: block;
+	position: relative;
+	left: -40px;
+	color: white;
+	text-decoration: none;
+	padding: 15px;
+	transition: all 0.3s ease-in-out;
+}
+
+#sideMenu a:hover {
+	background: #397298;
+	border-left: 5px solid #aa74da;
+	padding: 15px;
+	width: 280px;
+}
+
+#sideMenu a.clicked {
+	background: #397298;
+	border-left: 5px solid #aa74da;
+	padding: 15px 15px 15px 25px;
+	width: 280px;
+}
+
+i {
+	color: white;
+	font-size: 1.2rem;
+	margin-right: 0.8rem;
+	display: inline-block;
+	width: 20px;
+	position: relative;
+	top: 2px;
+}
+
+#sideMenu a.clicked > i {
+	color: #aa74da; /* Icon colour on click */
+}
+
+#sideMenu a:hover > i {
+	color: #aa74da; /* Icon colour on hover */
+}
+
+#dashboardArea {
+	margin-left: 280px;
+	padding: 10px;
+}
+
+.heading > h1 {
+	color: #792da8;
+	font-size: 25px;
+	margin: 8px;
+}
+
+.heading > p {
+	color: #535353;
+	font-size: 14px;
+	margin: 10px;
+	display: inline-block;
+}
+
+.app-input {
+  margin: 10px;
+}
+
+.app-input > #date {
+  margin-right: 10px;
+  width: 150px;
+  height: 26px;
+  padding: 8px;
+  border: 1px solid grey;
+  outline: 1px;
+  font-size: 14px;
+  color: #535353;
+  font-family: 'Assistant';
+}
+
+.app-input > #appointment-btn {
+  display: inline-block;
+  background-color: #397298;
+  width: 80px;
+  height: 24px;
+  outline: none;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#table-area {
+  position: relative;
+}
+
+.av-table > table {
+  border-spacing: 1;
+  border: 1px solid grey;
+	display: none;
+  border-collapse: collapse;
+  background: white;
+  float: left;
+  right: 500px;
+  overflow: scroll;
+  margin: 10px;
+  margin-left: 300px;
+}
+
+.av-table > table > tbody {
+  display: inline-block;
+  height: 400px;
+  min-width: 100px;
+  width: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.av-table > table tbody tr {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+.av-table > table tbody td {
+  padding: 10px;
+  width: 100px;
+}
+
+.av-table > table tbody tr:hover {
+  color: #792da8;
+  cursor: pointer;
+}
