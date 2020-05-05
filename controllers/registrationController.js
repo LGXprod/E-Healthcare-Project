@@ -9,8 +9,8 @@ const showRegisterPage = (app, dir) => {
 }
 
 // gets data from a form that's action="/registration"
-const registerUser = (app, connection, dir) => {
-    app.post("/registration", (req, res) => {
+const registerUser = (app, connection) => {
+    app.post("/UserRegistration", (req, res) => {
         const body = req.body;
         const username = body.username; // accesses variables form object (req.body) and gets a specific property from it (username) (this is the name of the input in the form)
         const password = body.password;
@@ -41,6 +41,12 @@ const registerUser = (app, connection, dir) => {
         }).catch((err) => {
             console.log(err);
         });
+    });
+}
+
+const registerDoctor = (app, connection) => {
+    app.post("/DoctorRegisteration", (req, res) => {
+        
     });
 }
 
