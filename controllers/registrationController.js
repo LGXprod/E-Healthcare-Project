@@ -24,9 +24,10 @@ const registerUser = (app, connection, dir) => {
                 patient.insertNewPatDB(connection, body, username, password).then((successfulInsert) => {
 
                     if (successfulInsert) {
-                        userDashboardController.showUserDashboard(res, true, username, connection);
+                        req.session.username = req.body.username;
+                        res.redirect("/PatientDashboard");
                     } else {
-                        res.send("<script>alert('An error occurred. Please refresh page and try again')</script>")
+                        res.send("<script>alert('An error occurred. Please refresh page and try again')</script>");
                     }
 
                 }).catch((err) => {
