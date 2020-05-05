@@ -166,3 +166,11 @@ i {
   color: #792da8;
   cursor: pointer;
 }
+
+#text-area > h2 {
+	display: none;
+	color: #535353;
+	font-size: 14px;
+	margin-left: 300px;
+	position: absolute;
+}

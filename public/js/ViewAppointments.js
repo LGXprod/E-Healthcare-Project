@@ -12,7 +12,7 @@ $("#appointment-btn").click(() => {
         }});
     }
 
-    document.querySelector(".av-table table").style.display = "table";
+    document.querySelector("#text-area h2").style.display = "none"
 
     $(document).ready(function() {
         // Fetch the initial table
@@ -82,6 +82,17 @@ $("#appointment-btn").click(() => {
                  }
             });
           });
+
+          //if table is empty replace table with text else display table
+            $('#doctor-app table tbody').each(function() {
+                if($(this).find('td').length == 0) {
+                 document.querySelector(".av-table table").style.display = "none";
+                 document.querySelector("#text-area h2").style.display = "block";
+                }
+                else {
+                 document.querySelector(".av-table table").style.display = "table";
+                }
+              });
 }});
 
 }
