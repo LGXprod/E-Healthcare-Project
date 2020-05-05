@@ -94,11 +94,13 @@ const getAvailableAppointments = (connection, username, date) => {
                 if (err) reject (err);
 
                 for (var appointment of appointments) {
-                    const time = timeRangeToMinutes("00:00", appointment.appointmentTime);
+            
+                    const time = timeRangeToMinutes(availabiltity[0].startTime, appointment.appointmentTime);
+                    console.log(time);
 
-                    availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)] = {
-                      isAvailable: false
-                    };
+                    availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)].isAvailable = false;
+
+                    console.log(availableAppointments);
                 }
 
                 resolve({
