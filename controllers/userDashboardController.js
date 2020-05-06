@@ -96,14 +96,17 @@ const ourDoctors = (app, connection) => {
         res.setHeader('Cache-Control', 'no-cache, no-store');
 
         if (req.session.username != null) {
-            doctor.getAllDoctors(connection, "fName, sName, certifications").then((doctors) => {
+            doctor.getAllDoctors(connection, "*").then((doctors) => {
                 var doctorDetails = [];
     
                 for (var doctor of doctors) {
                     doctorDetails.push({
                         fName: doctor.fName,
                         sName: doctor.sName,
-                        details: doctor.certifications
+                        details: doctor.certifications,
+                        specialisation: doctor.specialisation,
+                        education: doctor.education,
+                        experience: doctor.experience
                     });
                 }
     

@@ -87,11 +87,13 @@
       <div class="main">
          <% for (var doctor of doctorDetails) { %>
                 <div style="background-color:lavender">
-                      <h1><%= doctor.fName%></h1>
-                      <h3><%= doctor.sName%></h3>
+                      <h1>Dr. <%= doctor.fName%> <%= doctor.sName%></h1>
+                      <h3>Specialisation: <%= doctor.specialisation %></h3>
+                      <h3>Education: <%= doctor.education %></h3>
+                      <h3>Experience: <%= doctor.experience %> </h3>
                       <p><%= doctor.details%></p>
                  </div>
-                      <% } %>     
+          <% } %>     
         </div>
 
 
