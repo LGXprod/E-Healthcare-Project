@@ -22,6 +22,7 @@ create table Doctor (
     fName VARCHAR(40),
     sName VARCHAR(40),
     certifications longtext,
+    providerNo int,
     CONSTRAINT Doctor_PK primary key (username)
 );
 
@@ -63,6 +64,10 @@ create table Doctor_Availability (
     startTime datetime,
     endTime datetime,
     CONSTRAINT Doctor_Availability_FK FOREIGN KEY (doc_username) REFERENCES Doctor(username)
+);
+
+create table Valid_Provider_No (
+    providerNo int
 );
 
 -- copy and run in workbench:
