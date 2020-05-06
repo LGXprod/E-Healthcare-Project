@@ -77,7 +77,10 @@ function showUserDashboard(app, connection) {
                 res.render("DoctorDashboard", {
                     username: req.session.username,
                     fName: theDoctor[0].fName,
-                    sName: theDoctor[0].sName
+                    sName: theDoctor[0].sName,
+                    specialisation: theDoctor[0].specialisation,
+                    education: theDoctor[0].education,
+                    experience: theDoctor[0].experience
                 });
             }).catch((err) => {
                 console.log(err);
