@@ -64,14 +64,15 @@
 				 <h2> Sign Up </h2>
 				 <h3> Please fill in this form to create a patient account! </h3>
 				 <img src="img/times.svg" alt="Close" class="close">
-				 <form action="/registration" method="post">
+				 <form action="/UserRegistration" method="post">
 					 <input name="username" type="email" class="pat-signup-input" placeholder="Email">
 					 <input name="password" type="password" class="pat-signup-input" placeholder="Password">
 					 <input name="fName" type="text" class="pat-signup-input" placeholder="First Name">
 					 <input name="sName" type="text" class="pat-signup-input" placeholder="Last Name">
 					 <input name="medicareNo" type="text" class="pat-signup-input" placeholder="Medicare Number">
 					 <input name="medicareIRN" type="text" class="pat-signup-input" placeholder="Medicare IRN">
-					 <input name="medicareExpiry" type="date" class="pat-signup-input" placeholder="Medicare Expiry">
+					 <input name="medicareExpiry" type="text" class="pat-signup-input" placeholder="Medicare Expiry"
+					 				onfocus="(this.type='date')" onblur="(this.type='text')">
 					 <input type="submit" class="pat-signup-btn" value="Sign Up">
 				 </form>
 			 </div>
@@ -82,11 +83,12 @@
 				<h2> Sign Up </h2>
 				<h3> Please fill in this form to create a doctor account! </h3>
 				<img src="img/times.svg" alt="Close" class="closedoc">
-				<form action="/registration" method="post">
+				<form action="/DoctorRegistration" method="post">
 					<input name="username" type="email" class="doc-signup-input" placeholder="Email">
 					<input name="password" type="password" class="doc-signup-input" placeholder="Password">
 					<input name="fName" type="text" class="doc-signup-input" placeholder="First Name">
 					<input name="sName" type="text" class="doc-signup-input" placeholder="Last Name">
+					<input name="providerNo" type="text" class="doc-signup-input" placeholder="Provider Number">
 					<input type="submit" class="doc-signup-btn" value="Sign Up">
 				</form>
 			</div>

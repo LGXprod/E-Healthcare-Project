@@ -11,7 +11,7 @@ create table Patient (
     sName VARCHAR(40),
     medicareNo int,
     medicareExpiry datetime,
-    medicareIRN TINYINT,
+    medicareIRN TINYINT, -- be careful not to use big numbers
     isNewPatient bool,
     constraint Patient_PK primary key (username)
 );
@@ -22,6 +22,7 @@ create table Doctor (
     fName VARCHAR(40),
     sName VARCHAR(40),
     certifications longtext,
+    providerNo int,
     CONSTRAINT Doctor_PK primary key (username)
 );
 
@@ -65,7 +66,13 @@ create table Doctor_Availability (
     CONSTRAINT Doctor_Availability_FK FOREIGN KEY (doc_username) REFERENCES Doctor(username)
 );
 
+create table Valid_Provider_No (
+    providerNo int
+);
+
 -- copy and run in workbench:
 ALTER TABLE SCHEDULE DROP FOREIGN KEY SCHEDULE_FK1;
 ALTER TABLE SCHEDULE DROP FOREIGN KEY SCHEDULE_FK2;
 ALTER TABLE schedule DROP PRIMARY KEY;
+
+alter table doctor add (specialisation longtext, education longtext, experience longtext);

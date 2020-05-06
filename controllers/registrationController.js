@@ -1,4 +1,5 @@
 const patient = require("../models/patient");
+const doctor = require("../models/doctor");
 const userDashboardController = require("./userDashboardController");
 
 // sends registration.html to /registration
@@ -9,8 +10,8 @@ const showRegisterPage = (app, dir) => {
 }
 
 // gets data from a form that's action="/registration"
-const registerUser = (app, connection, dir) => {
-    app.post("/registration", (req, res) => {
+const registerUser = (app, connection) => {
+    app.post("/UserRegistration", (req, res) => {
         const body = req.body;
         const username = body.username; // accesses variables form object (req.body) and gets a specific property from it (username) (this is the name of the input in the form)
         const password = body.password;
@@ -24,9 +25,10 @@ const registerUser = (app, connection, dir) => {
                 patient.insertNewPatDB(connection, body, username, password).then((successfulInsert) => {
 
                     if (successfulInsert) {
-                        userDashboardController.showUserDashboard(res, true, username, connection);
+                        req.session.username = req.body.username;
+                        res.redirect("/PatientDashboard");
                     } else {
-                        res.send("<script>alert('An error occurred. Please refresh page and try again')</script>")
+                        res.send("<script>alert('An error occurred. Please refresh page and try again')</script>");
                     }
 
                 }).catch((err) => {
@@ -43,7 +45,55 @@ const registerUser = (app, connection, dir) => {
     });
 }
 
+const registerDoctor = (app, connection) => {
+    app.post("/DoctorRegisteration", (req, res) => {
+        const body = req.body;
+        const username = body.username; // accesses variables form object (req.body) and gets a specific property from it (username) (this is the name of the input in the form)
+        const password = body.password;
+
+        doctor.isProviderNoValid(connection, providerNo).then((isValid) => {
+            console.log(isAvailable);
+
+            if (isValid) {
+
+                // calls async function to check if username is available
+                doctor.isUsernameAvailable(connection, username).then((isAvailable) => {
+                    console.log(isAvailable);
+
+                    if (isAvailable) {
+                        
+                        doctor.insertNewDocDB(connection, body, username, password).then((successfulInsert) => {
+
+                            if (successfulInsert) {
+                                req.session.username = req.body.username;
+                                res.redirect("/DoctorDashboard");
+                            } else {
+                                res.send("<script>alert('An error occurred. Please refresh page and try again')</script>");
+                            }
+
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+
+                    } else {
+                        res.send("<script>alert('That username is not available')</script>");
+                    }
+                    
+                }).catch((err) => {
+                    console.log(err);
+                });
+            } else {
+                res.send("<script>alert('That provider number is not valid')</script>");
+            }
+
+        }).catch((err) => {
+            console.log(err);
+        });
+    });
+}
+
 module.exports = {
     showRegisterPage: showRegisterPage,
-    registerUser: registerUser
+    registerUser: registerUser,
+    registerDoctor: registerDoctor
 }

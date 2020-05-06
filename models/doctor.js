@@ -48,9 +48,34 @@ const getQualifications = (connection, username) => {
     });
 }
 
+const getOtherInfo = (connection, username) => {
+    return new Promise((resolve, reject) => {
+        connection.query("select specialisation, education, experience from doctor username='" + username + "';", (err, info) => {
+            if (err) reject(err);
+            resolve({
+                specialisation: (JSON.parse(info[0].specialisation)),
+                education: (JSON.parse(info[0].education)),
+                experience: (JSON.parse(info[0].experience))
+            });
+        });
+    });
+}
+
+const insertOtherInfo = (connection, username, specialisation, education, experience) => {
+    return new Promise((resolve, reject) => {
+        const queryString = "update doctor set specialisation='" + specialisation + "', education='" + education + "', experience='"
+                            + experience + "' where username='" + username + "';";
+                            // console.log(queryString)
+        connection.query(queryString, (err) => {
+            if (err) reject(err);
+            resolve(true);
+        })
+    });
+}
+
 const insertNewCertifications = (connection, username) => {
     return new Promise((resolve, reject) => {
-        connection.query("insert into Doctor (certifications) values '" + username +"' ;", (err) => {
+        connection.query("insert into Doctor (certifications) values '" + username + "' ;", (err) => {
             if (err) {
                 reject(err);
             } else {
@@ -94,11 +119,13 @@ const getAvailableAppointments = (connection, username, date) => {
                 if (err) reject (err);
 
                 for (var appointment of appointments) {
-                    const time = timeRangeToMinutes("00:00", appointment.appointmentTime);
+            
+                    const time = timeRangeToMinutes(availabiltity[0].startTime, appointment.appointmentTime);
+                    // console.log(time);
 
-                    availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)] = {
-                      isAvailable: false
-                    };
+                    availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)].isAvailable = false;
+
+                    // console.log(availableAppointments);
                 }
 
                 resolve({
@@ -116,5 +143,7 @@ module.exports = {
     getAvailableAppointments: getAvailableAppointments,
     getDoctorByUsername: getDoctorByUsername,
     insertNewCertifications: insertNewCertifications,
-    getQualifications: getQualifications
+    getQualifications: getQualifications,
+    getOtherInfo: getOtherInfo,
+    insertOtherInfo: insertOtherInfo
 }

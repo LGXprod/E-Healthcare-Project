@@ -77,7 +77,10 @@ function showUserDashboard(app, connection) {
                 res.render("DoctorDashboard", {
                     username: req.session.username,
                     fName: theDoctor[0].fName,
-                    sName: theDoctor[0].sName
+                    sName: theDoctor[0].sName,
+                    specialisation: theDoctor[0].specialisation,
+                    education: theDoctor[0].education,
+                    experience: theDoctor[0].experience
                 });
             }).catch((err) => {
                 console.log(err);
@@ -96,14 +99,17 @@ const ourDoctors = (app, connection) => {
         res.setHeader('Cache-Control', 'no-cache, no-store');
 
         if (req.session.username != null) {
-            doctor.getAllDoctors(connection, "fName, sName, certifications").then((doctors) => {
+            doctor.getAllDoctors(connection, "*").then((doctors) => {
                 var doctorDetails = [];
     
                 for (var doctor of doctors) {
                     doctorDetails.push({
                         fName: doctor.fName,
                         sName: doctor.sName,
-                        details: doctor.certifications
+                        details: doctor.certifications,
+                        specialisation: doctor.specialisation,
+                        education: doctor.education,
+                        experience: doctor.experience
                     });
                 }
     
