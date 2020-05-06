@@ -61,9 +61,13 @@ connection.connect(function(err) {
 //      insertRandomData.addDocData(connection);
 //   }
 
-
 // adds a year's worth of dates and times to a doctors availability
 //  insertRandomData.addAvailabilityData(connection);
+
+// generates 10 rows in the Valid_Provider_No table using simulated data from the faker package
+ for (var i=1; i<=10; i++) {
+     insertRandomData.addProviderNo(connection);
+  }
 
 // insertRandomData.addOtherDoctorInfo(connection);
 
@@ -95,6 +99,7 @@ loginController.logoutUser(ehealthApp);
 
 registrationController.showRegisterPage(ehealthApp, views_dir);
 registrationController.registerUser(ehealthApp, connection);
+registrationController.registerDoctor(ehealthApp, connection);
 
 schedulingController.getAppointmentsByDate(ehealthApp, connection);
 schedulingController.showBookingPage(ehealthApp, connection);
