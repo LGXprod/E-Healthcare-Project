@@ -18,8 +18,8 @@ $("#booking-btn").click(() => {
         var now = new Date();
         var nowString = now.getFullYear()  + "-" + (now.getMonth() < 10 ? "0" + now.getMonth() : now.getMonth()) + "-" + now.getDate();
         if (selectedDate < nowString) {
-          alert("You entered a date that has already passed. \nPlease enter a valid date.")
-          document.querySelector(".table table").style.display = "none";
+          alert("You entered a date that has already passed. \nPlease enter a valid date.") //if date is in the past this alert will show
+          document.querySelector(".table table").style.display = "none"; 
           document.querySelector(".booking-input p").style.display = "none";
         } else {
           var refreshIntervalId = setInterval(appointmentInterval, 5000)
@@ -113,8 +113,6 @@ $("#booking-btn").click(() => {
                               hours = hours ? hours : 12; // sets hour 0 to 12
                               minutes = minutes < 10 ? '0'+ minutes : minutes;
                               var strTime = hours + ':' + minutes + ' ' + ampm;
-                              console.log("");
-                              console.log(strTime);
                               return strTime;
                           }
 
@@ -136,20 +134,25 @@ $("#booking-btn").click(() => {
                       document.querySelector("#confirmHeading").innerHTML = "Please confirm appointment with Doctor " + doctorName +
                                                                             " at " + appTime + " " + date;
 
+                      //Turn 12-hour time into 24-time for mySQL use
+                      var time = appTime;
+                      var hours = Number(time.match(/^(\d+)/)[1]); // RegEx to seperate hours and minutes
+                      var minutes = Number(time.match(/:(\d+)/)[1]);
+                      var AMPM = time.match(/\s(.*)$/)[1];
+                      if(AMPM == "PM" && hours<12) hours = hours+12;
+                      if(AMPM == "AM" && hours==12) hours = hours-12;
+                      var sHours = hours.toString();
+                      var sMinutes = minutes.toString();
+                      if(hours<10) sHours = "0" + sHours;  //to allow 00:00 format
+                      if(minutes<10) sMinutes = "0" + sMinutes; //to allow 00:00 format
+                      sqlTime = (sHours + ":" + sMinutes + ":" + "00");
 
-                     if (appTime.includes("AM")){
-                       sqlTime = appTime.replace(' AM', ':00');
-                     }
-                     else {
-                       sqlTime = appTime.replace(' PM', ':00');
-                     }
-
-                      document.getElementById("appDate").value = date + " " + sqlTime;
-                      document.getElementById("docUser").value = result[i].username;
+                      document.getElementById("appDate").value = date + " " + sqlTime; //setting value to form inputs
+                      document.getElementById("docUser").value = result[i].username; //setting value to form inputs
 
                   });
 
-                  // delete row if unavailable
+                  // delete row if unavailable (only want to display available appointments)
                   $(function(){
                       $("#doctorAv tr").each(function(){
                         var col_val = $(this).find("td:eq(1)").text();
