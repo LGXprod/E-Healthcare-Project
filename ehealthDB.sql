@@ -70,6 +70,14 @@ create table Valid_Provider_No (
     providerNo int
 );
 
+Create table Urgent_Cases (
+	pat_username varchar(50),
+	CaseDate datetime,
+	CaseTime datetime,
+	CONSTRAINT PatientID_FK FOREIGN KEY (pat_username) REFERENCES Patient(username)
+);
+
+
 -- copy and run in workbench:
 ALTER TABLE SCHEDULE DROP FOREIGN KEY SCHEDULE_FK1;
 ALTER TABLE SCHEDULE DROP FOREIGN KEY SCHEDULE_FK2;
