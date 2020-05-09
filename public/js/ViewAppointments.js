@@ -4,7 +4,7 @@ $("#appointment-btn").click(() => {
     const date = year + "-" + (month < 10 ? "0" + month : month) + "-" + day;
     console.log(date)
 
-    var refreshIntervalId = setInterval(appointmentInterval, 5000);
+    var refreshIntervalId = setInterval(appointmentInterval, 10000);
 
     function appointmentInterval(){
         $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
@@ -66,7 +66,7 @@ $("#appointment-btn").click(() => {
                      doctorData += "<td>" + "Available" + "</td>";
                 }
                 else{
-                     doctorData += "<td>" + "Unavailable" + "</td>";
+                     doctorData += "<td>" + "" + "</td>";
                 }
                   return false;
                 });
