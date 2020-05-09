@@ -65,9 +65,9 @@ connection.connect(function(err) {
 //  insertRandomData.addAvailabilityData(connection);
 
 // generates 10 rows in the Valid_Provider_No table using simulated data from the faker package
- for (var i=1; i<=10; i++) {
-     insertRandomData.addProviderNo(connection);
-  }
+//  for (var i=1; i<=10; i++) {
+//      insertRandomData.addProviderNo(connection);
+//   }
 
 // insertRandomData.addOtherDoctorInfo(connection);
 

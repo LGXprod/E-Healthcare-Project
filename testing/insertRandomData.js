@@ -107,8 +107,7 @@ const addOtherDoctorInfo = (connection) => {
 const addProviderNo = (connection) => {
     const queryString = "insert into Valid_Provider_No (providerNo) values ('"
                         + (Math.floor(1000000 + Math.random()*1000000)) + "');";
-    console.log(queryString);
-
+    
     connection.query(queryString, (err) => {
         if (err) throw err;
     });

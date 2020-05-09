@@ -76,3 +76,10 @@ alter table doctor add (specialisation longtext, education longtext, experience 
 create table Valid_Provider_No (
     providerNo int
 );
+
+Create table Urgent_Cases (
+	pat_username varchar(50),
+	CaseDate datetime,
+	CaseTime datetime,
+	CONSTRAINT PatientID_FK FOREIGN KEY (pat_username) REFERENCES Patient(username)
+);

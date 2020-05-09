@@ -51,7 +51,7 @@ const registerDoctor = (app, connection) => {
         const username = body.username; // accesses variables form object (req.body) and gets a specific property from it (username) (this is the name of the input in the form)
         const password = body.password;
 
-        doctor.isProviderNoValid(connection, providerNo).then((isValid) => {
+        doctor.isProviderNoValid(connection, req.body.providerNo).then((isValid) => {
             console.log(isAvailable);
 
             if (isValid) {
