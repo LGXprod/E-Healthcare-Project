@@ -19,7 +19,7 @@ $("#booking-btn").click(() => {
         var nowString = now.getFullYear()  + "-" + (now.getMonth() < 10 ? "0" + now.getMonth() : now.getMonth()) + "-" + now.getDate();
         if (selectedDate < nowString) {
           alert("You entered a date that has already passed. \nPlease enter a valid date.") //if date is in the past this alert will show
-          document.querySelector(".table table").style.display = "none"; 
+          document.querySelector(".table table").style.display = "none";
           document.querySelector(".booking-input p").style.display = "none";
         } else {
           var refreshIntervalId = setInterval(appointmentInterval, 5000)
@@ -41,7 +41,7 @@ $("#booking-btn").click(() => {
 
                 $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
                   $.each(result, function(i, val) {
-                    $("#doctorTable table tbody").append("<tr><td>"+ val.fName + " " + val.sName +"</tr></td>");
+                    $("#doctorTable table tbody").append("<tr><td>"+ "Dr. " + val.fName + " " + val.sName +"</tr></td>");
                   });
                 }});
               }
@@ -50,7 +50,7 @@ $("#booking-btn").click(() => {
 
                 $.ajax({url: "/appointmentsAvailable?date=" + date, success: function(result) {
                   $.each(result, function(i, val) {
-                    $("#doctorTable table tbody").append("<tr><td>"+ val.fName + " " + val.sName +"</tr></td>");
+                    $("#doctorTable table tbody").append("<tr><td>"+ "Dr. " + val.fName + " " + val.sName +"</tr></td>");
                   });
                 }});
 
