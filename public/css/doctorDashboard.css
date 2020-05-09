@@ -143,3 +143,174 @@ i {
 	top: 240px;
 	margin-left: 210px;
 }
+
+
+.heading > .editBtn {
+  float: right;
+  display: block;
+  height: 25px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-image: linear-gradient(to left, #792da8, #8a3fcc, #aa74da);
+  background-size: 200%;
+  font-size: 12px;
+  color: white;
+  font-family: 'Assistant';
+  cursor: pointer; /*change the cursor to the hand thing*/
+  transition: 0.8s;
+}
+
+.heading > .editBtn:hover{
+background-position: right;
+}
+
+.edit-profile{
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-content{
+  height: 380px;
+  width: auto;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  position: relative;
+  padding: 10px;
+  padding-bottom: 25px;
+  background: white;
+}
+
+.edit-input{
+  width: 200px;
+  height: 35px;
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid grey;
+  outline: 1px;
+  background: transparent;
+  font-size: 12px;
+  color: #535353;
+  font-family: 'Assistant';
+}
+
+.editExp  >  .edit-input{
+  width: 200px;
+  height: 100px;
+	text-align: left;
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid grey;
+  outline: 1px;
+  background: transparent;
+  font-size: 12px;
+  color: #535353;
+  font-family: 'Assistant';
+}
+
+.edit-profile > .edit-content > .avatar {
+  display: inline-block;
+  width: 20%;
+}
+
+.editfName {
+  margin-left: 50px;
+  display: inline-block;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.editlName {
+  margin-left: 300px;
+  display: inline-block;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.editEmail {
+  margin-left: 50px;
+  display: inline-block;
+  position: absolute;
+  margin-top: 80px;
+}
+
+.editSpec{
+  margin-left: 300px;
+  display: inline-block;
+  position: absolute;
+  margin-top: 80px;
+}
+
+.editExp {
+  margin-left: 50px;
+  display: inline-block;
+  position: absolute;
+  margin-top: 150px;
+}
+
+.editEdu {
+  margin-left: 300px;
+  display: inline-block;
+  position: absolute;
+  margin-top: 150px;
+}
+
+label{
+  display: block;
+}
+
+.save-btn{
+   background-color: #397298;
+   display: block;
+   width: 110px;
+   height: 30px;
+   position: absolute;
+   bottom: 25px;
+   right: 65px;
+   border-radius: 25px;
+   outline: none;
+   border: none;
+   color: white;
+   text-align: center;
+   text-decoration: none;
+   font-size: 14px;
+   cursor: pointer;
+}
+
+h3 {
+  font-size: 12px;
+  color: #397298;
+  display: inline-block;
+  position: absolute;
+  bottom: 110px;
+  left: 24px;
+  cursor: pointer;
+}
+
+.edit-profile > .edit-content > a {
+  color: #397298;
+  font-size: 12px;
+  display: inline-block;
+  position: absolute;
+  bottom: 30px;
+  left: 27px;
+}
+
+.close{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.8);
+  height: 23px;
+  width: 23px;
+  border-radius: 50%;
+  cursor: pointer;
+}

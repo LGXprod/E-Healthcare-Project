@@ -38,6 +38,7 @@
 		<div class="heading">
 			<h1>Doctor Dashboard</h1>
 			 <p>Welcome to eHealthCare</p>
+			  <input type="submit" class="editBtn" value="Edit Profile">
 		</div>
 
 			<div class="slide">
@@ -53,6 +54,62 @@
 					<hr style="width:85%;margin-top:75px;">
 			</div>
 
+		</div>
+
+		<div class="edit-profile">
+				<section class="edit-content">
+					<h2> Edit Profile </h2>
+					<img src="img/times.svg" alt="Close" class="close">
+					<hr>
+
+					<img src="img/avatar.svg" class="avatar">
+				<!---	<form action="/registration" method="post"> --->
+
+					<h3 class="imgFile"> Change Profile Picture </h3>
+
+						<div class="editfName">
+							<label for="first-name">First Name</label>
+							<input id="first-name" name="fName" type="text"
+										 class="edit-input" value="<%= fName%>">
+						</div>
+
+						<div class="editlName">
+							<label for="last-name">Last Name</label>
+							<input id="last-name" name="sName" type="text"
+										 class="edit-input" value="<%= sName%>">
+						</div>
+
+						<div class="editEmail">
+							<label for="user">Email</label>
+							<input id="user" name="username" type="email"
+										 class="edit-input" value="<%= username%>">
+						</div>
+
+						<div class="editSpec">
+							<label for="spec">Specialisation</label>
+							<input id="spec" name="docSpec" type="text"
+										 class="edit-input" value="<%= specialisation%>">
+						</div>
+
+						<div class="editEdu">
+							<label for="edu">Education</label>
+							<input id="edu" name="docEdu" type="text"
+										 class="edit-input" value="<%= education%>">
+						</div>
+
+						<div class="editExp">
+							<label for="exp">Experience</label>
+							<textarea id="exp" rows="5" cols="5" name="docExp" type="text"
+										 class="edit-input"><%= experience%></textarea>
+						</div>
+
+						<a href="#" class="changePass"> Change Password</a>
+
+						<input type="submit" class="save-btn" value="Save Changes">
+
+
+				<!---	</form> --->
+			</section>
 		</div>
 
 
