@@ -66,13 +66,13 @@ create table Doctor_Availability (
     CONSTRAINT Doctor_Availability_FK FOREIGN KEY (doc_username) REFERENCES Doctor(username)
 );
 
-create table Valid_Provider_No (
-    providerNo int
-);
-
 -- copy and run in workbench:
 ALTER TABLE SCHEDULE DROP FOREIGN KEY SCHEDULE_FK1;
 ALTER TABLE SCHEDULE DROP FOREIGN KEY SCHEDULE_FK2;
 ALTER TABLE schedule DROP PRIMARY KEY;
 
 alter table doctor add (specialisation longtext, education longtext, experience longtext);
+
+create table Valid_Provider_No (
+    providerNo int
+);
