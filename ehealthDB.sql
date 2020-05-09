@@ -92,3 +92,5 @@ create table chat (
     CONSTRAINT chat_fk1 FOREIGN KEY (doc_username) REFERENCES doctor(username),
     CONSTRAINT chat_fk2 FOREIGN KEY (pat_username) REFERENCES patient(username)
 );
+
+alter table doctor add (categoryRank varchar(100), othersymptoms longtext);
