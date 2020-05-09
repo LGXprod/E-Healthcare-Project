@@ -83,3 +83,12 @@ Create table Urgent_Cases (
 	CaseTime datetime,
 	CONSTRAINT PatientID_FK FOREIGN KEY (pat_username) REFERENCES Patient(username)
 );
+
+create table chat (
+    pat_username VARCHAR(50),
+    doc_username VARCHAR(50),
+    patient_text longtext,
+    doctor_text longtext,
+    CONSTRAINT chat_fk1 FOREIGN KEY (doc_username) REFERENCES doctor(username),
+    CONSTRAINT chat_fk2 FOREIGN KEY (pat_username) REFERENCES patient(username)
+);

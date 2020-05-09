@@ -113,6 +113,10 @@ const addProviderNo = (connection) => {
     });
 }
 
+const addRandomChatData = (connection) => {
+    
+}
+
 module.exports = {
     addPatData: addPatData,
     addDocData: addDocData,
