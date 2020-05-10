@@ -116,7 +116,7 @@ $("#appointment-btn").click(() => {
 
         
                     $('.chat-btn').click(function() {
-                           window.location.href = "/StartChart?date=" + date + "&" + "time=" + sqlTime;
+                           window.location.href = "/StartChat?date=" + date + "&" + "time=" + sqlTime;
                       });
 
                 });

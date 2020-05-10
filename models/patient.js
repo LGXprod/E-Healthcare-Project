@@ -102,11 +102,24 @@ const deleteAppointmentFromSchedule = (connection, pat_username, doc_username, d
     })
 }
 
+const getPatientByTime = (connection, date, time) => {
+    return new Promise((resolve, reject) => {
+        const queryString = "select * from schedule where appointmentTime='" + date + " " + time + "';";
+
+        connection.query(queryString, (err, patient) => {
+            if (err) reject(err);
+
+            resolve(patient[0].username);
+        })
+    });
+}
+
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     isUsernameAvailable: async (connection, username) => { return await isUsernameAvailable(connection, username) },
     insertNewPatDB: async (connection, body, username, password) => { return await insertNewPatDB(connection, body, username, password) },
     getPatByUsername: getPatByUsername,
     insertNewAppointmentToSchedule: insertNewAppointmentToSchedule,
-    deleteAppointmentFromSchedule: deleteAppointmentFromSchedule
+    deleteAppointmentFromSchedule: deleteAppointmentFromSchedule,
+    getPatientByTime: getPatientByTime
 }
