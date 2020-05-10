@@ -93,6 +93,29 @@ $("#appointment-btn").click(() => {
                  document.querySelector(".av-table table").style.display = "table";
                 }
               });
+
+              $('#doctor-app table tbody').on('click', 'tr', function timeOnClick(){
+                  var appTime = $(this).closest("tr").text();
+                  appTime = appTime.replace('Available','');
+                  document.querySelector("#confirmApp").style.display = "inline-block";
+                  document.querySelector("#confirmHeading").innerHTML = "Please click here to enter chat with patient " + "";
+                  //Turn 12-hour time into 24-time for mySQL use
+                  var time = appTime;
+                  var hours = Number(time.match(/^(\d+)/)[1]); // RegEx to seperate hours and minutes
+                  var minutes = Number(time.match(/:(\d+)/)[1]);
+                  var AMPM = time.match(/\s(.*)$/)[1];
+                  if(AMPM == "PM" && hours<12) hours = hours+12;
+                  if(AMPM == "AM" && hours==12) hours = hours-12;
+                  var sHours = hours.toString();
+                  var sMinutes = minutes.toString();
+                  if(hours<10) sHours = "0" + sHours;  //to allow 00:00 format
+                  if(minutes<10) sMinutes = "0" + sMinutes; //to allow 00:00 format
+                  sqlTime = (sHours + ":" + sMinutes + ":" + "00");
+
+                  document.getElementById("appTime").value = sqlTime; //setting value to form inputs
+                  //document.getElementById("docUser").value = result[i].username; //setting value to form inputs
+
+              });
 }});
 
 }

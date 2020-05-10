@@ -174,3 +174,15 @@ i {
 	margin-left: 300px;
 	position: absolute;
 }
+
+#confirmApp {
+  background: #fff;
+  width: 30%;
+  display: none;
+  align-items: center;
+  height: 20%;
+  border-radius: 5px;
+  padding: 0 15px;
+  margin: 10px;
+  padding: 20px;
+}
