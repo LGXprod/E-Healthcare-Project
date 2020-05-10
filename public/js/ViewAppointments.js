@@ -113,9 +113,13 @@ $("#appointment-btn").click(() => {
                   sqlTime = (sHours + ":" + sMinutes + ":" + "00");
 
                   document.getElementById("appTime").value = sqlTime; //setting value to form inputs
-                  //document.getElementById("docUser").value = result[i].username; //setting value to form inputs
 
-              });
+        
+                    $('.chat-btn').click(function() {
+                           window.location.href = "/StartChart?date=" + date + "&" + "time=" + sqlTime;
+                      });
+
+                });
 }});
 
 }
