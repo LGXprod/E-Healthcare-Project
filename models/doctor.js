@@ -7,6 +7,41 @@ const getAllDoctors = (connection, attributes) => {
     });
 }
 
+async function isProviderNoValid(connection, providerNo) {
+    return new Promise((resolve, reject) => {
+        connection.query("select providerNo from Valid_Provider_No where providerNo='" + providerNo + "';", (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                if (result.length == 0) { // result.length is the number of doctors with that providerNo
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            }
+        });
+    });
+}
+
+async function insertNewDocDB(connection, body, username, password) {
+    return new Promise((resolve, reject) => {
+        const addNewDocQuery = "insert into Doctor (username, userPassword, fName, sName, certifications, providerNo) values "
+        + "('" + username + "', '" + password + "', '" + body.fName + "', '" + body.sName + "', "
+        +  body.certifications + ", " + body.providerNo + "');";
+
+        console.log(addNewDocQuery);
+
+        connection.query(addNewDocQuery, (err) => {
+            if (err) { // if there is an error with the insert query
+                reject(err);
+            } else {
+                resolve(true);
+            }
+            // if it doesn't meet the above condition it is assumed the insert query for the new doctor is successful
+        });
+    });
+}
+
 const getDoctorByUsername = (connection, username) => {
     return new Promise((resolve, reject) => {
         const queryString = "select * from doctor where username ='" + username + "';";
@@ -151,5 +186,7 @@ module.exports = {
     getQualifications: getQualifications,
     getOtherInfo: getOtherInfo,
     insertOtherInfo: insertOtherInfo,
-    handleUrgentCases: handleUrgentCases
+    handleUrgentCases: handleUrgentCases,
+    isProviderNoValid: isProviderNoValid,
+    insertNewDocDB: insertNewDocDB
 }
