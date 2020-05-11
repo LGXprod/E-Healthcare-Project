@@ -13,6 +13,8 @@ const io = require("socket.io").listen(server);
 
 // importing testing and sample data modules
 const insertRandomData = require("./testing/insertRandomData");
+const testUrgentCases = require("./testing/testUrgentCasesTable");
+const testChat = require("./testing/testChatTable");
 
 // importing controllers
 const loginController = require("./controllers/loginController");
@@ -74,6 +76,9 @@ connection.connect(function(err) {
 //   }
 
 // insertRandomData.addOtherDoctorInfo(connection);
+
+// testChat.loadTest(connection);
+// testUrgentCases.loadTest(connection);
 
 ehealthApp.use(session({
     secret: 'ssshhhhh',
