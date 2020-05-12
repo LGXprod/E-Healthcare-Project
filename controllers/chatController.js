@@ -18,11 +18,14 @@ const showChatPage = (app, connection, io) => {
             //     });
             // }).catch((err) => console.log(err));
         } else {
-            doctor.getAllDoctors(connection, "*").then((doctors) => {
-                res.render("PatientChat", {
-                    doctors: doctors
-                });
-            }).catch((err) => console.log(err));
+            
+            function showPage() {
+                doctor.getAllDoctors(connection, "*").then((doctors) => {
+                    res.render("PatientChat", {
+                        doctors: doctors
+                    });
+                }).catch((err) => console.log(err));
+            }
 
             function checkAgainstChatID(isPatient) {
                 chat.getChatByID(connection, chat_id, isPatient, username).then((chatData) => {
@@ -42,10 +45,12 @@ const showChatPage = (app, connection, io) => {
 
             patient.getPatByUsername(connection, username).then((thePatient) => {
                 if (thePatient != null) {
+                    showPage();
                     checkAgainstChatID(true);
                 } else {
                     doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
                         if (theDoctor.length == 1) {
+                            showPage();
                             checkAgainstChatID(false);
                         } else {
                             res.redirect("/DeniedAccess");
@@ -98,7 +103,16 @@ const notifyPatientOfChat = (app, connection) => {
 
 }
 
+const denyAccess = (app, connection, dir) => {
+
+    app.get("/DeniedAccess", (req, res) => {
+        res.sendFile(dir + "/DeniedAccess.html");
+    });
+
+}
+
 module.exports = {
     showChatPage: showChatPage,
-    notifyPatientOfChat: notifyPatientOfChat
+    notifyPatientOfChat: notifyPatientOfChat,
+    denyAccess: denyAccess
 }

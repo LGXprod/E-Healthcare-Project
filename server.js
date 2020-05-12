@@ -123,3 +123,4 @@ userDashboardController.updateDocInfo(ehealthApp, connection);
 
 chatController.showChatPage(ehealthApp, connection, io);
 chatController.notifyPatientOfChat(ehealthApp, connection);
+chatController.denyAccess(ehealthApp, ehealthApp, views_dir);
