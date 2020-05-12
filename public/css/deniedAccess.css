@@ -1,0 +1,52 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Assistant';
+	background: white;
+}
+
+.container {
+  width: 100%;
+  min-height: 80%;
+}
+
+.container > i {
+  font-size: 25vh;
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 20%;
+  text-align: center;
+}
+
+.container > h1 {
+  font-size: 3vh;
+  position: absolute;
+  color: rgba(214, 69, 65, 1);
+  left: 20%;
+  right: 20%;
+  top: 45%;
+  text-align: center;
+}
+
+.container > h2 {
+  font-size: 2vh;
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 51%;
+  text-align: center;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 51%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}

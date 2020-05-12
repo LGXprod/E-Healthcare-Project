@@ -98,7 +98,7 @@ $("#appointment-btn").click(() => {
                   var appTime = $(this).closest("tr").text();
                   appTime = appTime.replace('Available','');
                   document.querySelector("#confirmApp").style.display = "inline-block";
-                  document.querySelector("#confirmHeading").innerHTML = appTime + " appointment with" + " John Smith";
+                  document.querySelector("#confirmHeading").innerHTML = appTime + " appointment with" + "";
                   document.querySelector("#confirmHeading-nl").innerHTML = "Please click here to enter chat";
                   //Turn 12-hour time into 24-time for mySQL use
                   var time = appTime;
