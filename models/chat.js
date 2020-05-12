@@ -47,14 +47,19 @@ const createNewChat = (connection, chat_id, pat_username, doc_username) => {
     });
 }
 
-const getPatientAppointment = (connection, date, time, doc_username) => {
+const getChatByPatient = (connection, username) => {
     return new Promise((resolve, reject) => {
+        connection.query("select * from chat where pat_username='" + username + "';", (err, chats) => {
+            if (err) reject(err);
 
+            resolve(chats);
+        });
     });
 }
 
 module.exports = {
     getChatByID: getChatByID,
     isChatIDAvaliable, isChatIDAvaliable,
-    createNewChat: createNewChat    
+    createNewChat: createNewChat,
+    getChatByPatient: getChatByPatient
 }

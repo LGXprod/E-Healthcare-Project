@@ -80,40 +80,25 @@ const showChatPage = (app, connection, io) => {
         }).catch((err) => console.log(err));
 
         
-        
-        // /StartChat?date=2020-05-10&time=10:15:00
-
-        // const queryString = "select pat_username from schedule where appointmentTime='" + date + " " 
-        //                     + time + "';";
-
-        // connection.query(queryString, (err, patient) => {
-        //     if (err) throw err;
-
-        //     if (patient.length == 0) {
-
-        //     } else {
-
-        //     }
-        // });
-
-        // res.redirect("/Chat?id=" + urlfromdb);
     });
 
-    // app.get("/Chat", (req, res) => {
-    //     const doc_username = req.session.username;
-    //     const pat_username = req.query.username;
+}
 
-    //     patient.isUsernameAvailable(connection, pat_username).then((isNotPatient) => {
-    //         if (!isNotPatient) { // if they are a registered patient
+const notifyPatientOfChat = (app, connection) => {
 
-    //         } else {
+    app.get("/checkChats", (req, res) => {
 
-    //         }
-    //     }).catch((err) => console.log(err));
-    // });
+        if (req.session) {
+            chat.getChatByPatient(connection, req.session.username).then((chats) => {
+                res.json(chats);
+            }).catch((err) => console.log(err));
+        }
+
+    });
 
 }
 
 module.exports = {
-    showChatPage: showChatPage
+    showChatPage: showChatPage,
+    notifyPatientOfChat: notifyPatientOfChat
 }

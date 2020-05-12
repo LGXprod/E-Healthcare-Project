@@ -122,3 +122,4 @@ userDashboardController.showDocInfoPage(ehealthApp, connection);
 userDashboardController.updateDocInfo(ehealthApp, connection);
 
 chatController.showChatPage(ehealthApp, connection, io);
+chatController.notifyPatientOfChat(ehealthApp, connection);
