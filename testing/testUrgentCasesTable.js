@@ -1,3 +1,5 @@
+const faker = require("faker");
+
 const chat = require("../models/chat");
 const patient = require("../models/patient");
 const doctor = require("../models/doctor");

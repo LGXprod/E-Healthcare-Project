@@ -109,7 +109,7 @@ const getPatientByTime = (connection, date, time) => {
         connection.query(queryString, (err, patient) => {
             if (err) reject(err);
 
-            resolve(patient[0].username);
+            resolve(patient[0].pat_username);
         })
     });
 }

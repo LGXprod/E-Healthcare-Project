@@ -38,7 +38,7 @@ const isChatIDAvaliable = (connection, chat_id) => {
 
 const createNewChat = (connection, chat_id, pat_username, doc_username) => {
     return new Promise((resolve, reject) => {
-        const queryString = "insert into chat (pat_username, doc_username, appointmentTable) values ('"
+        const queryString = "insert into chat (pat_username, doc_username, url) values ('"
                             + pat_username + "', '" + doc_username + "', '" + chat_id + "');"
 
         connection.query(queryString, (err) => {
@@ -56,5 +56,5 @@ const getPatientAppointment = (connection, date, time, doc_username) => {
 module.exports = {
     getChatByID: getChatByID,
     isChatIDAvaliable, isChatIDAvaliable,
-    createNewChat: createNewChat
+    createNewChat: createNewChat    
 }

@@ -26,7 +26,8 @@ const showChatPage = (app, connection, io) => {
 
             function checkAgainstChatID(isPatient) {
                 chat.getChatByID(connection, chat_id, isPatient, username).then((chatData) => {
-                    if (chatData.length == 1) {
+                    if (chatData.length > 1) {
+                        console.log("here");
                         io.on("connection", (socket) => {
                             socket.on('chat message', (msg) => {
                                 console.log('message: ' + msg);
@@ -62,27 +63,24 @@ const showChatPage = (app, connection, io) => {
         const time = req.query.time;
         const username = req.session.username;
 
-        doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
-            if (theDoctor.length == 1) {
-                patient.getPatientByTime(connection, date, time).then((pat_username) => {
-                    const buf = crypto.randomBytes(256);
-                    const chat_id = `${buf.toString('hex')}`;
+        patient.getPatientByTime(connection, date, time).then((pat_username) => {
+            const buf = crypto.randomBytes(16);
+            const chat_id = `${buf.toString('hex')}`;
 
-                    chat.isChatIDAvaliable(connection, chat_id).then((idAvailable) => {
-                        if (idAvailable) {
-                            chat.createNewChat(connection, chat_id, pat_username, username).then().catch((err) => console.log(err));
-                            res.redirect("/Chat?id=" + chat_id);
-                        } else {
-                            // handle generating an existing chat_id
-                        }
-                    }).catch((err) => console.log(err));
-                }).catch((err) => console.log(err));
-            } else {
-                res.redirect("/DeniedAccess");
-            }
+            chat.isChatIDAvaliable(connection, chat_id).then((idAvailable) => {
+                if (idAvailable) {
+                    console.log("x " + pat_username);
+                    chat.createNewChat(connection, chat_id, pat_username, username).then().catch((err) => console.log(err));
+                    res.redirect("/Chat?id=" + chat_id);
+                } else {
+                    // handle generating an existing chat_id
+                }
+            }).catch((err) => console.log(err));
+
         }).catch((err) => console.log(err));
-        
 
+        
+        
         // /StartChat?date=2020-05-10&time=10:15:00
 
         // const queryString = "select pat_username from schedule where appointmentTime='" + date + " " 
