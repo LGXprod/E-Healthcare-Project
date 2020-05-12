@@ -29,7 +29,7 @@ const showChatPage = (app, connection, io) => {
 
             function checkAgainstChatID(isPatient) {
                 chat.getChatByID(connection, chat_id, isPatient, username).then((chatData) => {
-                    if (chatData.length > 1) {
+                    if (chatData.length == 1) {
                         console.log("here");
                         io.on("connection", (socket) => {
                             socket.on('chat message', (msg) => {
