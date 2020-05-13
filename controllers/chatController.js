@@ -65,6 +65,7 @@ const showChatPage = (app, connection, io) => {
     });
 
     app.get("/StartChat", (req, res) => {
+
         const date = req.query.date;
         const time = req.query.time;
         const username = req.session.username;
@@ -84,8 +85,32 @@ const showChatPage = (app, connection, io) => {
             }).catch((err) => console.log(err));
 
         }).catch((err) => console.log(err));
-
         
+    });
+
+    app.get("/PreviousMessages", (req, res) => {
+
+        const username = req.session.username;
+        const chat_id = req.query.id;
+
+        patient.getPatByUsername(connection, username).then((thePatient) => {
+            if (thePatient != null) {
+                chat.getChatByID(connection, chat_id, true, username).then((theChat) => {
+                    res.json(theChat);
+                });
+            } else {
+                doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
+                    if (theDoctor.length == 1) {
+                        chat.getChatByID(connection, chat_id, false, username).then((theChat) => {
+                            res.json(theChat);
+                        });
+                    } else {
+                        res.redirect("/DeniedAccess");
+                    }
+                }).catch((err) => console.log(err));
+            }
+        }).catch((err) => console.log(err));
+
     });
 
 }
