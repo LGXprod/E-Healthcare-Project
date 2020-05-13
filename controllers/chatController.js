@@ -28,7 +28,7 @@ const showChatPage = (app, connection, io) => {
             
             function showPage() {
                 doctor.getAllDoctors(connection, "*").then((doctors) => {
-                    res.render("PatientChat", {
+                    res.render("DoctorChat", {
                         doctors: doctors
                     });
                 }).catch((err) => console.log(err));

@@ -57,9 +57,16 @@ const getChatByPatient = (connection, username) => {
     });
 }
 
+const saveChatMessage = (connection, chat_id) => {
+    return new Promise((resolve, reject) => {
+
+    });
+}
+
 module.exports = {
     getChatByID: getChatByID,
     isChatIDAvaliable, isChatIDAvaliable,
     createNewChat: createNewChat,
-    getChatByPatient: getChatByPatient
+    getChatByPatient: getChatByPatient,
+    saveChatMessage: saveChatMessage
 }

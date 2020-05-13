@@ -94,3 +94,5 @@ create table chat (
 );
 
 alter table Urgent_Cases add (categoryRank varchar(100), othersymptoms longtext);
+
+alter table chat add (url longtext);
