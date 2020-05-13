@@ -6,6 +6,13 @@ const chat = require("../models/chat");
 
 const showChatPage = (app, connection, io) => {
 
+    io.on("connection", (socket) => {
+        socket.on('chat message', (msg) => {
+            console.log('message: ' + msg);
+            io.emit('chat message', msg);
+        });
+    });
+
     app.get("/Chat", (req, res) => {
 
         const username = req.session.username;
@@ -29,17 +36,11 @@ const showChatPage = (app, connection, io) => {
 
             function checkAgainstChatID(isPatient) {
                 chat.getChatByID(connection, chat_id, isPatient, username).then((chatData) => {
-                    if (chatData.length == 1) {
-                        console.log("here");
-                        io.on("connection", (socket) => {
-                            socket.on('chat message', (msg) => {
-                                console.log('message: ' + msg);
-                                io.emit('chat message', msg);
-                            });
+                    if (!(chatData.length == 1)) {
+                        socket.on("disconnect", () => {
+                            console.log("Disconnected unauthorized user");
                         });
-                    } else {
-                        // if chat_id doesn't exist in chat table
-                    }
+                    } 
                 }).catch((err) => console.log(err));
             }
 
@@ -89,13 +90,13 @@ const showChatPage = (app, connection, io) => {
 
 }
 
-const notifyPatientOfChat = (app, connection) => {
+const existingChats = (app, connection) => {
 
-    app.get("/checkChats", (req, res) => {
+    app.get("/Chats", (req, res) => {
 
         if (req.session) {
             chat.getChatByPatient(connection, req.session.username).then((chats) => {
-                res.json(chats);
+                res.render("ChatList", chats);
             }).catch((err) => console.log(err));
         }
 
@@ -113,6 +114,6 @@ const denyAccess = (app, connection, dir) => {
 
 module.exports = {
     showChatPage: showChatPage,
-    notifyPatientOfChat: notifyPatientOfChat,
+    existingChats: existingChats,
     denyAccess: denyAccess
 }
