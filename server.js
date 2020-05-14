@@ -22,6 +22,7 @@ const registrationController = require("./controllers/registrationController");
 const schedulingController = require("./controllers/schedulingController");
 const userDashboardController = require("./controllers/userDashboardController");
 const chatController = require("./controllers/chatController");
+const urgentController = require("./controllers/urgentController");
 
 // uses mysql package to create connection to mysql server
 const connection = mySQL.createConnection({
@@ -124,3 +125,5 @@ userDashboardController.updateDocInfo(ehealthApp, connection);
 chatController.showChatPage(ehealthApp, connection, io);
 chatController.existingChats(ehealthApp, connection);
 chatController.denyAccess(ehealthApp, ehealthApp, views_dir);
+
+urgentController.showUrgentCasesPage(ehealthApp, connection);
