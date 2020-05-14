@@ -88,6 +88,14 @@ const showChatPage = (app, connection, io) => {
         
     });
 
+    app.get("/UrgentChat", (req, res) => {
+
+        const date = req.query.date;
+        const time = req.query.time;
+        const username = req.session.username;
+
+    });
+
     app.get("/PreviousMessages", (req, res) => {
 
         const username = req.session.username;
