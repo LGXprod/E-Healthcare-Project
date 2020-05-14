@@ -181,7 +181,6 @@ module.exports = {
     getQualifications: getQualifications,
     getOtherInfo: getOtherInfo,
     insertOtherInfo: insertOtherInfo,
-    handleUrgentCases: handleUrgentCases,
     isProviderNoValid: isProviderNoValid,
     insertNewDocDB: insertNewDocDB
 }
