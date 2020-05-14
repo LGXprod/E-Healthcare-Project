@@ -172,11 +172,6 @@ const getAvailableAppointments = (connection, username, date) => {
     });
 }
 
-const handleUrgentCases = (connection) => {
-    // give the most urgent cases to a doctor immediately
-    // for less urgent cases give them the first available appointment
-}
-
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     getAllDoctors: getAllDoctors,
