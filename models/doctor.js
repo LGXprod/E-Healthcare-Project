@@ -172,6 +172,10 @@ const getAvailableAppointments = (connection, username, date) => {
     });
 }
 
+const getFirstAvailableDoctor = (connection) => {
+
+}
+
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     getAllDoctors: getAllDoctors,
@@ -182,5 +186,6 @@ module.exports = {
     getOtherInfo: getOtherInfo,
     insertOtherInfo: insertOtherInfo,
     isProviderNoValid: isProviderNoValid,
-    insertNewDocDB: insertNewDocDB
+    insertNewDocDB: insertNewDocDB,
+    getFirstAvailableDoctor: getFirstAvailableDoctor
 }

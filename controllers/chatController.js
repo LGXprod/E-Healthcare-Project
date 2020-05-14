@@ -94,6 +94,19 @@ const showChatPage = (app, connection, io) => {
         const time = req.query.time;
         const username = req.session.username;
 
+        if (req.session) {
+            patient.getPatByUsername(connection, username).then((thePatient) => {
+                if (thePatient != null) {
+                    
+                } else {
+                    res.redirect("/DeniedAccess");
+                }
+            }).catch((err) => console.log(err));
+        } else {
+            res.redirect("/DeniedAccess");
+        }
+
+
     });
 
     app.get("/PreviousMessages", (req, res) => {
