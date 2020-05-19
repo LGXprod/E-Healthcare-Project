@@ -136,14 +136,17 @@ i {
 }
 
 .slide > .slide-below {
-  font-size: 0.7rem;
-  color: black;
   display: block;
 	position: absolute;
+	width: 85%;
 	top: 240px;
 	margin-left: 210px;
 }
 
+.slide > .slide-below > h2{
+  font-size: 0.85rem;
+  color: black;
+}
 
 .heading > .editBtn {
   float: right;

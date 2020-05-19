@@ -13,6 +13,8 @@ $("#appointment-btn").click(() => {
     }
 
     document.querySelector("#text-area h2").style.display = "none"
+    document.querySelector("#confirmApp").style.display = "none";
+    document.querySelector("#cancelApp").style.display = "none";
 
     $(document).ready(function() {
         // Fetch the initial table
@@ -98,8 +100,12 @@ $("#appointment-btn").click(() => {
                   var appTime = $(this).closest("tr").text();
                   appTime = appTime.replace('Available','');
                   document.querySelector("#confirmApp").style.display = "inline-block";
-                  document.querySelector("#confirmHeading").innerHTML = appTime + " appointment with" + "";
-                  document.querySelector("#confirmHeading-nl").innerHTML = "Please click here to enter chat";
+                  document.querySelector("#confirmHeading").innerHTML = "Please click here to enter chat"
+                  document.querySelector("#confirmHeading-nl").innerHTML = "at " + appTime + " " + date;
+
+                  document.querySelector("#cancelApp").style.display = "inline-block";
+                  document.querySelector("#cancelHeading").innerHTML = "Please click here to cancel appointment";
+                  document.querySelector("#cancelHeading-nl").innerHTML = "at " + appTime + " " + date;
                   //Turn 12-hour time into 24-time for mySQL use
                   var time = appTime;
                   var hours = Number(time.match(/^(\d+)/)[1]); // RegEx to seperate hours and minutes

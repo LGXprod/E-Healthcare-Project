@@ -177,7 +177,7 @@ i {
 
 #confirmApp {
   background: #fff;
-  width: auto;
+  width: 18%;
   display: none;
   align-items: center;
   height: 20%;
@@ -197,7 +197,41 @@ i {
 
 .chat-btn {
   background-color: #397298;
-  width: 80px;
+  width: auto;
+  height: 24px;
+  outline: none;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#cancelApp {
+  background: #fff;
+  width: 18%;
+  display: none;
+  align-items: center;
+  height: 20%;
+  border-radius: 5px;
+  padding: 0 15px;
+  margin-left: 10px;
+	margin-top: 20px;
+  padding: 20px;
+}
+
+#cancelApp > h2{
+  font-family: 'Assistant';
+  font-size: 14px;
+  color: #535353;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cancel-btn {
+  background-color: #397298;
+  width: auto;
   height: 24px;
   outline: none;
   border: none;
