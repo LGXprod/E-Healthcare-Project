@@ -122,11 +122,19 @@ $("#appointment-btn").click(() => {
                   document.getElementById("appTime").value = sqlTime; //setting value to form inputs
                   document.getElementById("appDate").value = date;
 
-
-              /*      $('.chat-btn').click(function() {
-                           window.location.href = "/StartChat?date=" + date + "&" + "time=" + sqlTime;
-                      });*/
-
+                  //Function to remove time from table (this is only for demonstration)
+                  //Once the date is clicked again the time will come up again as it was never
+                  //removed from backend
+                   $('.cancel-btn').click(function() {
+                       $("#doctor-app tr").each(function(){
+                         var col_val = $(this).find("td:eq(0)").text();
+                         if (col_val == appTime){
+                           $(this).text('')
+                          }
+                      });
+                      document.querySelector("#confirmApp").style.display = "none";
+                      document.querySelector("#cancelApp").style.display = "none";
+                    });
                 });
 }});
 
