@@ -172,7 +172,19 @@ const getAvailableAppointments = (connection, username, date) => {
     });
 }
 
-const getFirstAvailableDoctor = (connection) => {
+const getFirstAvailableDoctor = (connection, username) => {
+    return new Promise((resolve, reject) => {
+        const queryString = "select doc_username from Doctor_Avaliability where doc_username  ='" + username + "';";
+
+        connection.query(queryString, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+
 
 }
 
