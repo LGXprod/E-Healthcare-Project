@@ -81,6 +81,8 @@ connection.connect(function(err) {
 // testChat.loadTest(connection);
 // testUrgentCases.loadTest(connection);
 
+// insertRandomData.addRandomChatData(connection);
+
 ehealthApp.use(session({
     secret: 'ssshhhhh',
     store: sessionStore,
