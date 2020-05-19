@@ -255,6 +255,10 @@ background-position: right;
   margin-top: 150px;
 }
 
+.editExp > textarea{
+  resize: none;
+}
+
 .editEdu {
   margin-left: 300px;
   display: inline-block;
