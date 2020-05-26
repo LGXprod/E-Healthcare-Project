@@ -94,16 +94,14 @@ i {
 	display: inline-block;
 }
 
-
 .slide {
   background: #fff;
   border-radius: 5px;
   padding: 0 15px;
-	height: 400px;
   width: 100%;
   margin: 10px;
   float: left;
-  padding: 10px;
+  padding: 20px;
 }
 
 .slide > img {

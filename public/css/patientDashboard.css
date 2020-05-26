@@ -94,39 +94,43 @@ color: #aa74da; /* Icon colour on hover */
   display: inline-block;
 }
 
-.slides > .slide {
+.slides {
   background: #fff;
   border-radius: 5px;
   padding: 0 15px;
   width: 100%;
   margin: 10px;
   float: left;
-  padding: 10px;
+  padding: 20px;
 }
 
-.slides > .slide-below {
-  background: #fff;
-  border-radius: 5px;
-  padding: 0 15px;
-  margin: 10px;
-  float: left;
-  padding: 20px;
+.slides > .slide > .below > p {
+  font-size: 0.85rem;
+  color: black;
+}
+
+.slides > .slide > .below {
+  margin-left: 210px;
+  display: block;
 }
 
 .slides > .slide > img {
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  display: block;
-  margin: auto;
+  display: inline-block;
+	margin-top: 30px;
+	margin-left: 25px;
 }
 
 .slides > .slide > .user-name {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   color: #792da8;
-  display: block;
+  display: inline-block;
   text-align: center;
-  margin: 10px 0;
+	position: absolute;
+	top: 170px;
+	margin-left: 55px;
 }
 
 .slides > .slide > .user-email {
@@ -134,13 +138,9 @@ color: #aa74da; /* Icon colour on hover */
   color: #535353;
   display: block;
   text-align: center;
-  margin: 10px 0;
-}
-
-.slides > .slide > .below {
-  width: (100/4) + %;
-  padding: 0 15px;
-  display: inline-block;
+  position: absolute;
+  top: 220px;
+  margin-left: 210px;
 }
 
 .heading > .editBtn {
