@@ -111,6 +111,7 @@ const showChatPage = (app, connection, io) => {
         
     });
 
+    // needs front end
     app.get("/UrgentChat", (req, res) => {
 
         const date = req.query.date;
@@ -132,6 +133,18 @@ const showChatPage = (app, connection, io) => {
 
     });
 
+    // needs front end
+    app.post("/SaveMessage", (req, res) => {
+
+        const message = req.body.message;
+        const isPatient = req.body.isPatient;
+        const chat_id = req.body.chat_id;
+
+        chat.saveChatMessage(connection, chat_id, message, isPatient);
+
+    });
+
+    // needs front end
     app.get("/PreviousMessages", (req, res) => {
 
         const username = req.session.username;
@@ -140,14 +153,16 @@ const showChatPage = (app, connection, io) => {
 
         patient.getPatByUsername(connection, username).then((thePatient) => {
             if (thePatient != null) {
+                // just going to store doctor and patient texts in patient_chat
+
                 chat.getChatByID(connection, chat_id, true, username).then((theChat) => {
-                    res.json(theChat);
+                    res.json(theChat[0].patient_chat);
                 });
             } else {
                 doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
                     if (theDoctor.length == 1) {
                         chat.getChatByID(connection, chat_id, false, username).then((theChat) => {
-                            res.json(theChat);
+                            res.json(theChat[0].patient_chat);
                         });
                     } else {
                         res.redirect("/DeniedAccess");
@@ -160,6 +175,7 @@ const showChatPage = (app, connection, io) => {
 
 }
 
+// needs front end
 const existingChats = (app, connection) => {
 
     app.get("/Chats", (req, res) => {
