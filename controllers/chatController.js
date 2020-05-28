@@ -26,14 +26,16 @@ const showChatPage = (app, connection, io) => {
             // }).catch((err) => console.log(err));
         } else {
             
-            function showPage(isPatient, fName, sName) {
+            function showPage(isPatient, req_fName, req_sName, resName) {
                 if (isPatient) {
                     res.render("PatientChat", {
-                        name: fName + " " + sName
+                        name: req_fName + " " + req_sName,
+                        resName: resName
                     });
                 } else {
                     res.render("DoctorChat", {
-                        name: fName + " " + sName
+                        name: req_fName + " " + req_sName,
+                        resName: resName
                     });
                 }
             }
@@ -41,17 +43,15 @@ const showChatPage = (app, connection, io) => {
             function checkAgainstChatID(isPatient) {
                 chat.getChatByID(connection, chat_id, isPatient, username).then((chatData) => {
                     if (chatData.length == 1) {
-                        if (isPatient) {
-                            doctor.getDoctorByUsername(connection, chatData[0].doc_username).then((docData) => {
-                                console.log(docData)
-                                showPage(true, docData[0].fName, docData[0].sName);
-                            }).catch(err => console.log(err));
-                        } else {
+                        doctor.getDoctorByUsername(connection, chatData[0].doc_username).then((docData) => {
                             patient.getPatByUsername(connection, chatData[0].pat_username).then((patData) => {
-                                console.log(patData)
-                                showPage(false, patData.fName, patData.sName);
+                               if (isPatient) {
+                                   showPage(true, docData[0].fName, docData[0].sName, patData.fName + " " + patData.sName);
+                               } else {
+                                   showPage(true, patData.fName, patData.sName, docData[0].fName + " " + docData[0].sName);
+                               }
                             }).catch(err => console.log(err));
-                        }
+                        }).catch(err => console.log(err));
                     } else {
                         socket.on("disconnect", () => {
                             console.log("Disconnected unauthorized user");
