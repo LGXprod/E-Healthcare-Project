@@ -26,32 +26,47 @@ const showChatPage = (app, connection, io) => {
             // }).catch((err) => console.log(err));
         } else {
             
-            function showPage() {
-                doctor.getAllDoctors(connection, "*").then((doctors) => {
-                    res.render("DoctorChat", {
-                        doctors: doctors
+            function showPage(isPatient, fName, sName) {
+                if (isPatient) {
+                    res.render("PatientChat", {
+                        name: fName + " " + sName
                     });
-                }).catch((err) => console.log(err));
+                } else {
+                    res.render("DoctorChat", {
+                        name: fName + " " + sName
+                    });
+                }
             }
 
             function checkAgainstChatID(isPatient) {
                 chat.getChatByID(connection, chat_id, isPatient, username).then((chatData) => {
-                    if (!(chatData.length == 1)) {
+                    if (chatData.length == 1) {
+                        if (isPatient) {
+                            doctor.getDoctorByUsername(connection, chatData[0].doc_username).then((docData) => {
+                                console.log(docData)
+                                showPage(true, docData[0].fName, docData[0].sName);
+                            }).catch(err => console.log(err));
+                        } else {
+                            patient.getPatByUsername(connection, chatData[0].pat_username).then((patData) => {
+                                console.log(patData)
+                                showPage(false, patData.fName, patData.sName);
+                            }).catch(err => console.log(err));
+                        }
+                    } else {
                         socket.on("disconnect", () => {
                             console.log("Disconnected unauthorized user");
                         });
-                    } 
+                        res.redirect("/DeniedAccess");
+                    }
                 }).catch((err) => console.log(err));
             }
 
             patient.getPatByUsername(connection, username).then((thePatient) => {
                 if (thePatient != null) {
-                    showPage();
                     checkAgainstChatID(true);
                 } else {
                     doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
                         if (theDoctor.length == 1) {
-                            showPage();
                             checkAgainstChatID(false);
                         } else {
                             res.redirect("/DeniedAccess");
@@ -76,7 +91,6 @@ const showChatPage = (app, connection, io) => {
 
             chat.isChatIDAvaliable(connection, chat_id).then((idAvailable) => {
                 if (idAvailable) {
-                    console.log("x " + pat_username);
                     chat.createNewChat(connection, chat_id, pat_username, username).then().catch((err) => console.log(err));
                     res.redirect("/Chat?id=" + chat_id);
                 } else {
