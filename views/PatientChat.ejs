@@ -1,66 +1,61 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>eHealthcare</title>
-        	<link rel="stylesheet" type="text/css" href="css/patientChat.css">
-        <!--- Font from google fonts --->
-        <link href="https://fonts.googleapis.com/css?family=Assistant:600&display=swap" rel="stylesheet">
-        <!--- Font Awesome is used for the email and password icons --->
-        <script src="https://kit.fontawesome.com/d65ff00190.js"></script>
+<html>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<head>
+	<title>eHealthcare</title>
+	<link rel="stylesheet" type="text/css" href="css/doctorChat.css">
+  <!--- Font from google fonts --->
+	<link href="https://fonts.googleapis.com/css?family=Assistant:600&display=swap" rel="stylesheet">
+  <!--- Font Awesome is used for the email and password icons --->
+  <script src="https://kit.fontawesome.com/d65ff00190.js"></script>
 
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
-        <!-- from https://socket.io/get-started/chat/ -->
-    </head>
-    <body>
-      <div id="sideMenu">
-        <img src="img/dashboardTitle.png">
-        <ul>
-          <a href="/PatientDashboard" class="link"><i class="fa fa-home"
-          ></i> Home</a>
-          <a href="/booking" class="link"><i class="fa fa-calendar-check"
-          ></i> Book An Appointment</a>
-          <a href="/OurDoctors" class="link"><i class="fa fa-user-nurse"
-          ></i> Our Doctors</a>
-          <a href="/Chats" class="link"><i class="fa fa-comment-alt"
-            ></i> Chat</a>
-          <a href="#" class="link"><i class="fa fa-first-aid"
-          ></i> Urgent Cases</a>
-          <a style="position: fixed; bottom: 0; left: 0.52rem" href="/logout" class="link"><i class="fa fa-sign-out-alt"
-          ></i> Logout</a>
-        </ul>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-      </div>
+<body>
 
-      <div id="dashboardArea">
-    		<div class="heading">
-    			<h1>Web Chat</h1>
-    			 <p>Please select a doctor to chat with</p>
-    		</div>
-      </div>
+  <div id="sideMenu">
+		<img src="img/dashboardTitle.png">
+		<ul>
+			<a href="/PatientDashboard" class="link"><i class="fa fa-home"
+			></i> Home</a>
+			<a href="/booking" class="link"><i class="fa fa-calendar-check"
+			></i> Book An Appointment</a>
+			<a href="/OurDoctors" class="link"><i class="fa fa-user-nurse"
+			></i> Our Doctors</a>
+			<a href="/Chats" class="link"><i class="fa fa-comment-alt"
+				></i> Chat</a>
+			<a href="#" class="link"><i class="fa fa-first-aid"
+			></i> Urgent Cases</a>
+			<a style="position: fixed; bottom: 0; left: 0.52rem" href="/logout" class="link"><i class="fa fa-sign-out-alt"
+			></i> Logout</a>
+		</ul>
 
-        <select>
-            <% for (var doctor of doctors) { %>
-                <option>Dr. <%= doctor.fName %> <%= doctor.sName %></option>
-            <% } %>
-        </select>
+	</div>
 
-        <!-- from https://socket.io/get-started/chat/ -->
-        <ul id="messages"></ul>
-        <form action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
+	<div id="dashboardArea">
+		<div class="heading">
+      <h1>Web Chat with: Dr. <%= name %></h1>
+		</div>
+	</div>
+
+		<!-- from https://socket.io/get-started/chat/ -->
+	 <div id="chatContainer">
+        <p id="messages"></p>
+		</div>
+
+        <form id=messageInput action="">
+            <input id="m" autocomplete="off" placeholder="Type your message here..."><button>Send</button>
         </form>
 
-        <!-- <script src="" async defer></script> -->
-      <script type="text/javascript" src="js/patientChat.js"></script>
-    </body>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</body>
+
+<script type="text/javascript" src="js/doctorChat.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
 
     <!-- from https://socket.io/get-started/chat/ -->
     <script>
