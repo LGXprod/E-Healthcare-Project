@@ -6,16 +6,25 @@ const chat = require("../models/chat");
 
 const showChatPage = (app, connection, io) => {
 
+    var current_username;
+
     io.on("connection", (socket) => {
         socket.on('chat message', (msg) => {
             console.log('message: ' + msg);
-            io.emit('chat message', msg);
+            
+            patient.isUsernameAvailable(connection, current_username).then((notPatient) => {
+                io.emit('chat message', {
+                    msg: msg,
+                    isPatient: !notPatient
+                });
+            }).catch(err => console.log(err));
         });
     });
 
     app.get("/Chat", (req, res) => {
 
         const username = req.session.username;
+        current_username = username;
         const chat_id = req.query.id;
 
         if (chat_id == null) {
@@ -48,7 +57,7 @@ const showChatPage = (app, connection, io) => {
                                if (isPatient) {
                                    showPage(true, docData[0].fName, docData[0].sName, patData.fName + " " + patData.sName);
                                } else {
-                                   showPage(true, patData.fName, patData.sName, docData[0].fName + " " + docData[0].sName);
+                                   showPage(false, patData.fName, patData.sName, docData[0].fName + " " + docData[0].sName);
                                }
                             }).catch(err => console.log(err));
                         }).catch(err => console.log(err));
@@ -127,6 +136,7 @@ const showChatPage = (app, connection, io) => {
 
         const username = req.session.username;
         const chat_id = req.query.id;
+        current_username = username;
 
         patient.getPatByUsername(connection, username).then((thePatient) => {
             if (thePatient != null) {
