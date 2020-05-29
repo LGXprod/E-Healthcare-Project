@@ -42,13 +42,14 @@
 	</div>
 
 		<!-- from https://socket.io/get-started/chat/ -->
-	 <div id="chatContainer">
-        <p id="messages"></p>
-		</div>
+		<div id="chatContainer">
+				 <p id="messages"></p>
 
-        <form id=messageInput action="">
-            <input id="m" autocomplete="off" placeholder="Type your message here..."><button>Send</button>
-        </form>
+				 <form id=messageInput  action="/SaveMessage" method="post">
+						 <input id="m" name ="message" autocomplete="off" placeholder="Type your message here..."><button>Send</button>
+						 <input id="chatID" type="hidden" name ="chat_id">
+				 </form>
+	 </div>
 
 
 </body>

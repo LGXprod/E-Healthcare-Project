@@ -28,6 +28,7 @@ $(document).ready(() => {
     }
 
     const id = getUrlVars()["id"];
+    document.getElementById("chatID").value = id;
 
     $.get("/PreviousMessages?id=" + id, (data) => {
         console.log(data);
