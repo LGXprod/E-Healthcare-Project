@@ -57,9 +57,35 @@ const getChatByPatient = (connection, username) => {
     });
 }
 
-const saveChatMessage = (connection, chat_id) => {
-    return new Promise((resolve, reject) => {
+const saveChatMessage = (connection, chat_id, message, isPatient) => {
+    const getPrevChat = "select * from chat where url ='" + chat_id + "';";
 
+    // we are going to store all message in patient_text
+    connection.query(getPrevChat, (err, chat) => {
+        if (err) throw err;
+
+        let messages;
+
+        if (chat[0].patient_text != "") {
+            messages = JSON.parse(chat[0].patient_text);
+            messages.push({
+                msg: message,
+                isPatient: isPatient
+            });
+        } else {
+            messages.push({
+                msg: message,
+                isPatient: isPatient
+            });
+        }
+
+        const messages_store = JSON.stringify(messages);
+
+        const updateTexts = "update chat set patient_text='" + messages_store + "' where chat_id='" + chat_id + "';";
+
+        connection.query(updateTexts, (err) => {
+            if (err) throw err;
+        });
     });
 }
 

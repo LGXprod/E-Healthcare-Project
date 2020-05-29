@@ -6,16 +6,25 @@ const chat = require("../models/chat");
 
 const showChatPage = (app, connection, io) => {
 
+    var current_username;
+
     io.on("connection", (socket) => {
         socket.on('chat message', (msg) => {
             console.log('message: ' + msg);
-            io.emit('chat message', msg);
+            
+            patient.isUsernameAvailable(connection, current_username).then((notPatient) => {
+                io.emit('chat message', {
+                    msg: msg,
+                    isPatient: !notPatient
+                });
+            }).catch(err => console.log(err));
         });
     });
 
     app.get("/Chat", (req, res) => {
 
         const username = req.session.username;
+        current_username = username;
         const chat_id = req.query.id;
 
         if (chat_id == null) {
@@ -48,7 +57,7 @@ const showChatPage = (app, connection, io) => {
                                if (isPatient) {
                                    showPage(true, docData[0].fName, docData[0].sName, patData.fName + " " + patData.sName);
                                } else {
-                                   showPage(true, patData.fName, patData.sName, docData[0].fName + " " + docData[0].sName);
+                                   showPage(false, patData.fName, patData.sName, docData[0].fName + " " + docData[0].sName);
                                }
                             }).catch(err => console.log(err));
                         }).catch(err => console.log(err));
@@ -102,6 +111,7 @@ const showChatPage = (app, connection, io) => {
         
     });
 
+    // needs front end
     app.get("/UrgentChat", (req, res) => {
 
         const date = req.query.date;
@@ -123,21 +133,36 @@ const showChatPage = (app, connection, io) => {
 
     });
 
+    // needs front end
+    app.post("/SaveMessage", (req, res) => {
+
+        const message = req.body.message;
+        const isPatient = req.body.isPatient;
+        const chat_id = req.body.chat_id;
+
+        chat.saveChatMessage(connection, chat_id, message, isPatient);
+
+    });
+
+    // needs front end
     app.get("/PreviousMessages", (req, res) => {
 
         const username = req.session.username;
         const chat_id = req.query.id;
+        current_username = username;
 
         patient.getPatByUsername(connection, username).then((thePatient) => {
             if (thePatient != null) {
+                // just going to store doctor and patient texts in patient_chat
+
                 chat.getChatByID(connection, chat_id, true, username).then((theChat) => {
-                    res.json(theChat);
+                    res.json(theChat[0].patient_chat);
                 });
             } else {
                 doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
                     if (theDoctor.length == 1) {
                         chat.getChatByID(connection, chat_id, false, username).then((theChat) => {
-                            res.json(theChat);
+                            res.json(theChat[0].patient_chat);
                         });
                     } else {
                         res.redirect("/DeniedAccess");
@@ -150,6 +175,7 @@ const showChatPage = (app, connection, io) => {
 
 }
 
+// needs front end
 const existingChats = (app, connection) => {
 
     app.get("/Chats", (req, res) => {
