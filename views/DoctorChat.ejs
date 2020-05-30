@@ -73,9 +73,9 @@
             return false;
           });
           socket.on('chat message', function(msg){
-			document.getElementById("patientTF").value = msg.isPatient;
 			$('#messages').append($('<li>').text(msg.msg));
 				console.log(msg.isPatient);
+				document.getElementById("patientTF").value = msg.isPatient;
           });
         });
     </script>
