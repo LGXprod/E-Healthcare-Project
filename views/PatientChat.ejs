@@ -80,6 +80,15 @@
 			document.getElementById("patientTF").value = msg.isPatient;
 			$('#messages').append($('<li>').text(msg.msg));
 				console.log(msg.isPatient);
+
+			const urlParams = new URLSearchParams(window.location.search);
+			const chat_id = urlParams.get('id');
+			
+			$.post("/SaveMessage", {
+				message: msg.msg,
+				isPatient: msg.isPatient,
+				chat_id: chat_id
+			})
           });
         });
     </script>

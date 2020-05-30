@@ -131,6 +131,10 @@ const showChatPage = (app, connection, io) => {
         const isPatient = req.body.isPatient;
         const chat_id = req.body.chat_id;
 
+        console.log(message);
+        console.log(isPatient);
+        console.log(chat_id);
+
         chat.saveChatMessage(connection, chat_id, message, isPatient);
 
     });
@@ -141,26 +145,21 @@ const showChatPage = (app, connection, io) => {
         const username = req.session.username;
         const chat_id = req.query.id;
 
-        patient.getPatByUsername(connection, username).then((thePatient) => {
-            if (thePatient != null) {
-                // just going to store doctor and patient texts in patient_chat
-
-                chat.getChatByID(connection, chat_id, true, username).then((theChat) => {
-                    res.json(theChat[0].patient_chat);
-                });
+        patient.isUsernameAvailable(connection, username).then((notPatient) => {
+            if (notPatient) {
+                if (theDoctor.length == 1) {
+                    chat.getChatByID(connection, chat_id, false, username).then((theChat) => {
+                        res.send(theChat[0].patient_text);
+                    });
+                } else {
+                    res.redirect("/DeniedAccess");
+                }
             } else {
-                doctor.getDoctorByUsername(connection, username).then((theDoctor) => {
-                    if (theDoctor.length == 1) {
-                        chat.getChatByID(connection, chat_id, false, username).then((theChat) => {
-                            res.json(theChat[0].patient_chat);
-                        });
-                    } else {
-                        res.redirect("/DeniedAccess");
-                    }
-                }).catch((err) => console.log(err));
+                chat.getChatByID(connection, chat_id, true, username).then((theChat) => {
+                    res.send(theChat[0].patient_text);
+                });
             }
-        }).catch((err) => console.log(err));
-
+        }).catch(err => console.log(err));
     });
 
 }

@@ -16,24 +16,16 @@ $(document).ready(function () {
 
 $(document).ready(() => {
 
-    function getUrlVars() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const chat_id = urlParams.get('id');
 
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++) {
-            hash = hashes[i].split('=');
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
+    $.get("/PreviousMessages?id=" + chat_id, (data) => {
+        const prev_chat = $.parseJSON(data);
+        console.log(prev_chat);
+
+        for (var msg of prev_chat) {
+            $('#messages').append($('<li>').text(msg.msg));
         }
-        return vars;
-
-    }
-
-    const id = getUrlVars()["id"];
-    document.getElementById("chatID").value = id;
-
-    $.get("/PreviousMessages?id=" + id, (data) => {
-        console.log(data);
     });
 
 });

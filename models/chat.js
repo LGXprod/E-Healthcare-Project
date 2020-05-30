@@ -68,10 +68,11 @@ const saveChatMessage = (connection, chat_id, message, isPatient) => {
     connection.query(getPrevChat, (err, chat) => {
         if (err) throw err;
 
-        let messages;
+        var messages = [];
 
-        if (chat[0].patient_text != "") {
+        if (chat[0].patient_text != null) {
             messages = JSON.parse(chat[0].patient_text);
+            console.log(messages);
             messages.push({
                 msg: message,
                 isPatient: isPatient
@@ -83,9 +84,16 @@ const saveChatMessage = (connection, chat_id, message, isPatient) => {
             });
         }
 
+        for (var msg of messages) {
+            console.log("X:")
+            console.log(msg.msg);
+        }
+
         const messages_store = JSON.stringify(messages);
 
-        const updateTexts = "update chat set patient_text='" + messages_store + "' where chat_id='" + chat_id + "';";
+        console.log(messages_store);
+
+        const updateTexts = "update chat set patient_text='" + messages_store + "' where url='" + chat_id + "';";
 
         connection.query(updateTexts, (err) => {
             if (err) throw err;
