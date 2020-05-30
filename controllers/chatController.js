@@ -147,13 +147,9 @@ const showChatPage = (app, connection, io) => {
 
         patient.isUsernameAvailable(connection, username).then((notPatient) => {
             if (notPatient) {
-                if (theDoctor.length == 1) {
-                    chat.getChatByID(connection, chat_id, false, username).then((theChat) => {
-                        res.send(theChat[0].patient_text);
-                    });
-                } else {
-                    res.redirect("/DeniedAccess");
-                }
+                chat.getChatByID(connection, chat_id, false, username).then((theChat) => {
+                    res.send(theChat[0].patient_text);
+                });
             } else {
                 chat.getChatByID(connection, chat_id, true, username).then((theChat) => {
                     res.send(theChat[0].patient_text);
