@@ -45,7 +45,12 @@
         <form id=messageInput  action="/SaveMessage" method="post">
             <input id="m" name ="message" autocomplete="off" placeholder="Type your message here..."><button>Send</button>
 						<input id="chatID" type="hidden" name ="chat_id">
+						<input id="patientTF" type="hidden" name ="isPatient">
         </form>
+	</div>
+
+	<div id="imageUpload">
+	<a  target="_blank" rel="noopener noreferrer" href="https://drive.google.com/embeddedfolderview?id=1cd1X0Jq4NB01Ye1uWcr1Xgo_SEahZzdD#grid">Upload Image</a>
 	</div>
 
 </body>
@@ -65,6 +70,7 @@
             return false;
           });
           socket.on('chat message', function(msg){
+					document.getElementById("patientTF").value = msg.isPatient;
 			console.log(msg.isPatient); // can check if was the patient who sent it or the doctor using this bool value
             $('#messages').append($('<li>').text(msg.msg));
           });
