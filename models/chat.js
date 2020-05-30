@@ -49,7 +49,11 @@ const createNewChat = (connection, chat_id, pat_username, doc_username) => {
 
 const getChatByPatient = (connection, username) => {
     return new Promise((resolve, reject) => {
-        connection.query("select * from chat where pat_username='" + username + "';", (err, chats) => {
+        const queryString = "select chat.url as url, doctor.fName as fName, doctor.sName as sName from chat left join doctor on chat.doc_username=doctor.username " + 
+                            "where pat_username='" + username + "';"
+                            
+
+        connection.query(queryString, (err, chats) => {
             if (err) reject(err);
 
             resolve(chats);

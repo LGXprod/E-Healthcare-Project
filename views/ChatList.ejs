@@ -37,8 +37,12 @@
 	<div id="dashboardArea">
 		<div class="heading">
 			<h1>Web Chat</h1>
-			 <p>Please select a doctor to chat with</p>
-		</div>
+       <p>Please select a doctor to chat with</p>
+       
+       <% for (var chat of chats) { %> 
+        <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>">Dr. <%= chat.fName %> <%= chat.sName %></a></p>
+        <% } %>
+    </div>
 
 </body>
 

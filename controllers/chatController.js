@@ -172,7 +172,9 @@ const existingChats = (app, connection) => {
 
         if (req.session) {
             chat.getChatByPatient(connection, req.session.username).then((chats) => {
-                res.render("ChatList", chats);
+                res.render("ChatList", {
+                    chats: chats
+                });
             }).catch((err) => console.log(err));
         }
 
