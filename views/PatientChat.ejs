@@ -69,15 +69,17 @@
           var socket = io();
           $('form').submit(function(e){
             e.preventDefault(); // prevents page reloading
-            socket.emit('chat message', $('#m').val());
+            socket.emit('chat message', {
+				msg: $('#m').val(),
+				isPatient: true
+			});
             $('#m').val('');
             return false;
           });
           socket.on('chat message', function(msg){
-			$.get("http://localhost:3000/IsPatient", (isPatient) => {
-				document.getElementById("patientTF").value = isPatient;
-				$('#messages').append($('<li>').text(msg));
-			});
+			document.getElementById("patientTF").value = msg.isPatient;
+			$('#messages').append($('<li>').text(msg.msg));
+				console.log(msg.isPatient);
           });
         });
     </script>

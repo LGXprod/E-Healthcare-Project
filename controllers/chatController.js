@@ -1,3 +1,4 @@
+const http = require("http");
 const crypto = require('crypto');
 
 const patient = require("../models/patient");
@@ -8,7 +9,6 @@ const showChatPage = (app, connection, io) => {
 
     io.on("connection", (socket) => {
         socket.on('chat message', (msg) => {
-            console.log('message: ' + msg);
             io.emit('chat message', msg);
         });
     });
@@ -122,18 +122,6 @@ const showChatPage = (app, connection, io) => {
         }
 
 
-    });
-
-    app.get("/IsPatient", (req, res) => {
-        const username = req.session.username;
-
-        patient.isUsernameAvailable(connection, username).then((notPatient) => {
-            if (notPatient) {
-                res.send(false);
-            } else {
-                res.send(true);
-            }
-        });
     });
 
     // needs front end

@@ -4,7 +4,6 @@ const doctor = require("../models/doctor");
 const showUrgentCasesPage = (app, connection) => {
 
 	app.post("/Emergency", (req, res) => {
-
 		res.setHeader('Cache-Control', 'no-cache, no-store');
 
 		var today = new Date();
@@ -20,8 +19,8 @@ const showUrgentCasesPage = (app, connection) => {
 
 		console.log(today + " " + time);
 
-		res.redirect("/UrgentChat?date=" + today + "&time=" + time)
-    });
+		res.redirect("/UrgentChat?date=" + today + "&time=" + time);
+	});
 
 }
 
