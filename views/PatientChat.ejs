@@ -74,9 +74,10 @@
             return false;
           });
           socket.on('chat message', function(msg){
-						document.getElementById("patientTF").value = msg.isPatient;
-            console.log(msg.isPatient); // can check if was the patient who sent it or the doctor using this bool value
-            $('#messages').append($('<li>').text(msg.msg));
+			$.get("http://localhost:3000/IsPatient", (isPatient) => {
+				document.getElementById("patientTF").value = isPatient;
+				$('#messages').append($('<li>').text(msg));
+			});
           });
         });
     </script>

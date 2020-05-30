@@ -114,12 +114,14 @@ const addProviderNo = (connection) => {
 }
 
 const addRandomChatData = (connection) => {
-    const patDocQuery = "select * from patient union select * from doctor";
+    const patDocQuery = "select * from patient union select * from doctor;";
 
     connection.query(patDocQuery, (err, result) => {
+        if (err) console.log(err);
+
         for (var patDocPair of result) {
             var createChatQuery = "insert into chat (pat_username, doc_username) values " + 
-            "('" + patDocPair.patient.username + "', '" + patDocPair.doctor.username + "')";
+            "('" + patDocPair.patient.username + "', '" + patDocPair.doctor.username + "');";
             connection.query(createChatQuery, (err) => {
                 if (err) console.log(err);
             });

@@ -6,25 +6,16 @@ const chat = require("../models/chat");
 
 const showChatPage = (app, connection, io) => {
 
-    var current_username;
-
     io.on("connection", (socket) => {
         socket.on('chat message', (msg) => {
             console.log('message: ' + msg);
-            
-            patient.isUsernameAvailable(connection, current_username).then((notPatient) => {
-                io.emit('chat message', {
-                    msg: msg,
-                    isPatient: !notPatient
-                });
-            }).catch(err => console.log(err));
+            io.emit('chat message', msg);
         });
     });
 
     app.get("/Chat", (req, res) => {
 
         const username = req.session.username;
-        current_username = username;
         const chat_id = req.query.id;
 
         if (chat_id == null) {
@@ -133,6 +124,18 @@ const showChatPage = (app, connection, io) => {
 
     });
 
+    app.get("/IsPatient", (req, res) => {
+        const username = req.session.username;
+
+        patient.isUsernameAvailable(connection, username).then((notPatient) => {
+            if (notPatient) {
+                res.send(false);
+            } else {
+                res.send(true);
+            }
+        });
+    });
+
     // needs front end
     app.post("/SaveMessage", (req, res) => {
 
@@ -149,7 +152,6 @@ const showChatPage = (app, connection, io) => {
 
         const username = req.session.username;
         const chat_id = req.query.id;
-        current_username = username;
 
         patient.getPatByUsername(connection, username).then((thePatient) => {
             if (thePatient != null) {
