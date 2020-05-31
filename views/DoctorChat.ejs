@@ -73,11 +73,17 @@
             return false;
           });
           socket.on('chat message', function(msg){
-			$('#messages').append($('<li>').text(msg.msg));
+			 if(!msg.isPatient){
+		 			$('#messages').append($('<li>').text("Doctor" + ": " + msg.msg));
+	   	 }
+			 else{
+				 $('#messages').append($('<li>').text("Patient" + ": " + msg.msg));
+			 }
 				console.log(msg.isPatient);
 				document.getElementById("patientTF").value = msg.isPatient;
           });
         });
+
     </script>
 
 </html>

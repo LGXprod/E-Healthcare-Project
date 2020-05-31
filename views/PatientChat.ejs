@@ -78,12 +78,17 @@
           });
           socket.on('chat message', function(msg){
 			document.getElementById("patientTF").value = msg.isPatient;
-			$('#messages').append($('<li>').text(msg.msg));
+			if(!msg.isPatient){
+				 $('#messages').append($('<li>').text("Doctor" + ": " + msg.msg));
+			}
+			else{
+				$('#messages').append($('<li>').text("Patient" + ": " + msg.msg));
+			}
 				console.log(msg.isPatient);
 
 			const urlParams = new URLSearchParams(window.location.search);
 			const chat_id = urlParams.get('id');
-			
+
 			$.post("/SaveMessage", {
 				message: msg.msg,
 				isPatient: msg.isPatient,

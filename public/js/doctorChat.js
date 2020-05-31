@@ -24,7 +24,7 @@ $(document).ready(() => {
         console.log(prev_chat);
 
         for (var msg of prev_chat) {
-            $('#messages').append($('<li>').text(msg.msg));
+          $('#messages').append($('<li>').text(msg.msg));
         }
     });
 
