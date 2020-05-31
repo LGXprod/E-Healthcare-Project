@@ -7,7 +7,7 @@ const showUrgentCasesPage = (app, connection) => {
 		res.render("UrgentCases");
 	});
 
-	app.post("/Emergency", (req, res) => {
+	app.get("/Emergency", (req, res) => {
 		res.setHeader('Cache-Control', 'no-cache, no-store');
 
 		var today = new Date();
@@ -21,8 +21,7 @@ const showUrgentCasesPage = (app, connection) => {
 		today = yyyy + '-' + mm + '-' + dd; 
 		time = hour + ":" + min + ":" + sec;
 
-		console.log(today + " " + time);
-
+		console.log("/UrgentChat?date=" + today + "&time=" + time);
 		res.redirect("/UrgentChat?date=" + today + "&time=" + time);
 	});
 

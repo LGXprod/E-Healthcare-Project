@@ -173,6 +173,7 @@ const getAvailableAppointments = (connection, username, date) => {
 }
 
 const getFirstAvailableDoctor = (connection, username) => {
+    
     return new Promise((resolve, reject) => {
         const queryString = "select doc_username from Doctor_Avaliability where doc_username  ='" + username + "';";
 
@@ -185,6 +186,33 @@ const getFirstAvailableDoctor = (connection, username) => {
         });
     });
 
+}
+
+const pushBackAppointments = (connection, doc_username, minutes) => {
+    
+    return new Promise((resolve, reject) => {
+        const queryString = "update schedule set appointmentTime = date_add(appointmentTime, interval " + minutes + " minute) where doc_username = '" + doc_username + "';";
+        console.log(queryString);
+
+        connection.query(queryString, (err) => {
+            if (err) reject(err);
+
+            resolve();
+        });
+    });
+
+}
+
+const getRandomDoc = (connection) => {
+    
+    return new Promise((resolve, reject) => {
+        connection.query("select username from doctor order by rand() limit 1;", (err, doc) => {
+            if (err) reject(err);
+
+            console.log(doc[0].username);
+            resolve(doc[0].username);
+        });
+    });
 
 }
 
@@ -199,5 +227,7 @@ module.exports = {
     insertOtherInfo: insertOtherInfo,
     isProviderNoValid: isProviderNoValid,
     insertNewDocDB: insertNewDocDB,
-    getFirstAvailableDoctor: getFirstAvailableDoctor
+    getFirstAvailableDoctor: getFirstAvailableDoctor,
+    pushBackAppointments: pushBackAppointments,
+    getRandomDoc: getRandomDoc
 }

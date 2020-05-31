@@ -111,16 +111,31 @@ const showChatPage = (app, connection, io) => {
 
         if (req.session) {
             patient.getPatByUsername(connection, username).then((thePatient) => {
-                if (thePatient != null) {
-                    
-                } else {
-                    res.redirect("/DeniedAccess");
-                }
+                doctor.getRandomDoc(connection).then((doc_username) => {
+                    if (thePatient != null) {
+                        console.log("here1");
+                        doctor.pushBackAppointments(connection, doc_username, 45).then(() => {
+                            console.log("here5");
+                            patient.insertNewAppointmentToSchedule(connection, username, doc_username, date + " " + time).then((success) => {
+                                console.log("here21", success);
+                                if (success) {
+                                    const buf = crypto.randomBytes(16);
+                                    const chat_id = `${buf.toString('hex')}`;
+                                    console.log("x", chat_id);
+
+                                    chat.createNewChat(connection, chat_id, username, doc_username).then().catch((err) => console.log(err));
+                                    res.send("/Chat?id=" + chat_id);
+                                }
+                            }).catch(err => console.log(err));
+                        }).catch(err => console.log(err));
+                    } else {
+                        res.redirect("/DeniedAccess");
+                    }
+                });
             }).catch((err) => console.log(err));
         } else {
             res.redirect("/DeniedAccess");
         }
-
 
     });
 
