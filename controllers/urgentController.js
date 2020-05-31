@@ -3,6 +3,10 @@ const doctor = require("../models/doctor");
 
 const showUrgentCasesPage = (app, connection) => {
 
+	app.get("/UrgentCases", (req, res) => {
+		res.render("UrgentCases");
+	});
+
 	app.post("/Emergency", (req, res) => {
 		res.setHeader('Cache-Control', 'no-cache, no-store');
 
