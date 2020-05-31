@@ -2,8 +2,9 @@
 <html>
 
 <head>
-	<title>eHealthcare</title>
+	<title>Chat</title>
 	<link rel="stylesheet" type="text/css" href="css/chatList.css">
+	<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
   <!--- Font from google fonts --->
 	<link href="https://fonts.googleapis.com/css?family=Assistant:600&display=swap" rel="stylesheet">
   <!--- Font Awesome is used for the email and password icons --->
@@ -38,8 +39,8 @@
 		<div class="heading">
 			<h1>Web Chat</h1>
        <p>Please select a doctor to chat with</p>
-       
-       <% for (var chat of chats) { %> 
+
+       <% for (var chat of chats) { %>
         <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>">Dr. <%= chat.fName %> <%= chat.sName %></a></p>
         <% } %>
     </div>

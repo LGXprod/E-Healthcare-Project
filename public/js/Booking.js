@@ -17,6 +17,7 @@ $("#booking-btn").click(() => {
         var selectedDate = date;
         var now = new Date();
         var nowString = now.getFullYear()  + "-" + (now.getMonth() < 10 ? "0" + now.getMonth() : now.getMonth()) + "-" + now.getDate();
+        console.log(nowString);
         if (selectedDate < nowString) {
           alert("You entered a date that has already passed. \nPlease enter a valid date.") //if date is in the past this alert will show
           document.querySelector(".table table").style.display = "none";

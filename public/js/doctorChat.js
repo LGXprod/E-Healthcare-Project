@@ -22,9 +22,8 @@ $(document).ready(() => {
     $.get("/PreviousMessages?id=" + chat_id, (data) => {
         const prev_chat = $.parseJSON(data);
         console.log(prev_chat);
-
         for (var msg of prev_chat) {
-          $('#messages').append($('<li>').text(msg.msg));
+         $('#messages').append($('<li>').text(msg.msg));
         }
     });
 
