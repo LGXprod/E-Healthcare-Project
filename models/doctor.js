@@ -129,7 +129,7 @@ const getAvailableAppointments = (connection, username, date) => {
     return new Promise((resolve, reject) => {
         const queryString = "select date_format(startTime, '%H:%i') as startTime, date_format(endTime, '%H:%i') as endTime from Doctor_Availability where startTime like '"
                             + date + "%' and doc_username='" + username + "';";
-
+                            
         connection.query(queryString, async (err, availabiltity) => {
             if (err) reject(err);
 
@@ -139,6 +139,7 @@ const getAvailableAppointments = (connection, username, date) => {
             var availableAppointments = [];
 
             for (var i = 0; i <= time; i = i + 15) {
+                // console.log(i);
                 availableAppointments.push({
                     minutesAfterStart: i,
                     isAvailable: true
@@ -155,12 +156,17 @@ const getAvailableAppointments = (connection, username, date) => {
 
                 for (var appointment of appointments) {
             
-                    const time = timeRangeToMinutes(availabiltity[0].startTime, appointment.appointmentTime);
-                    // console.log(time);
+                    // console.log(parseInt((appointment.appointmentTime).split(":")[1])%15);
+                    if (parseInt((appointment.appointmentTime).split(":")[1])%15 == 0) {
+                        const time = timeRangeToMinutes(availabiltity[0].startTime, appointment.appointmentTime);
+                        // console.log("X");
+                        // console.log(time);
+                        // console.log(appointment);
+    
+                        availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)].isAvailable = false;
+                        // console.log(availableAppointments);
+                    } 
 
-                    availableAppointments[availableAppointments.findIndex(element => element.minutesAfterStart == time)].isAvailable = false;
-
-                    // console.log(availableAppointments);
                 }
 
                 resolve({

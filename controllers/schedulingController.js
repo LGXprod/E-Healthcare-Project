@@ -16,6 +16,7 @@ const getAppointmentsByDate = (app, connection) => {
     app.get("/appointmentsAvailable", (req, res) => {
 
         doctor.getAllDoctors(connection, "username, fName, sName").then(async (doctors) => { // getting the promise from getAllDoctors()
+           
             var doctorTimes = [];
 
             for (var theDoctor of doctors) {

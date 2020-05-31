@@ -18,7 +18,7 @@ const showUrgentCasesPage = (app, connection) => {
 		var min = String(today.getMinutes()).padStart(2, '0');
 		var sec = String(today.getSeconds()).padStart(2, '0');
 
-		today = yyyy + '-' + mm + '-' + dd; 
+		today = yyyy + '-' + 06 + '-' + 01; // change back to mm plus dd
 		time = hour + ":" + min + ":" + sec;
 
 		console.log("/UrgentChat?date=" + today + "&time=" + time);

@@ -181,11 +181,27 @@ const existingChats = (app, connection) => {
     app.get("/Chats", (req, res) => {
 
         if (req.session) {
-            chat.getChatByPatient(connection, req.session.username).then((chats) => {
-                res.render("ChatList", {
-                    chats: chats
-                });
-            }).catch((err) => console.log(err));
+            const username = req.session.username;
+
+            patient.isUsernameAvailable(connection, username).then((notPatient) => {
+                if (notPatient) {
+                    chat.getChatByDoc(connection, username).then((chats) => {
+                        res.render("ChatList", {
+                            chats: chats,
+                            isPatient: false
+                        });
+                    })
+                } else {
+                    chat.getChatByPatient(connection, username).then((chats) => {
+                        res.render("ChatList", {
+                            chats: chats,
+                            isPatient: true
+                        });
+                    }).catch((err) => console.log(err));
+                }
+            }).catch(err => console.log(err));
+        } else {
+            res.redirect("/DeniedAccess");
         }
 
     });

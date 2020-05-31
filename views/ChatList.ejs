@@ -41,7 +41,12 @@
        <p>Please select a doctor to chat with</p>
 
        <% for (var chat of chats) { %>
-        <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>">Dr. <%= chat.fName %> <%= chat.sName %></a></p>
+          <% if (isPatient) { %> 
+              <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>">Dr. <%= chat.fName %> <%= chat.sName %></a></p>
+          <% } else{ %>
+             <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>"><%= chat.fName %> <%= chat.sName %></a></p>
+          <% } %> 
+          
         <% } %>
     </div>
 

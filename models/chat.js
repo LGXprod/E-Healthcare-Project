@@ -61,6 +61,19 @@ const getChatByPatient = (connection, username) => {
     });
 }
 
+const getChatByDoc = (connection, username) => {
+    return new Promise((resolve, reject) => {
+        const queryString = "select chat.url as url, patient.fName as fName, patient.sName as sName from chat left join patient on chat.pat_username=patient.username " + 
+                            "where doc_username='" + username + "';"
+                            
+        connection.query(queryString, (err, chats) => {
+            if (err) reject(err);
+
+            resolve(chats);
+        });
+    });
+}
+
 const saveChatMessage = (connection, chat_id, message, isPatient) => {
     const getPrevChat = "select * from chat where url ='" + chat_id + "';";
 
@@ -106,5 +119,6 @@ module.exports = {
     isChatIDAvaliable, isChatIDAvaliable,
     createNewChat: createNewChat,
     getChatByPatient: getChatByPatient,
-    saveChatMessage: saveChatMessage
+    saveChatMessage: saveChatMessage,
+    getChatByDoc: getChatByDoc
 }
