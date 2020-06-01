@@ -98,6 +98,7 @@ color: #aa74da; /* Icon colour on hover */
 }
 
 .dropdown {
+  margin-top: 5px;
   position: relative;
   display: block;
   margin-left: 300px;
