@@ -116,8 +116,8 @@ const getPatientByTime = (connection, date, time) => {
 
 const emergency = (connection, pat_username, doc_username, date, time) => {
     return new Promise((resolve, reject) => {
-        const queryString = "insert into urgent_cases (pat_username, doc_username, casedate) values ('"
-                            + pat_username + "', '" + doc_username + "', '" + date + " " + time + "');";
+        const queryString = "insert into urgent_cases (pat_username, doc_username, handled, casedate) values ('"
+                            + pat_username + "', '" + doc_username + "', " + 0 + ", '" + date + " " + time + "');";
 
         connection.query(queryString, (err) => {
             if (err) reject (err);

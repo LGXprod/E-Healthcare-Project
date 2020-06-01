@@ -222,6 +222,45 @@ const getRandomDoc = (connection) => {
 
 }
 
+const getEmergencyByDoc = (connection, doc_username) => {
+
+    return new Promise((resolve, reject) => {
+        const queryString = "select patient.fName as fName, patient.sName as sName, patient.username as pat_username, urgent_cases.handled as handled from urgent_cases inner join patient on patient.username=urgent_cases.pat_username where urgent_cases.doc_username='" + doc_username + "';";
+
+        connection.query(queryString, (err, patient) => {
+            if (err) reject(err);
+
+            if (patient.length == 0) {
+                resolve(null);
+            } else {
+                // console.log(!patient[0].handled);
+                if (!patient[0].handled) {
+                    const name = patient[0].fName + " " + patient[0].sName;
+                    resolve({
+                        name: name,
+                        pat_username: patient[0].pat_username
+                    });
+                }
+            }
+        });
+    });
+
+}
+
+const emergencyHandled = (connection, pat_username) => {
+    
+    return new Promise((resolve, reject) => {
+        const queryString = "update urgent_cases set handled=1 where pat_username='" + pat_username + "';";
+        
+        connection.query(queryString, (err) => {
+            if (err) reject(err);
+
+            resolve();
+        });
+    });
+
+}
+
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     getAllDoctors: getAllDoctors,
@@ -235,5 +274,7 @@ module.exports = {
     insertNewDocDB: insertNewDocDB,
     getFirstAvailableDoctor: getFirstAvailableDoctor,
     pushBackAppointments: pushBackAppointments,
-    getRandomDoc: getRandomDoc
+    getRandomDoc: getRandomDoc,
+    getEmergencyByDoc: getEmergencyByDoc,
+    emergencyHandled: emergencyHandled
 }

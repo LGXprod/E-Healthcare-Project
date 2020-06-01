@@ -27,6 +27,33 @@ const showUrgentCasesPage = (app, connection) => {
 
 	});
 
+	app.get("/IsEmergency", (req, res) => {
+
+		const username = req.session.username;
+
+		doctor.getDoctorByUsername(connection, username).then((docInfo) => {
+			if (docInfo.length == 1) {
+				doctor.getEmergencyByDoc(connection, username).then((pat) => {
+					doctor.emergencyHandled(connection, pat.pat_username).then(() => {
+                        if (pat.name != null) {
+							res.send({
+								isEmergency: true,
+								name: pat.name
+							});
+						} else {
+							res.send({
+								isEmergency: false,
+								name: null
+							});
+						}
+					}).catch(err => console.log(err));
+					
+				}).catch(err => console.log(err));
+			} 
+		}).catch(err => console.log(err));
+
+	});
+
 }
 
 module.exports = {
