@@ -39,15 +39,19 @@
 		<div class="heading">
 			<h1>Web Chat</h1>
        <p>Please select a doctor to chat with</p>
+					<div class="dropdown">
+					<button class="dropbtn">Select Doctor</button>
+					 <div class="dropdown-content">
+		       <% for (var chat of chats) { %>
+		          <% if (isPatient) { %>
+		              <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>">Dr. <%= chat.fName %> <%= chat.sName %></a></p>
+		          <% } else{ %>
+		             <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>"><%= chat.fName %> <%= chat.sName %></a></p>
+		          <% } %>
 
-       <% for (var chat of chats) { %>
-          <% if (isPatient) { %> 
-              <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>">Dr. <%= chat.fName %> <%= chat.sName %></a></p>
-          <% } else{ %>
-             <p><a href="http://localhost:3000/Chat?id=<%= chat.url %>"><%= chat.fName %> <%= chat.sName %></a></p>
-          <% } %> 
-          
-        <% } %>
+		        <% } %>
+					</div>
+				</div>
     </div>
 
 </body>

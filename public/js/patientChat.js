@@ -7,9 +7,9 @@ $(function(){
 
 //Home highlighted when the PatientDashbaord page is loaded
 $(document).ready(function() {
-    $("#sideMenu a").slice(3,4,5,6).css({"background": "#397298", "border-left": "5px solid #aa74da",
+    $("#sideMenu a").slice(1,2,3,4,5,6).css({"background": "#397298", "border-left": "5px solid #aa74da",
     "padding": "15px 15px 15px 25px", "width": "280px", "transition": "0s"});
-    $("#sideMenu a i").slice(3,4,5,6).css({"color": "#aa74da"});
+    $("#sideMenu a i").slice(1,2,3,4,5,6).css({"color": "#aa74da"});
 });
 
 $(document).ready(() => {
