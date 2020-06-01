@@ -7,16 +7,16 @@ const getAllDoctors = (connection, attributes) => {
     });
 }
 
-async function isProviderNoValid(connection, providerNo) {
+function isProviderNoValid(connection, providerNo) {
     return new Promise((resolve, reject) => {
         connection.query("select providerNo from Valid_Provider_No where providerNo='" + providerNo + "';", (err, result) => {
             if (err) {
                 reject(err);
             } else {
                 if (result.length == 0) { // result.length is the number of doctors with that providerNo
-                    resolve(true);
-                } else {
                     resolve(false);
+                } else {
+                    resolve(true);
                 }
             }
         });
@@ -25,9 +25,9 @@ async function isProviderNoValid(connection, providerNo) {
 
 async function insertNewDocDB(connection, body, username, password) {
     return new Promise((resolve, reject) => {
-        const addNewDocQuery = "insert into Doctor (username, userPassword, fName, sName, certifications, providerNo) values "
-        + "('" + username + "', '" + password + "', '" + body.fName + "', '" + body.sName + "', "
-        +  body.certifications + ", " + body.providerNo + "');";
+        const addNewDocQuery = "insert into Doctor (username, userPassword, fName, sName, experience, education, specialisation) values "
+        + "('" + username + "', '" + password + "', '" + body.fName + "', '" + body.sName + "', '"
+        +  body.experience + "', '" + body.education + "', '" + body.specialisation + "');";
 
         console.log(addNewDocQuery);
 

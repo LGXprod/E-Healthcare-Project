@@ -52,15 +52,14 @@ const registerDoctor = (app, connection) => {
         const password = body.password;
 
         doctor.isProviderNoValid(connection, req.body.providerNo).then((isValid) => {
-            console.log(isAvailable);
+            console.log(isValid);
 
             if (isValid) {
 
                 // calls async function to check if username is available
-                doctor.isUsernameAvailable(connection, username).then((isAvailable) => {
-                    console.log(isAvailable);
+                doctor.getDoctorByUsername(connection, username).then((doc) => {
 
-                    if (isAvailable) {
+                    if (doc.length == 0) {
                         
                         doctor.insertNewDocDB(connection, body, username, password).then((successfulInsert) => {
 
