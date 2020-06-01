@@ -43,6 +43,8 @@ const createNewChat = (connection, chat_id, pat_username, doc_username) => {
 
         connection.query(queryString, (err) => {
             if (err) reject(err);
+
+            resolve();
         });
     });
 }

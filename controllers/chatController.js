@@ -123,8 +123,12 @@ const showChatPage = (app, connection, io) => {
                                     const chat_id = `${buf.toString('hex')}`;
                                     console.log("x", chat_id);
 
-                                    chat.createNewChat(connection, chat_id, username, doc_username).then().catch((err) => console.log(err));
-                                    res.send("/Chat?id=" + chat_id);
+                                    chat.createNewChat(connection, chat_id, username, doc_username).then(() => {
+                                        patient.emergency(connection, username, doc_username, date, time).then(() => {
+                                            res.send("/Chat?id=" + chat_id);
+                                        }).catch(err => console.log(err));
+                                    }).catch((err) => console.log(err));
+                                    
                                 }
                             }).catch(err => console.log(err));
                         }).catch(err => console.log(err));

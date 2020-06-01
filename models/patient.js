@@ -114,6 +114,19 @@ const getPatientByTime = (connection, date, time) => {
     });
 }
 
+const emergency = (connection, pat_username, doc_username, date, time) => {
+    return new Promise((resolve, reject) => {
+        const queryString = "insert into urgent_cases (pat_username, doc_username, casedate) values ('"
+                            + pat_username + "', '" + doc_username + "', '" + date + " " + time + "');";
+
+        connection.query(queryString, (err) => {
+            if (err) reject (err);
+
+            resolve();
+        });
+    }); 
+}
+
 module.exports = {
     checkLoginCredentials: checkLoginCredentials,
     isUsernameAvailable: async (connection, username) => { return await isUsernameAvailable(connection, username) },
@@ -121,5 +134,6 @@ module.exports = {
     getPatByUsername: getPatByUsername,
     insertNewAppointmentToSchedule: insertNewAppointmentToSchedule,
     deleteAppointmentFromSchedule: deleteAppointmentFromSchedule,
-    getPatientByTime: getPatientByTime
+    getPatientByTime: getPatientByTime,
+    emergency: emergency
 }
