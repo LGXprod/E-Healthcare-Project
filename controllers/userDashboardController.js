@@ -90,6 +90,7 @@ function showUserDashboard(app, connection) {
         }
 
     });
+
 }
 
 // show the webpage with the doctor's about me and qualifications
