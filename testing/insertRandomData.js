@@ -68,6 +68,7 @@ const addAvailabilityData = (connection) => {
             for (let date of dates) {
                 const theDate = date.getFullYear() + "-" + (date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()) + "-"
                                  + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
+                console.log(doctors[i].username);
 
                 var queryString = "insert into Doctor_Availability (doc_username, startTime, endTime) values ('"
                                    + doctors[i].username + "', '" + theDate + " 10:00:00', '" + theDate + " 17:00:00');";
